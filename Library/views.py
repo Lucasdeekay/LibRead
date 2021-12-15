@@ -26,3 +26,6 @@ def repository(request):
     return render(request, 'library/library_main.html')
 
 
+def offline_resources(request):
+    return render(request, 'library/offline_resources.html')
+

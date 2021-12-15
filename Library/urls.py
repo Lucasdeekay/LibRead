@@ -11,4 +11,5 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
     path('repository', views.repository, name='repository'),
+    path('repository/e-books', views.offline_resources, name='offline_resources'),
 ]
