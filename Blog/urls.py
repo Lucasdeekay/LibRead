@@ -1,5 +1,9 @@
 from django.urls import path, include
 
-urlpatterns = [
+from Blog import views
 
+app_name = 'Blog'
+
+urlpatterns = [
+    path('', views.home, name='home'),
 ]

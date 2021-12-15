@@ -6,7 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>E-Library | Home</title>
+
+    {% block title %}
+    {% endblock %}
+
     <meta name="description" content="library, books, education, university">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -52,7 +55,8 @@
                 <div class="col-md-6 col-sm-6 col-6 col-lg-4">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="{% static 'images/logo/du logo.png' %}" alt="logo image" style="height:50px; width:250px">
+                            <img src="{% static 'images/logo/du logo.png' %}" alt="logo image"
+                                 style="height:50px; width:250px">
                         </a>
                     </div>
                 </div>
@@ -66,7 +70,7 @@
                                 <a href="{% url 'Library:about' %}" style="color:white">About</a>
                             </li>
                             <li class="drop">
-                                <a href="#" style="color:white">Blog</a>
+                                <a href="{% url 'Blog:home' %}" style="color:white">Blog</a>
                             </li>
                             <li class="drop">
                                 <a href="#" style="color:white">E-Library</a>
@@ -79,18 +83,24 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                     <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                        <li class=""><a class="setting__active" href="#"><img src="https://img.icons8.com/office/50/000000/person-neutral-skin-type-4.png"/></a>
+                        <li class=""><a class="setting__active" href="#"><img
+                                src="https://img.icons8.com/office/50/000000/person-neutral-skin-type-4.png"
+                                width="30px"/></a>
                             <div class="searchbar__content setting__block">
                                 <div class="content-inner">
                                     <div class="switcher-currency">
-                                        <strong class="label switcher-label">
-                                            <span>Login</span>
-                                        </strong>
+                                        <a href="{% url 'Library:login' %}">
+                                            <strong class="label switcher-label">
+                                                <span>Login</span>
+                                            </strong>
+                                        </a>
                                     </div>
                                     <div class="switcher-currency">
-                                        <strong class="label switcher-label">
-                                            <span>Register</span>
-                                        </strong>
+                                        <a href="{% url 'Library:register' %}">
+                                            <strong class="label switcher-label">
+                                                <span>Register</span>
+                                            </strong>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +173,7 @@
                                         <a href="{% url 'Library:about' %}">About</a>
                                     </li>
                                     <li>
-                                        <a href="#">Blog</a>
+                                        <a href="{% url 'Blog:home' %}">Blog</a>
                                     </li>
                                     <li>
                                         <a href="#">E-Library</a>

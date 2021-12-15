@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>E-Library | Register</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Start breadcrumb area -->
+    <div class="ht__breadcrumb__area bg-image--6">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title">Register</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item" href="index.html">Home</a>
+                            <span class="brd-separator">/</span>
+                            <span class="breadcrumb_item active">Register</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <!-- Start My Login Area -->
+    <section class="my_account_area pt--80 pb--55 bg--white">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-6">
+                    <div class="my__account__wrapper">
+                        <h3 class="account__title">Register</h3>
+                        <form action="#">
+                            <div class="account__form">
+                                <div class="input__box">
+                                    <h6><label>Last Name <span>*</span></label></h6>
+                                    <input type="text" name="last_name" required>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>First Name <span>*</span></label></h6>
+                                    <input type="text" name="first_name" required>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>Matric No <span>*</span></label></h6>
+                                    <input type="text" name="matric_no" required>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>Email address <span>*</span></label></h6>
+                                    <input type="email" name="email" required>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>Role <span>*</span></label></h6>
+                                    <select name="role" id="" required class="input-group">
+                                        <option value="">Select Role...</option>
+                                        <option value="student">Student</option>
+                                        <option value="staff">Staff</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>Password<span>*</span></label></h6>
+                                    <input type="password1" name="password1" required>
+                                </div>
+                                <div class="input__box">
+                                    <h6><label>Confirm Password<span>*</span></label></h6>
+                                    <input type="password2" name="password2" required>
+                                </div>
+                                <div class="form__btn">
+                                    <button type="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End My Login Area -->
+{% endblock %}
+
