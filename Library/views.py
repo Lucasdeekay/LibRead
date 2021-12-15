@@ -22,3 +22,7 @@ def register(request):
     return render(request, 'library/register.html')
 
 
+def library_main(request):
+    return render(request, 'library/library_main.html')
+
+
