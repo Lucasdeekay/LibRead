@@ -18,16 +18,20 @@ def login(request):
     return render(request, 'library/login.html')
 
 
+def forgotten_password(request):
+    return render(request, 'library/forgot_password.html')
+
+
+def password_retrieval(request):
+    return render(request, 'library/password_retrieval.html')
+
+
 def register(request):
     return render(request, 'library/register.html')
 
 
 def repository(request):
     return render(request, 'library/library_main.html')
-
-
-def forgotten_password(request):
-    return render(request, 'library/forgot_password.html')
 
 
 def offline_resources(request):
