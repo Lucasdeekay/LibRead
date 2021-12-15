@@ -86,27 +86,16 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                     <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                        <li class=""><a class="setting__active" href="#"><img
-                                src="https://img.icons8.com/office/50/000000/person-neutral-skin-type-4.png"
-                                width="30px"/></a>
-                            <div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:login' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Login</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:register' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Register</span>
-                                            </strong>
-                                        </a>
-                                    </div>
+                        <li class="">
+                            <a class="setting__active" href="#"><img class="ml-6"
+                                                                     src="https://img.icons8.com/office/50/000000/person-neutral-skin-type-4.png"
+                                                                     width="30px"/>
+                                <div>
+                                    <small style="color:white">DU/2020/02/10/0244</small>
                                 </div>
-                            </div>
+                            </a>
+                            {% block userlink %}
+                            {% endblock %}
                         </li>
                     </ul>
                 </div>

@@ -9,6 +9,20 @@
 <title>E-Library | Repository</title>
 {% endblock %}
 
+{% block userlink %}
+<div class="searchbar__content setting__block">
+                                <div class="content-inner">
+                                    <div class="switcher-currency">
+                                        <a href="#">
+                                            <strong class="label switcher-label">
+                                                <span>Logout</span>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+{% endblock %}
+
 {% block content %}
 <div class="ht__breadcrumb__area bg-image--6">
     <div class="container">
@@ -31,7 +45,7 @@
 <section class="my_account_area pt--80 pb--55 bg--white">
     <div class="container">
         <div class="row">
-            <div class="col-6 d-flex justify-content-center">
+            <div class="col d-flex align-items-center m-3">
                 <div class="my__account__wrapper">
                     <div class="notification is-link" style="background-color: #1C1C4A">
                         <h4><u>DU Archive</u></h4>
@@ -45,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 d-flex justify-content-center">
+            <div class="col d-flex align-items-center m-3">
                 <div class="my__account__wrapper">
                     <div class="notification is-link" style="background-color: #CC8500">
                         <h4><u>E-Library</u></h4>
