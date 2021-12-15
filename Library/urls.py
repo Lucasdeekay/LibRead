@@ -10,6 +10,7 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('login', views.login, name='login'),
     path('login/forgot-password', views.forgotten_password, name='forgot_password'),
+    path('login/forgot-password/retrieve-password', views.password_retrieval, name='password_retrieval'),
     path('register', views.register, name='register'),
     path('repository', views.repository, name='repository'),
     path('repository/e-books', views.offline_resources, name='offline_resources'),
