@@ -26,7 +26,7 @@ def repository(request):
     return render(request, 'library/library_main.html')
 
 
-def forgot_password(request):
+def forgotten_password(request):
     return render(request, 'library/forgot_password.html')
 
 
