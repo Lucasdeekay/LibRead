@@ -26,6 +26,10 @@ def password_retrieval(request):
     return render(request, 'library/password_retrieval.html')
 
 
+def update_password(request):
+    return render(request, 'library/update_password.html')
+
+
 def register(request):
     return render(request, 'library/register.html')
 
