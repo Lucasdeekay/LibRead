@@ -26,6 +26,10 @@ def repository(request):
     return render(request, 'library/library_main.html')
 
 
+def forgot_password(request):
+    return render(request, 'library/forgot_password.html')
+
+
 def offline_resources(request):
     return render(request, 'library/offline_resources.html')
 
