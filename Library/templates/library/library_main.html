@@ -1,44 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block link %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+{% endblock %}
+
 {% block title %}
 <title>E-Library | Repository</title>
 {% endblock %}
 
 {% block content %}
-    <div class="ht__breadcrumb__area bg-image--6">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__inner text-center">
-                        <h2 class="breadcrumb-title">My Account</h2>
-                        <nav class="breadcrumb-content">
-                            <a class="breadcrumb_item" href="index.html">Home</a>
-                            <span class="brd-separator">/</span>
-                            <span class="breadcrumb_item active">E-library</span>
-                        </nav>
+<div class="ht__breadcrumb__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__inner text-center">
+                    <h2 class="breadcrumb-title">My Account</h2>
+                    <nav class="breadcrumb-content">
+                        <a class="breadcrumb_item" href="index.html">Home</a>
+                        <span class="brd-separator">/</span>
+                        <span class="breadcrumb_item active">E-library</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumb area -->
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+                <div class="my__account__wrapper">
+                    <div class="notification is-link" style="background-color: #1C1C4A">
+                        <h4><u>DU Archive</u></h4>
+                        Primar lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat
+                        ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et
+                        dictum felis venenatis efficitur.
+                        <div class="mt-3">
+                            <button class="button is-primary"><a href="" style="text-decoration:none">Access Resources</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <div class="my__account__wrapper">
+                    <div class="notification is-link" style="background-color: #CC8500">
+                        <h4><u>E-Library</u></h4>
+                        Primar lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat
+                        ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et
+                        dictum <a>felis venenatis</a> efficitur.
+                        <div class="mt-3">
+                            <button class="button is-warning"><a href="" style="text-decoration:none">Access Resources</a></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End breadcrumb area -->
-    <!-- Start My Account Area -->
-    <section class="my_account_area pt--80 pb--55 bg--white">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-12" style="background-color: #1C1C4A">
-                    <div class="my__account__wrapper">
-
-                    </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                    <div class="my__account__wrapper" STYLE="background-color: #CC8500">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End My Account Area -->
+</section>
+<!-- End My Account Area -->
 {% endblock %}
