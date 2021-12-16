@@ -24,5 +24,6 @@ urlpatterns = [
     path('register/process-registration', views.process_registration, name='process_registration'),
     path('repository', views.repository, name='repository'),
     path('repository/e-books', views.offline_resources, name='offline_resources'),
+    path('logout', views.log_out, name='logout'),
     path('api/', include(router.urls))
 ]
