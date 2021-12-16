@@ -1,8 +1,15 @@
 from django.urls import path, include
+from rest_framework import routers
 
 from Library import views
+from Library.api_views import ClienteleView, PasswordView, EbookView
 
 app_name = 'Library'
+
+router = routers.DefaultRouter()
+router.register('clientele', ClienteleView)
+router.register('password', PasswordView)
+router.register('ebook', EbookView)
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -15,4 +22,5 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('repository', views.repository, name='repository'),
     path('repository/e-books', views.offline_resources, name='offline_resources'),
+    path('api/', include(router.urls))
 ]
