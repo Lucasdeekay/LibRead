@@ -5,7 +5,7 @@
 __pycache__
 db.sqlite3
 manage.py
-EduWeb/.env
+DU_E_Library/.env
 
 # Backup files #
 *.bak
