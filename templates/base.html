@@ -46,6 +46,7 @@
 </head>
 
 <body>
+{% if user %}
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
@@ -207,6 +208,7 @@
 <script src="{% static 'js/plugins.js' %}"></script>
 <script src="{% static 'js/active.js' %}"></script>
 
+{% endif %}
 </body>
 
 

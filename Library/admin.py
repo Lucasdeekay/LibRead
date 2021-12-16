@@ -4,7 +4,7 @@ from Library.models import Clientele, Password, Ebook
 
 
 class ClienteleAdmin(admin.ModelAdmin):
-    list_display = ('user', 'last_name', 'first_name', 'matric_no', 'sex', 'phone_no', 'email', 'role')
+    list_display = ('user', 'last_name', 'first_name', 'clientele_id', 'sex', 'phone_no', 'email', 'role')
 
 
 class PasswordAdmin(admin.ModelAdmin):
