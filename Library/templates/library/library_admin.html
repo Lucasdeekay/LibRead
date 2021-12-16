@@ -5,6 +5,12 @@
 <title>E-Library | Admin</title>
 {% endblock %}
 
+{% block user %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endblock %}
+
 {% block userlink %}
 <div class="searchbar__content setting__block">
     <div class="content-inner">
@@ -33,11 +39,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__inner text-center">
-                    <h2 class="breadcrumb-title">Login</h2>
+                    <h2 class="breadcrumb-title">Admin</h2>
                     <nav class="breadcrumb-content">
                         <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
                         <span class="brd-separator">/</span>
-                        <span class="breadcrumb_item active">Login</span>
+                        <span class="breadcrumb_item active">Admin</span>
                     </nav>
                 </div>
             </div>
@@ -45,8 +51,46 @@
     </div>
 </div>
 <!-- End breadcrumb area -->
+<!-- Start Tab area -->
+<div class="container mt-5">
+    <div class="tabs is-toggle is-fullwidth">
+        <ul>
+            <li class="is-active">
+                <a id="ebook-button">
+                    <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span>Upload Ebook</span>
+                </a>
+            </li>
+            <li>
+                <a id="journal-button">
+                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                    <span>Upload Journal</span>
+                </a>
+            </li>
+            <li>
+                <a id="blog-button">
+                    <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+                    <span>Upload Blog</span>
+                </a>
+            </li>
+            <li>
+                <a id="user-auth-button">
+                    <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+                    <span>Authenticate User</span>
+                </a>
+            </li>
+            <li>
+                <a id="journal-auth-button">
+                    <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+                    <span>Authenticate Journal</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Start Tab area -->
 <!-- Start Upload Ebook Area -->
-<section class="my_account_area pt--80 pb--55 bg--white">
+<section class="my_account_area pt--80 pb--55 bg--white" id="ebook-section">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -74,10 +118,11 @@
                 {% endif %}
                 {% endfor %}
                 <div class="my__account__wrapper">
-                    <h3 class="account__title">Ebook Upload</h3>
-                    <form action="" method="post">
+                    <h3 class="account__title">Upload Ebook</h3>
+                    <form action="" method="post" enctype="multipart/form-data"
+                          style="background-color:#D3D3EE; border-radius:5%">
                         {% csrf_token %}
-                        <div class="account__form">
+                        <div class="account__form" style="border:0">
                             <div class="field">
                                 <label class="label">Title <span>*</span></label>
                                 <div class="control">
@@ -115,14 +160,14 @@
                                 </div>
                             </div>
                             <div class="field">
-                            <div class="has-name is-fullwidth">
-                                <label class="file-label">
-                                    <input class="input" style="padding:0; margin:0" type="file" name="file">
-                                </label>
-                            </div>
+                                <div class="has-name is-fullwidth">
+                                    <label class="file-label input">
+                                        <input type="file" name="file">
+                                    </label>
+                                </div>
                             </div>
                             <div>
-                                <button class="button is-fullwidth is-rounded is-success label" type="submit">Submit
+                                <button class="button is-fullwidth is-rounded is-link label" type="submit">Submit
                                 </button>
                             </div>
                         </div>
@@ -133,8 +178,8 @@
     </div>
 </section>
 <!-- End Upload Ebook Area -->
-<!-- Start Upload Jouurnals Area -->
-<section class="my_account_area pt--80 pb--55 bg--white">
+<!-- Start Upload Journal Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="journal-section">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -162,10 +207,11 @@
                 {% endif %}
                 {% endfor %}
                 <div class="my__account__wrapper">
-                    <h3 class="account__title">Ebook Upload</h3>
-                    <form action="" method="post">
+                    <h3 class="account__title">Upload Journal</h3>
+                    <form action="" method="post" enctype="multipart/form-data"
+                          style="background-color:#9298A0; border-radius:5%">
                         {% csrf_token %}
-                        <div class="account__form">
+                        <div class="account__form" style="border:0">
                             <div class="field">
                                 <label class="label">Title <span>*</span></label>
                                 <div class="control">
@@ -191,23 +237,79 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label class="label">Programme <span>*</span></label>
+                                <div class="has-name is-fullwidth">
+                                    <label class="file-label input">
+                                        <input type="file" name="file">
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button is-fullwidth is-rounded is-dark label" type="submit">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Upload Journals Area -->
+<!-- Start Upload Blog Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="blog-section">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                {% for message in messages %}
+                {% if message.success %}
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+                {% else %}
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+                {% endif %}
+                {% endfor %}
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Upload Blog</h3>
+                    <form action="" method="post" enctype="multipart/form-data"
+                          style="background-color:#C9F299; border-radius:5%">
+                        {% csrf_token %}
+                        <div class="account__form" style="border:0">
+                            <div class="field">
+                                <label class="label">Title <span>*</span></label>
                                 <div class="control">
-                                    <div class="select">
-                                        <select name="programme" required>
-                                            <option value="">Select Programme...</option>
-                                            <option value="Computer Science">Computer Science</option>
-                                            <option value="Biochemistry">Biochemistry</option>
-                                        </select>
-                                    </div>
+                                    <input class="input" type="text" placeholder="Enter title"
+                                           name="title"
+                                           required>
                                 </div>
                             </div>
                             <div class="field">
-                            <div class="has-name is-fullwidth">
-                                <label class="file-label">
-                                    <input class="input" style="padding:0; margin:0" type="file" name="file">
-                                </label>
+                                <label class="label">Description <span>*</span></label>
+                                <div class="control">
+                                    <textarea class="textarea is-info" name="article" maxlength="500"
+                                              placeholder="Info textarea" required></textarea>
+                                </div>
                             </div>
+                            <div class="field">
+                                <div class="has-name is-fullwidth">
+                                    <label class="file-label input">
+                                        <input type="file" name="file">
+                                    </label>
+                                </div>
                             </div>
                             <div>
                                 <button class="button is-fullwidth is-rounded is-success label" type="submit">Submit
@@ -220,6 +322,61 @@
         </div>
     </div>
 </section>
-<!-- End Upload Journals Area -->
+<!-- End Upload Blog Area -->
+<!-- Start Authenticate User Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="user-auth-section">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Matric No</th>
+                    <th scope="col">Role</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Smith</td>
+                    <td>Rachel</td>
+                    <td>DU/2020/02/09/0233</td>
+                    <td>Student</td>
+                    <td><button class="button is-success">Accept</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- End Authenticate User Area -->
+<!-- Start Authenticate Journal Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="journal-auth-section">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date Of Submission</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Journey Home</td>
+                    <td>09/08/2021</td>
+                    <td><a href="" download>Download</a></td>
+                    <td><button class="button is-success">Accept</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- End Authenticate Journals Area -->
+
 {% endblock %}
 
