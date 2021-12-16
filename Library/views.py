@@ -99,3 +99,8 @@ def repository(request):
 def offline_resources(request):
     return render(request, 'library/offline_resources.html')
 
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('Library:login'))
+
