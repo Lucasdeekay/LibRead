@@ -88,7 +88,7 @@ def process_registration(request):
 
 
 def repository(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = Clientele.objects.get(clientele_id=request.user.username)
         return render(request, 'library/library_main.html', {'current_clientele': current_clientele})
     else:
@@ -97,7 +97,12 @@ def repository(request):
 
 
 def offline_resources(request):
-    return render(request, 'library/offline_resources.html')
+    if request.user.is_authenticated and not request.user.is_superuser:
+        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        return render(request, 'library/offline_resources.html', {'current_clientele': current_clientele})
+    else:
+        messages.error(request, 'Please login to have access')
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def log_out(request):
