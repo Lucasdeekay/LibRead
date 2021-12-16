@@ -1,114 +1,150 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block title %}
 <title>E-Library | Register</title>
 {% endblock %}
 
 {% block userlink %}
 <div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:login' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Login</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:register' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Register</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="content-inner">
+        <div class="switcher-currency">
+            <a href="{% url 'Library:login' %}">
+                <strong class="label switcher-label">
+                    <span>Login</span>
+                </strong>
+            </a>
+        </div>
+        <div class="switcher-currency">
+            <a href="{% url 'Library:register' %}">
+                <strong class="label switcher-label">
+                    <span>Register</span>
+                </strong>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
-    <!-- Start breadcrumb area -->
-    <div class="ht__breadcrumb__area bg-image--6">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__inner text-center">
-                        <h2 class="breadcrumb-title">Register</h2>
-                        <nav class="breadcrumb-content">
-                            <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
-                            <span class="brd-separator">/</span>
-                            <span class="breadcrumb_item active">Register</span>
-                        </nav>
-                    </div>
+<!-- Start breadcrumb area -->
+<div class="ht__breadcrumb__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__inner text-center">
+                    <h2 class="breadcrumb-title">Register</h2>
+                    <nav class="breadcrumb-content">
+                        <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
+                        <span class="brd-separator">/</span>
+                        <span class="breadcrumb_item active">Register</span>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End breadcrumb area -->
-    <!-- Start My Login Area -->
-    <section class="my_account_area pt--80 pb--55 bg--white">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-6">
-                    <div class="my__account__wrapper">
-                        <h3 class="account__title">Register</h3>
-                        <form action="#">
-                            <div class="account__form">
-                                <div class="input__box">
-                                    <h6><label>Last Name <span>*</span></label></h6>
-                                    <input type="text" name="last_name" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>First Name <span>*</span></label></h6>
-                                    <input type="text" name="first_name" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Matric No <span>*</span></label></h6>
-                                    <input type="text" name="matric_no" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Sex <span>*</span></label></h6>
-                                    <select name="sex" required class="input-group">
-                                        <option value="">Select Sex...</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Phone Number <span>*</span></label></h6>
-                                    <input type="tel" name="phone_number" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Email address <span>*</span></label></h6>
-                                    <input type="email" name="email" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Role <span>*</span></label></h6>
-                                    <select name="role" required class="input-group">
-                                        <option value="">Select Role...</option>
-                                        <option value="student">Student</option>
-                                        <option value="staff">Staff</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Password<span>*</span></label></h6>
-                                    <input type="password" name="password1" required>
-                                </div>
-                                <div class="input__box">
-                                    <h6><label>Confirm Password<span>*</span></label></h6>
-                                    <input type="password" name="password2" required>
-                                </div>
-                                <div class="form__btn">
-                                    <button type="submit">Register</button>
+</div>
+<!-- End breadcrumb area -->
+<!-- Start My Login Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Register</h3>
+                    <form action="#" method="post">
+                        <div class="account__form">
+                            <div class="field">
+                                <label class="label">Last Name/Surname <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter Last Name" name="last_name"
+                                           required>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="field">
+                                <label class="label">First Name <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter First Name" name="first_name"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Matric No <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter Matric No" name="matric_no"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Sex <span>*</span></label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="sex" required>
+                                            <option value="">Select Sex...</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Phone Number <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="tel" placeholder="Enter Phone Number" name="phone_number"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" name="email" placeholder="Enter email"
+                                    required>
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                      <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Role <span>*</span></label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="role" required>
+                                            <option value="">Select Role...</option>
+                                            <option value="student">Student</option>
+                                        <option value="staff">Staff</option>
+                                        <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="password" placeholder="Enter Password" name="password1"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Confirm Password <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="password" placeholder="Enter Password" name="password2"
+                                           required>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button is-fullwidth is-rounded label" style="background-color:#1C1C4A; color:white" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End My Login Area -->
+    </div>
+</section>
+<!-- End My Login Area -->
 {% endblock %}
 

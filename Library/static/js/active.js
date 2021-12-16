@@ -377,7 +377,7 @@
         autoplay: true,
         autoplayTimeout: 10000,
         items:1,
-        navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>' ],
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>' ],
         dots: false,
         lazyLoad: true,
         responsive:{
