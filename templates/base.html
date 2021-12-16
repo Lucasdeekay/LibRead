@@ -59,7 +59,7 @@
     <header id="wn__header" class="header__area header__absolute sticky__header" style="background-color:#1C1C4A">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-6 col-lg-4">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-3">
                     <div class="logo">
                         <a href="index.html">
                             <img src="{% static 'images/logo/du logo.png' %}" alt="logo image"
@@ -67,7 +67,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 d-none d-lg-block">
+                <div class="col-lg-8 d-none d-lg-block">
                     <nav class="mainmenu__nav">
                         <ul class="meninmenu d-flex justify-content-end">
                             <li class="drop with--one--item">
@@ -85,10 +85,13 @@
                             <li>
                                 <a href="{% url 'Library:contact' %}" style="color:white">Contact</a>
                             </li>
+                            <li>
+                                <a href="{% url 'Library:library_admin' %}" style="color:white">Admin</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-1">
                     <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
                         <li class="">
                             <a class="setting__active" href="#"><img class="mx-6"
@@ -105,7 +108,7 @@
             </div>
             <!-- Start Mobile Menu -->
             <div class="row d-none">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <nav class="mobilemenu__nav">
                         <ul class="meninmenu">
                             <li style="background-color:#1C1C4A">
@@ -122,6 +125,9 @@
                             </li>
                             <li style="background-color:#1C1C4A">
                                 <a href="{% url 'Library:contact' %}" style="color:white">Contact</a>
+                            </li>
+                            <li style="background-color:#1C1C4A">
+                                <a href="{% url 'Library:library_admin' %}" style="color:white">Admin</a>
                             </li>
                         </ul>
                     </nav>
@@ -175,6 +181,9 @@
                                     </li>
                                     <li>
                                         <a href="{% url 'Library:contact' %}">Contact</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'Library:library_admin' %}">Admin</a>
                                     </li>
                                 </ul>
                             </div>

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -77,6 +77,15 @@ def process_registration(request):
             user = User.objects.create_user(username=clientele_id, email=email, password=password, last_name=last_name, first_name=first_name)
             Clientele.objects.create(user=user, last_name=last_name, first_name=first_name, clientele_id=clientele_id, sex=sex,
                                      phone_no=phone_no, email=email, role=role)
+            if role == 'Admin':
+                group = Group.objects.get(name='Admin')
+                user.groups.add(group)
+            elif role == 'Staff':
+                group = Group.objects.get(name='Staff')
+                user.groups.add(group)
+            elif role == 'Student':
+                group = Group.objects.get(name='Student')
+                user.groups.add(group)
             messages.success(request, "Registration successful")
             return HttpResponseRedirect(reverse('Library:login'))
         elif len(password) < 8:
@@ -103,6 +112,10 @@ def offline_resources(request):
     else:
         messages.error(request, 'Please login to have access')
         return HttpResponseRedirect(reverse('Library:login'))
+
+
+def library_admin(request):
+    return render(request, 'library/library_admin.html')
 
 
 def log_out(request):
