@@ -65,7 +65,7 @@
                         <h3 class="account__title">Register</h3>
                         <form action="{% url 'Library:process_registration' %}" method="post" style="background-color:#D3D3EE; border-radius:5%">
                             {% csrf_token %}
-                            <div class="account__form">
+                            <div class="account__form" style="border:0">
                                 <div class="field">
                                     <label class="label">Last Name/Surname <span>*</span></label>
                                     <div class="control">
@@ -151,8 +151,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="button is-fullwidth is-rounded label"
-                                            style="background-color:#1C1C4A; color:white" type="submit">Submit
+                                    <button class="button is-fullwidth is-rounded is-link label" type="submit">Submit
                                     </button>
                                 </div>
                             </div>
