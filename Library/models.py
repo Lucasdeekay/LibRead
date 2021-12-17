@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class Clientele(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     last_name = models.CharField(max_length=50, null=False)
     first_name = models.CharField(max_length=50, null=False)
     clientele_id = models.CharField(max_length=25, null=False)
