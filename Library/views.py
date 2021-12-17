@@ -154,7 +154,7 @@ def library_admin(request):
             return render(request, 'library/library_admin.html', {'current_clientele': current_clientele})
         else:
             messages.error(request, 'Access only available to Staff and Admin')
-            return HttpResponseRedirect(reverse('Library:library-home'))
+            return HttpResponseRedirect(reverse('Library:library_home'))
     else:
         messages.error(request, 'Please login to have access')
         return HttpResponseRedirect(reverse('Library:login'))
