@@ -33,7 +33,7 @@
     </div>
 </div>
 <!-- End breadcrumb area -->
-<!-- Start My Registration Area -->
+<!-- Start Message area -->
 <section class="my_account_area pt--80 pb--55 bg--white">
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -41,125 +41,138 @@
                 {% for message in messages %}
                 {% if message.success %}
                 <article class="message is-success">
-                  <div class="message-header">
-                    <p>Success</p>
-                    <button class="delete" aria-label="delete"></button>
-                  </div>
-                  <div class="message-body">
-                    <em>{{ message }}</em>
-                  </div>
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
                 </article>
                 {% else %}
                 <article class="message is-danger">
-                  <div class="message-header">
-                    <p>Error</p>
-                    <button class="delete" aria-label="delete"></button>
-                  </div>
-                  <div class="message-body">
-                    <em>{{ message }}</em>
-                  </div>
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
                 </article>
                 {% endif %}
                 {% endfor %}
-                    <div class="my__account__wrapper">
-                        <h3 class="account__title">Register</h3>
-                        <form action="{% url 'Library:process_registration' %}" method="post" style="background-color:#D3D3EE; border-radius:5%">
-                            {% csrf_token %}
-                            <div class="account__form" style="border:0">
-                                <div class="field">
-                                    <label class="label">Last Name/Surname <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="Enter Last Name/Surname" name="last_name"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">First Name <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="Enter First Name"
-                                               name="first_name"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Matric No/Staff No <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="Enter Matric No/Staff No" name="clientele_id"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Sex <span>*</span></label>
-                                    <div class="control">
-                                        <div class="select">
-                                            <select name="sex" required>
-                                                <option value="">Select Sex...</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Phone Number <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="tel" placeholder="Enter Phone Number"
-                                               name="phone_number"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Email</label>
-                                    <div class="control has-icons-left has-icons-right">
-                                        <input class="input" type="email" name="email" placeholder="Enter email"
-                                               required>
-                                        <span class="icon is-small is-left">
-                                      <i class="fas fa-envelope"></i>
-                                    </span>
-                                        <span class="icon is-small is-right">
-                                      <i class="fas fa-exclamation-triangle"></i>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Role <span>*</span></label>
-                                    <div class="control">
-                                        <div class="select">
-                                            <select name="role" required>
-                                                <option value="">Select Role...</option>
-                                                <option value="student">Student</option>
-                                                <option value="staff">Staff</option>
-                                                <option value="admin">Admin</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Password <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="password" placeholder="Enter Password"
-                                               name="password1"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Confirm Password <span>*</span></label>
-                                    <div class="control">
-                                        <input class="input" type="password" placeholder="Enter Password"
-                                               name="password2"
-                                               required>
-                                    </div>
-                                </div>
-                                <div>
-                                    <button class="button is-fullwidth is-rounded is-link label" type="submit">Submit
-                                    </button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Message area -->
+<!-- Start My Registration Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Register</h3>
+                    <form action="{% url 'Library:process_registration' %}" method="post"
+                          style="background-color:#D3D3EE; border-radius:5%">
+                        {% csrf_token %}
+                        <div class="account__form" style="border:0">
+                            <div class="field">
+                                <label class="label">Last Name/Surname <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter Last Name/Surname"
+                                           name="last_name"
+                                           required>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="field">
+                                <label class="label">First Name <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter First Name"
+                                           name="first_name"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Matric No/Staff No <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter Matric No/Staff No"
+                                           name="clientele_id"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Sex <span>*</span></label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="sex" required>
+                                            <option value="">Select Sex...</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Phone Number <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="tel" placeholder="Enter Phone Number"
+                                           name="phone_number"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" name="email" placeholder="Enter email"
+                                           required>
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                      <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Role <span>*</span></label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="role" required>
+                                            <option value="">Select Role...</option>
+                                            <option value="student">Student</option>
+                                            <option value="staff">Staff</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="password" placeholder="Enter Password"
+                                           name="password1"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Confirm Password <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="password" placeholder="Enter Password"
+                                           name="password2"
+                                           required>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button is-fullwidth is-rounded is-link label" type="submit">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- End My Registration Area -->
 {% endblock %}
