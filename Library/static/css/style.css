@@ -7422,7 +7422,7 @@ p.form-messege.success{
 }
 
 .account__form .input__box label span {
-    color: #ce7852;
+    color: #CC8500;
 }
 
 .account__form .input__box input {
@@ -7449,8 +7449,8 @@ p.form-messege.success{
 
 .account__form .form__btn button:hover {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border-color: #ce7852;
-    color: #ce7852;
+    border-color: #CC8500;
+    color: #CC8500;
 }
 
 .account__form .form__btn span {
@@ -7459,7 +7459,7 @@ p.form-messege.success{
 }
 
 .account__form .forget_pass {
-    color: #ce7852;
+    color: #CC8500;
     font-size: 12px;
     margin-top: 18px;
     display: block;
