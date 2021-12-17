@@ -19,6 +19,7 @@ urlpatterns = [
     path('login', views.log_in, name='login'),
     path('login/process-login', views.process_login, name='process_login'),
     path('login/forgot-password', views.forgotten_password, name='forgot_password'),
+    path('login/forgot-password/send-recovery-pin', views.send_recovery_pin, name='send_recovery_pin'),
     path('login/forgot-password/retrieve-password', views.password_retrieval, name='password_retrieval'),
     path('login/forgot-password/retrieve-password/update', views.update_password, name='update_password'),
     path('admin/', views.library_admin, name='library_admin'),
