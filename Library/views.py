@@ -107,17 +107,35 @@ def process_recovery_password(request, user):
                 subject = 'Password Recovery Successful'
                 msg = "Account successfully retrieved"
                 send_mail(subject, msg, EMAIL_HOST_USER, [user.email], fail_silently=False)
-                return HttpResponseRedirect(reverse('Library:password_retrieval'))
+                return HttpResponseRedirect(reverse('Library:update_password', args=(user,)))
         else:
             messages.error(request, "Incorrect recovery password. Click on resend to get the retrieval password again")
-            return HttpResponseRedirect(reverse('Library:password_retrieval'))
+            return HttpResponseRedirect(reverse('Library:password_retrieval', args=(user,)))
 
 
-def update_password(request):
+def update_password(request, user):
     if request.user.is_authenticated and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        return render(request, 'library/update_password.html')
+        return render(request, 'library/update_password.html', {'user': user})
+
+
+def set_updated_password(request, user):
+    if request.user.is_authenticated and not request.user.is_superuser:
+        return HttpResponseRedirect(reverse('Library:repository'))
+    else:
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 == password2:
+            user.set_password(password1)
+            user.save()
+            subject = 'Password Update Successful'
+            msg = "Account password has  been successfully changed"
+            send_mail(subject, msg, EMAIL_HOST_USER, [user.email], fail_silently=False)
+            return HttpResponseRedirect(reverse('Library:login'))
+        else:
+            messages.error(request, "Password does not match")
+            return HttpResponseRedirect(reverse('Library:update_password', args=(user,)))
 
 
 def register(request):
