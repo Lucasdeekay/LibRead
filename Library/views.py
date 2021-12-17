@@ -82,17 +82,35 @@ def send_recovery_pin(request):
                 subject = 'Password Recovery'
                 Password.objects.create(clientele=Clientele.objects.get(user=user), recovery_pin=recovery_password, time=timezone.now())
                 send_mail(subject, recovery_password, EMAIL_HOST_USER, [email], fail_silently=False)
-                return HttpResponseRedirect(reverse('Library:password_retrieval'))
+                return HttpResponseRedirect(reverse('Library:password_retrieval', args=(user,)))
         else:
             messages.error(request, "User profile not found")
             return HttpResponseRedirect(reverse('Library:forgot_password'))
 
 
-def password_retrieval(request):
+def password_retrieval(request, user):
     if request.user.is_authenticated and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        return render(request, 'library/password_retrieval.html')
+        return render(request, 'library/password_retrieval.html', {'user': user})
+
+
+def process_recovery_password(request, user):
+    if request.user.is_authenticated and not request.user.is_superuser:
+        return HttpResponseRedirect(reverse('Library:repository'))
+    else:
+        password = request.POST.get('password')
+        clientele = get_object_or_404(Clientele, user=user)
+        all_password = Password.objects.all()
+        for passcode in all_password:
+            if passcode.clientele == clientele and passcode.password == password:
+                subject = 'Password Recovery Successful'
+                msg = "Account successfully retrieved"
+                send_mail(subject, msg, EMAIL_HOST_USER, [user.email], fail_silently=False)
+                return HttpResponseRedirect(reverse('Library:password_retrieval'))
+        else:
+            messages.error(request, "Incorrect recovery password. Click on resend to get the retrieval password again")
+            return HttpResponseRedirect(reverse('Library:password_retrieval'))
 
 
 def update_password(request):
