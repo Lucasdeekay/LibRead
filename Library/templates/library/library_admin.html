@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-<title>E-Library | Admin</title>
-{% endblock %}
 
 {% block user %}
 <div>
@@ -55,32 +52,32 @@
 <div class="container mt-5">
     <div class="tabs is-toggle is-fullwidth">
         <ul>
-            <li class="is-active">
-                <a id="ebook-button">
+            <li id="ebook-button">
+                <a>
                     <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
                     <span>Upload Ebook</span>
                 </a>
             </li>
-            <li>
-                <a id="journal-button">
+            <li id="journal-button">
+                <a>
                     <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                     <span>Upload Journal</span>
                 </a>
             </li>
-            <li>
-                <a id="blog-button">
+            <li id="blog-button">
+                <a>
                     <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
                     <span>Upload Blog</span>
                 </a>
             </li>
-            <li>
-                <a id="user-auth-button">
+            <li id="user-auth-button">
+                <a>
                     <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
                     <span>Authenticate User</span>
                 </a>
             </li>
-            <li>
-                <a id="journal-auth-button">
+            <li id="journal-auth-button">
+                <a>
                     <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
                     <span>Authenticate Journal</span>
                 </a>
@@ -380,3 +377,6 @@
 
 {% endblock %}
 
+{% block script %}
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
