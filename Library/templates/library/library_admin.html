@@ -67,8 +67,8 @@
     </div>
 </div>
 <!-- Start Tab area -->
-<!-- Start Upload Ebook Area -->
-<section class="my_account_area pt--80 pb--55 bg--white" id="ebook-section">
+<!-- Start Message area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -95,6 +95,16 @@
                 </article>
                 {% endif %}
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Message area -->
+<!-- Start Upload Ebook Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="ebook-section">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Ebook</h3>
                     <form action="" method="post" enctype="multipart/form-data"
@@ -161,29 +171,6 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
-                {% for message in messages %}
-                {% if message.success %}
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p>Success</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-                {% else %}
-                <article class="message is-danger">
-                    <div class="message-header">
-                        <p>Error</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-                {% endif %}
-                {% endfor %}
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Journal</h3>
                     <form action="" method="post" enctype="multipart/form-data"
@@ -238,29 +225,6 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
-                {% for message in messages %}
-                {% if message.success %}
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p>Success</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-                {% else %}
-                <article class="message is-danger">
-                    <div class="message-header">
-                        <p>Error</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-                {% endif %}
-                {% endfor %}
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Blog</h3>
                     <form action="" method="post" enctype="multipart/form-data"
