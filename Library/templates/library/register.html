@@ -63,7 +63,7 @@
                 {% endfor %}
                     <div class="my__account__wrapper">
                         <h3 class="account__title">Register</h3>
-                        <form action="{% url 'Library:process_registration' %}" method="post">
+                        <form action="{% url 'Library:process_registration' %}" method="post" style="background-color:#D3D3EE; border-radius:5%">
                             {% csrf_token %}
                             <div class="account__form">
                                 <div class="field">
