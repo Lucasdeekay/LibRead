@@ -5,25 +5,12 @@
 <title>E-Library | Contact</title>
 {% endblock %}
 
-{% block userlink %}
-<div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:login' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Login</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:register' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Register</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block content %}

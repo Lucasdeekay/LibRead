@@ -10,23 +10,11 @@
 {% endblock %}
 
 {% block user %}
+{% if current_clientele %}
 <div>
     <small style="color:white">{{ current_clientele.clientele_id }}</small>
 </div>
-{% endblock %}
-
-{% block userlink %}
-<div class="searchbar__content setting__block">
-    <div class="content-inner">
-        <div class="switcher-currency">
-            <a href="{% url 'Library:logout' %}">
-                <strong class="label switcher-label">
-                    <span>Logout</span>
-                </strong>
-            </a>
-        </div>
-    </div>
-</div>
+{% endif %}
 {% endblock %}
 
 {% block content %}

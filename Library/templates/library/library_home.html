@@ -5,230 +5,241 @@
 <title>E-Library | Home</title>
 {% endblock %}
 
-{% block userlink %}
-<div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:login' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Login</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:register' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Register</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
 {% endblock %}
 
 
 {% block content %}
 
-    <!-- Start Search Popup -->
-    <div class="brown--color box-search-content search_active block-bg close__top">
-        <form id="search_mini_form" class="minisearch" action="#">
-            <div class="field__search">
-                <input type="text" placeholder="Search entire store here...">
-                <div class="action">
-                    <a href="#"><i class="zmdi zmdi-search"></i></a>
-                </div>
+<!-- Start Search Popup -->
+<div class="brown--color box-search-content search_active block-bg close__top">
+    <form id="search_mini_form" class="minisearch" action="#">
+        <div class="field__search">
+            <input type="text" placeholder="Search entire store here...">
+            <div class="action">
+                <a href="#"><i class="zmdi zmdi-search"></i></a>
             </div>
-        </form>
-        <div class="close__wrap">
-            <span>close</span>
         </div>
+    </form>
+    <div class="close__wrap">
+        <span>close</span>
     </div>
-    <!-- End Search Popup -->
+</div>
+<!-- End Search Popup -->
 
-    <!-- Start Slider area -->
-    <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
-        <!-- Start Single Slide -->
-        <div class="slide animation__style10 bg-image--8 fullscreen align__center--left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="slider__content">
-                            <div class="contentbox">
-                                <h2>Dominion <span>University</span></h2>
-                                <h2 class="another">E-<span>Library </span></h2>
-                                <p>Boighor specifically created for authors and writes to present and sell their
-                                    books online Soufflé tart sweet. </p>
-                                <a class="shopbtn" href="#">READ NOW</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Single Slide -->
-        <!-- Start Single Slide -->
-        <div class="slide animation__style10 bg-image--9 fullscreen align__center--left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="slider__content">
-                            <div class="contentbox">
-                                <h2>Dominion <span>University</span></h2>
-                                <h2 class="another">E-<span>Library </span></h2>
-                                <p>Boighor specifically created for authors and writes to present and sell their
-                                    books online Soufflé tart sweet. </p>
-                                <a class="shopbtn" href="#">GO TO LIBRARY</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Single Slide -->
-    </div>
-    <!-- End Slider area -->
-
-    <div class="page-blog-details section-padding--lg bg--white">
+<!-- Start Slider area -->
+<div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--8 fullscreen align__center--left">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-12">
-                    <div class="blog-details content">
-                        <article class="blog-post-details">
-                            <div class="post-thumbnail">
-                                <img src="{% static 'images/blog/big-img/1.jpg' %}" alt="blog images">
-                            </div>
-                            <div class="post_wrapper">
-                                <div class="post_header">
-                                    <h2>International activities of the Book</h2>
-                                </div>
-                                <div class="post_content">
-                                    <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Crastoup pretium arcu ex.
-                                        Aenean posuere libero eu augue rhoncus. Praesent ornare tortor ac ante
-                                        egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum
-                                        odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris eu dui
-                                        ut lectus fermentum eleifend. Pellentesque faucibus sem ante, non malesuada
-                                        odio varius nec. Suspendisse potenti. Proin consectetur aliquam odio nec
-                                        fringilla. Sed interdum at justo in efficitur. Vivamus gravida volutpat
-                                        sodales. Fusce ornare sit amet ligula condimentum sagittis.</p>
-
-                                    <blockquote>Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do
-                                        eiusmod tempor deo incididunt labo dolor magna aliqua. Ut enim ad minim
-                                        veniam quis nostrud geolans work.
-                                    </blockquote>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehendrit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur.</p>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore of to magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat. Duis aute irure dolor in reprehnderit in voluptate velit
-                                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                        cupidatat non proident, sunt in culpa qui officia dser mollit anim id est
-                                        laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                                        illo.</p>
-
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
-                    <div class="wn__sidebar">
-                        <!-- Start Single Widget -->
-                        <aside class="widget search_widget">
-                            <h3 class="widget-title">Search</h3>
-                            <form action="#">
-                                <div class="form-input">
-                                    <input type="text" placeholder="Search...">
-                                    <button><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
-                        </aside>
-                        <!-- End Single Widget -->
-                        <!-- Start Single Widget -->
-                        <aside class="widget recent_widget">
-                            <h3 class="widget-title">Recent</h3>
-                            <div class="recent-posts">
-                                <ul>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img
-                                                        src="{% static 'images/blog/sm-img/1.jpg' %}"
-                                                        alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Blog image post</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img
-                                                        src="{% static 'images/blog/sm-img/2.jpg' %}"
-                                                        alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Post with Gallery</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img
-                                                        src="{% static 'images/blog/sm-img/3.jpg' %}"
-                                                        alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Post with Video</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img
-                                                        src="{% static 'images/blog/sm-img/4.jpg' %}"
-                                                        alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Maecenas ultricies</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-wrapper d-flex">
-                                            <div class="thumb">
-                                                <a href="blog-details.html"><img
-                                                        src="{% static 'images/blog/sm-img/5.jpg' %}"
-                                                        alt="blog images"></a>
-                                            </div>
-                                            <div class="content">
-                                                <h4><a href="blog-details.html">Blog image post</a></h4>
-                                                <p> March 10, 2015</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
-                        <!-- End Single Widget -->
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another">E-<span>Library </span></h2>
+                            <p>Boighor specifically created for authors and writes to present and sell their
+                                books online Soufflé tart sweet. </p>
+                            <a class="shopbtn" href="#">READ NOW</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--9 fullscreen align__center--left">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another">E-<span>Library </span></h2>
+                            <p>Boighor specifically created for authors and writes to present and sell their
+                                books online Soufflé tart sweet. </p>
+                            <a class="shopbtn" href="#">GO TO LIBRARY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+</div>
+<!-- End Slider area -->
+
+{% for message in messages %}
+{% if message.success %}
+<article class="message is-success">
+    <div class="message-header">
+        <p>Success</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        <em>{{ message }}</em>
+    </div>
+</article>
+{% else %}
+<article class="message is-danger">
+    <div class="message-header">
+        <p>Error</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        <em>{{ message }}</em>
+    </div>
+</article>
+{% endif %}
+{% endfor %}
+
+<div class="page-blog-details section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <div class="blog-details content">
+                    <article class="blog-post-details">
+                        <div class="post-thumbnail">
+                            <img src="{% static 'images/blog/big-img/1.jpg' %}" alt="blog images">
+                        </div>
+                        <div class="post_wrapper">
+                            <div class="post_header">
+                                <h2>International activities of the Book</h2>
+                            </div>
+                            <div class="post_content">
+                                <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Crastoup pretium arcu ex.
+                                    Aenean posuere libero eu augue rhoncus. Praesent ornare tortor ac ante
+                                    egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum
+                                    odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris eu dui
+                                    ut lectus fermentum eleifend. Pellentesque faucibus sem ante, non malesuada
+                                    odio varius nec. Suspendisse potenti. Proin consectetur aliquam odio nec
+                                    fringilla. Sed interdum at justo in efficitur. Vivamus gravida volutpat
+                                    sodales. Fusce ornare sit amet ligula condimentum sagittis.</p>
+
+                                <blockquote>Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do
+                                    eiusmod tempor deo incididunt labo dolor magna aliqua. Ut enim ad minim
+                                    veniam quis nostrud geolans work.
+                                </blockquote>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat. Duis aute irure dolor in reprehendrit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur.</p>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore of to magna aliqua. Ut enim ad minim
+                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                    commodo consequat. Duis aute irure dolor in reprehnderit in voluptate velit
+                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident, sunt in culpa qui officia dser mollit anim id est
+                                    laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                    accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+                                    illo.</p>
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+                <div class="wn__sidebar">
+                    <!-- Start Single Widget -->
+                    <aside class="widget search_widget">
+                        <h3 class="widget-title">Search</h3>
+                        <form action="#">
+                            <div class="form-input">
+                                <input type="text" placeholder="Search...">
+                                <button><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </aside>
+                    <!-- End Single Widget -->
+                    <!-- Start Single Widget -->
+                    <aside class="widget recent_widget">
+                        <h3 class="widget-title">Recent</h3>
+                        <div class="recent-posts">
+                            <ul>
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="blog-details.html"><img
+                                                    src="{% static 'images/blog/sm-img/1.jpg' %}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="blog-details.html">Blog image post</a></h4>
+                                            <p> March 10, 2015</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="blog-details.html"><img
+                                                    src="{% static 'images/blog/sm-img/2.jpg' %}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="blog-details.html">Post with Gallery</a></h4>
+                                            <p> March 10, 2015</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="blog-details.html"><img
+                                                    src="{% static 'images/blog/sm-img/3.jpg' %}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="blog-details.html">Post with Video</a></h4>
+                                            <p> March 10, 2015</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="blog-details.html"><img
+                                                    src="{% static 'images/blog/sm-img/4.jpg' %}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="blog-details.html">Maecenas ultricies</a></h4>
+                                            <p> March 10, 2015</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="blog-details.html"><img
+                                                    src="{% static 'images/blog/sm-img/5.jpg' %}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="blog-details.html">Blog image post</a></h4>
+                                            <p> March 10, 2015</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- //Main wrapper -->
 {% endblock %}
