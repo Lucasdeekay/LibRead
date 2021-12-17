@@ -2,6 +2,10 @@ $(function(){
 
 	/*============= Admin Tab =============*/
 	$('#journal-section').hide();
+	$('#blog-section').hide();
+	$('#user-auth-section').hide();
+	$('#journal-auth-section').hide();
+
 	$('#ebook-button').click(function(){
 	    $('#ebook-section').show();
 	    $('#ebook-button').addClass('is-active');
