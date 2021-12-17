@@ -1,17 +1,25 @@
+import random
+import string
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 
-from Library.models import Clientele
+from DU_E_Library.settings import EMAIL_HOST_USER
+from Library.models import Clientele, Password
+
+random = random.Random()
 
 
 def home(request):
     context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         context = {'current_clientele': current_clientele}
     return render(request, 'library/library_home.html', context)
 
@@ -19,7 +27,7 @@ def home(request):
 def about(request):
     context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         context = {'current_clientele': current_clientele}
     return render(request, 'library/about.html', context)
 
@@ -27,7 +35,7 @@ def about(request):
 def contact(request):
     context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         context = {'current_clientele': current_clientele}
     return render(request, 'library/contact.html', context)
 
@@ -59,6 +67,25 @@ def forgotten_password(request):
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
         return render(request, 'library/forgot_password.html')
+
+
+def send_recovery_pin(request):
+    if request.user.is_authenticated and not request.user.is_superuser:
+        return HttpResponseRedirect(reverse('Library:repository'))
+    else:
+        clientele_id = request.POST.get('clientele_id')
+        email = request.POST.get('email')
+        all_user = User.objects.all()
+        for user in all_user:
+            if user.username == clientele_id and user.email == email:
+                recovery_password = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(12)])
+                subject = 'Password Recovery'
+                Password.objects.create(clientele=Clientele.objects.get(user=user), recovery_pin=recovery_password, time=timezone.now())
+                send_mail(subject, recovery_password, EMAIL_HOST_USER, [email], fail_silently=False)
+                return HttpResponseRedirect(reverse('Library:password_retrieval'))
+        else:
+            messages.error(request, "User profile not found")
+            return HttpResponseRedirect(reverse('Library:forgot_password'))
 
 
 def password_retrieval(request):
@@ -131,7 +158,7 @@ def process_registration(request):
 
 def repository(request):
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         return render(request, 'library/library_main.html', {'current_clientele': current_clientele})
     else:
         messages.error(request, 'Please login to have access')
@@ -140,7 +167,7 @@ def repository(request):
 
 def offline_resources(request):
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         return render(request, 'library/offline_resources.html', {'current_clientele': current_clientele})
     else:
         messages.error(request, 'Please login to have access')
@@ -150,7 +177,7 @@ def offline_resources(request):
 def library_admin(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         if (User.objects.filter(username=request.user.username, groups__name='Staff').exists()) or (User.objects.filter(username=request.user.username, groups__name='Admin').exists()):
-            current_clientele = Clientele.objects.get(clientele_id=request.user.username)
+            current_clientele =get_object_or_404(Clientele, clientele_id=request.user.username)
             return render(request, 'library/library_admin.html', {'current_clientele': current_clientele})
         else:
             messages.error(request, 'Access only available to Staff and Admin')
