@@ -103,35 +103,35 @@
                             </a>
                             {% if current_clientele %}
                             <div class="searchbar__content setting__block">
-    <div class="content-inner">
-        <div class="switcher-currency">
-            <a href="{% url 'Library:login' %}">
-                <strong class="label switcher-label">
-                    <span>Login</span>
-                </strong>
-            </a>
-        </div>
-        <div class="switcher-currency">
-            <a href="{% url 'Library:register' %}">
-                <strong class="label switcher-label">
-                    <span>Register</span>
-                </strong>
-            </a>
-        </div>
-    </div>
-</div>
+                                <div class="content-inner">
+                                    <div class="switcher-currency">
+                                        <a href="{% url 'Library:logout' %}">
+                                            <strong class="label switcher-label">
+                                                <span>Logout</span>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                             {% else %}
                             <div class="searchbar__content setting__block">
-    <div class="content-inner">
-        <div class="switcher-currency">
-            <a href="{% url 'Library:logout' %}">
-                <strong class="label switcher-label">
-                    <span>Logout</span>
-                </strong>
-            </a>
-        </div>
-    </div>
-</div>
+                                <div class="content-inner">
+                                    <div class="switcher-currency">
+                                        <a href="{% url 'Library:login' %}">
+                                            <strong class="label switcher-label">
+                                                <span>Login</span>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                    <div class="switcher-currency">
+                                        <a href="{% url 'Library:register' %}">
+                                            <strong class="label switcher-label">
+                                                <span>Register</span>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                             {% endif %}
                         </li>
                     </ul>
