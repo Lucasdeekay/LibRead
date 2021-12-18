@@ -219,7 +219,14 @@ def repository(request):
 def offline_resources(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        return render(request, 'library/offline_resources.html', {'current_clientele': current_clientele})
+        all_ebooks = Ebook.objects.all()
+        approved_journals = Journal.objects.filter(is_approved=True)
+        e_resources = [all_ebooks + approved_journals]
+        e_resources.sort()
+        return render(request, 'library/offline_resources.html', {
+            'current_clientele': current_clientele,
+            'e_resources': e_resources,
+        })
     else:
         messages.error(request, 'Please login to have access')
         return HttpResponseRedirect(reverse('Library:login'))
