@@ -206,6 +206,7 @@ def process_registration(request):
 
 
 def repository(request):
+    update_users()
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         return render(request, 'library/library_main.html', {'current_clientele': current_clientele})
