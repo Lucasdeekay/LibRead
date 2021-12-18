@@ -1,5 +1,6 @@
 import random
 import string
+from operator import attrgetter
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -221,8 +222,9 @@ def offline_resources(request):
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         all_ebooks = Ebook.objects.all()
         approved_journals = Journal.objects.filter(is_approved=True)
-        e_resources = [all_ebooks + approved_journals]
-        e_resources.sort()
+        e_list = [all_ebooks + approved_journals]
+        e_list.sort()
+        e_resources = sorted(e_list, key=attrgetter('date'))
         return render(request, 'library/offline_resources.html', {
             'current_clientele': current_clientele,
             'e_resources': e_resources,
@@ -314,4 +316,20 @@ def reject_journal(request, journal_id):
 def log_out(request):
     logout(request)
     return HttpResponseRedirect(reverse('Library:login'))
+
+
+def error_400(request, exception):
+    return render(request, 'library/400.html')
+
+
+def error_403(request, exception):
+    return render(request, 'library/403.html')
+
+
+def error_404(request, exception):
+    return render(request, 'library/404.html')
+
+
+def error_500(request):
+    return render(request, 'library/500.html')
 
