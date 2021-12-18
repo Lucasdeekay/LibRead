@@ -105,6 +105,13 @@
                             <div class="searchbar__content setting__block">
                                 <div class="content-inner">
                                     <div class="switcher-currency">
+                                        <a href="{% url 'Library:update_password' current_clientele.user %}">
+                                            <strong class="label switcher-label">
+                                                <span>Change Password</span>
+                                            </strong>
+                                        </a>
+                                    </div>
+                                    <div class="switcher-currency">
                                         <a href="{% url 'Library:logout' %}">
                                             <strong class="label switcher-label">
                                                 <span>Logout</span>
