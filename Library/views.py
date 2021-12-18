@@ -10,8 +10,9 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils import timezone
 
+from Blog.models import Blog
 from DU_E_Library.settings import EMAIL_HOST_USER
-from Library.models import Clientele, Password, Journal
+from Library.models import Clientele, Password, Journal, Ebook
 
 random = random.Random()
 
@@ -241,6 +242,66 @@ def library_admin(request):
     else:
         messages.error(request, 'Please login to have access')
         return HttpResponseRedirect(reverse('Library:login'))
+
+
+def upload_ebook(request):
+    title = request.POST.get('title')
+    authors = request.POST.get('authors')
+    description = request.POST.get('description')
+    programme = request.POST.get('programme')
+    file = request.FILES.get('file')
+    Ebook.objects.create(title=title, authors=authors, description=description, programme=programme, file=file, date=timezone.now())
+    messages.success(request, 'Ebook successfully uploaded')
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def upload_journal(request):
+    title = request.POST.get('title')
+    authors = request.POST.get('authors')
+    description = request.POST.get('description')
+    file = request.FILES.get('file')
+    Journal.objects.create(title=title, authors=authors, description=description, file=file, date=timezone.now())
+    messages.success(request, 'Journal successfully uploaded and awaiting approval')
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def upload_blog(request):
+    title = request.POST.get('title')
+    article = request.POST.get('article')
+    image = request.FILES.get('image')
+    Blog.objects.create(title=title, article=article, image=image, date=timezone.now())
+    messages.success(request, 'Blog successfully uploaded')
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def approve_clientele(request, clientele_id):
+    clientele = get_object_or_404(Clientele, id=clientele_id)
+    clientele.is_approved = True
+    clientele.save()
+    messages.success(request, f"{clientele.last_name} {clientele.first_name} has been successfully authorized")
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def reject_clientele(request, clientele_id):
+    clientele = get_object_or_404(Clientele, id=clientele_id)
+    clientele.delete()
+    messages.success(request, f"{clientele.last_name} {clientele.first_name} registration has been rejected")
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def approve_journal(request, journal_id):
+    journal = get_object_or_404(Journal, id=journal_id)
+    journal.is_approved = True
+    journal.save()
+    messages.success(request, f"{journal.title} by {journal.authors} has been successfully approved")
+    return HttpResponseRedirect(reverse('Library:library_admin'))
+
+
+def reject_journal(request, journal_id):
+    journal = get_object_or_404(Journal, id=journal_id)
+    journal.delete()
+    messages.success(request, f"{journal.title} by {journal.authors} has been rejected")
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def log_out(request):

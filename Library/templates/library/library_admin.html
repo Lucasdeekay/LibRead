@@ -107,7 +107,7 @@
             <div class="col-sm-6">
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Ebook</h3>
-                    <form action="" method="post" enctype="multipart/form-data"
+                    <form action="{% url 'Library:upload_ebook' %}" method="post" enctype="multipart/form-data"
                           style="background-color:#D3D3EE; border-radius:5%">
                         {% csrf_token %}
                         <div class="account__form" style="border:0">
@@ -150,7 +150,7 @@
                             <div class="field">
                                 <div class="has-name is-fullwidth">
                                     <label class="file-label input">
-                                        <input type="file" name="file">
+                                        <input type="file" name="file" required>
                                     </label>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
             <div class="col-sm-6">
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Journal</h3>
-                    <form action="" method="post" enctype="multipart/form-data"
+                    <form action="{% url 'Library:upload_journal' %}" method="post" enctype="multipart/form-data"
                           style="background-color:#9298A0; border-radius:5%">
                         {% csrf_token %}
                         <div class="account__form" style="border:0">
@@ -204,7 +204,7 @@
                             <div class="field">
                                 <div class="has-name is-fullwidth">
                                     <label class="file-label input">
-                                        <input type="file" name="file">
+                                        <input type="file" name="file" required>
                                     </label>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
             <div class="col-sm-6">
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Blog</h3>
-                    <form action="" method="post" enctype="multipart/form-data"
+                    <form action="{% url 'Library:upload_blog' %}" method="post" enctype="multipart/form-data"
                           style="background-color:#C9F299; border-radius:5%">
                         {% csrf_token %}
                         <div class="account__form" style="border:0">
@@ -247,9 +247,10 @@
                                 </div>
                             </div>
                             <div class="field">
+                                <label class="label">Add image <span>*</span></label>
                                 <div class="has-name is-fullwidth">
                                     <label class="file-label input">
-                                        <input type="file" name="file">
+                                        <input type="image" name="image" required>
                                     </label>
                                 </div>
                             </div>
@@ -281,18 +282,20 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% if unauthorized_clienteles %}
                 {% for clientele in unauthorized_clienteles %}
                 <tr>
                     <td>{{ clientele.last_name }}</td>
                     <td>{{ clientele.first_name }}</td>
                     <td>{{ clientele.matric_no }}</td>
                     <td>{{ clientele.role }}</td>
-                    <td><a href=""><button class="button is-danger">Unauthorize</button></a></td>
-                    <td><a href=""><button class="button is-success">Authorize</button></a></td>
+                    <td><a href="{% url 'Library:reject_clientele' clientele.id %}"><button class="button is-danger">Reject</button></a></td>
+                    <td><a href="{% url 'Library:approve_clientele' clientele.id %}"><button class="button is-success">Approve</button></a></td>
                 </tr>
+                {% endfor %}
                 {% else %}
                 <tr>No unauthorized user available </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
@@ -314,17 +317,19 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% if unauthorized_journals %}
                 {% for journal in unauthorized_journals %}
                 <tr>
                     <td>{{ journal.title }}</td>
                     <td>{{ journal.date }}</td>
-                    <td><a href=""><button class="button is-link">Download</button></a></td>
-                    <td><a href=""><button class="button is-danger">Unauthorize</button></a></td>
-                    <td><a href=""><button class="button is-success">Authorize</button></a></td>
+                    <td><a href="{{ journal.file.url }}" download><button class="button is-link">Download</button></a></td>
+                    <td><a href="{% url 'Library:reject_journal' journal.id %}"><button class="button is-danger">Reject</button></a></td>
+                    <td><a href="{% url 'Library:approve_journal' journal.id %}"><button class="button is-success">Approve</button></a></td>
                 </tr>
+                {% endfor %}
                 {% else %}
                 <tr>No unauthorized journal available </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
