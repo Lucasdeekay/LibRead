@@ -11,9 +11,39 @@ from django.urls import reverse
 from django.utils import timezone
 
 from DU_E_Library.settings import EMAIL_HOST_USER
-from Library.models import Clientele, Password
+from Library.models import Clientele, Password, Journal
 
 random = random.Random()
+
+
+def update_users():
+    all_clienteles = Clientele.objects.all()
+    all_users = User.objects.all()
+    for clientele in all_clienteles:
+        if clientele.is_approved:
+            for user in all_users:
+                if clientele.clientele_id == user.username:
+                    break
+            else:
+                password = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
+                user = User.objects.create_user(username=clientele.clientele_id, email=clientele.email, password=password, last_name=clientele.last_name, first_name=clientele.first_name)
+                clientele.user = user
+                clientele.save()
+                if clientele.role == 'Admin':
+                    group = Group.objects.get(name='Admin')
+                    user.groups.add(group)
+                elif clientele.role == 'Staff':
+                    group = Group.objects.get(name='Staff')
+                    user.groups.add(group)
+                elif clientele.role == 'Student':
+                    group = Group.objects.get(name='Student')
+                    user.groups.add(group)
+
+                subject = 'Registration Approval'
+                msg = f"You have been successfully approved to make use of Dominion university library. Your password " \
+                      f"is {password}. You can proceed to update after login"
+                send_mail(subject, msg, EMAIL_HOST_USER, [clientele.email], fail_silently=False)
+                return HttpResponseRedirect(reverse('Library:login'))
 
 
 def home(request):
@@ -156,8 +186,6 @@ def process_registration(request):
         phone_no = request.POST.get('phone_number')
         email = request.POST.get('email')
         role = request.POST.get('role').capitalize()
-        password = request.POST.get('password1')
-        confirm_password = request.POST.get('password2')
 
         all_clienteles = Clientele.objects.all()
 
@@ -169,27 +197,12 @@ def process_registration(request):
                 messages.error(request, "Email already in use")
                 return HttpResponseRedirect(reverse('Library:register'))
         else:
-            if password == confirm_password and len(password) >= 8:
-                user = User.objects.create_user(username=clientele_id, email=email, password=password, last_name=last_name, first_name=first_name)
-                Clientele.objects.create(user=user, last_name=last_name, first_name=first_name, clientele_id=clientele_id, sex=sex,
-                                         phone_no=phone_no, email=email, role=role)
-                if role == 'Admin':
-                    group = Group.objects.get(name='Admin')
-                    user.groups.add(group)
-                elif role == 'Staff':
-                    group = Group.objects.get(name='Staff')
-                    user.groups.add(group)
-                elif role == 'Student':
-                    group = Group.objects.get(name='Student')
-                    user.groups.add(group)
-                messages.success(request, "Registration successful")
-                return HttpResponseRedirect(reverse('Library:login'))
-            elif len(password) < 8:
-                messages.error(request, "Password must be 8 characters or more")
-                return HttpResponseRedirect(reverse('Library:register'))
-            elif password != confirm_password:
-                messages.error(request, "Password does not match")
-                return HttpResponseRedirect(reverse('Library:register'))
+            Clientele.objects.create(last_name=last_name, first_name=first_name, clientele_id=clientele_id, sex=sex,
+                                     phone_no=phone_no, email=email, role=role)
+
+            messages.success(request, "Registration successful. A mail of approval will be sent to your email within "
+                                      "the next 48hrs. Thank You.")
+            return HttpResponseRedirect(reverse('Library:home'))
 
 
 def repository(request):
@@ -213,8 +226,14 @@ def offline_resources(request):
 def library_admin(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         if (User.objects.filter(username=request.user.username, groups__name='Staff').exists()) or (User.objects.filter(username=request.user.username, groups__name='Admin').exists()):
-            current_clientele =get_object_or_404(Clientele, clientele_id=request.user.username)
-            return render(request, 'library/library_admin.html', {'current_clientele': current_clientele})
+            current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
+            unauthorized_clienteles = Clientele.objects.filter(status=False)
+            unauthorized_journals = Journal.objects.filter(status=False)
+            return render(request, 'library/library_admin.html', {
+                'current_clientele': current_clientele,
+                'unauthorized_clienteles': unauthorized_clienteles,
+                'unauthorized_journals': unauthorized_journals,
+            })
         else:
             messages.error(request, 'Access only available to Staff and Admin')
             return HttpResponseRedirect(reverse('Library:home'))
