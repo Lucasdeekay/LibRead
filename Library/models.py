@@ -34,7 +34,6 @@ class Ebook(models.Model):
     programme = models.CharField(max_length=250, null=False)
     date = models.DateTimeField(null=False)
     file = models.FileField(upload_to="ebooks/", null=False)
-    is_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} -> {self.authors}"
