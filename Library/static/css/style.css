@@ -816,17 +816,17 @@ a {
 }
 
 .bg-image--3 {
-    background-image: url(../images/library/0Q4A9189-Edit.jpg);
+    background-image: url(../images/library/0Q4A9162-Edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--4 {
-    background-image: url(../images/bg/4.jpg);
+    background-image: url(../images/library/0Q4A9132-Edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--5 {
@@ -837,10 +837,10 @@ a {
 }
 
 .bg-image--6 {
-    background-image: url(../images/library/0Q4A9142-Edit.jpg);
+    background-image: url(../images/library/0Q4A9162-Edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--7 {
@@ -854,21 +854,21 @@ a {
     background-image: url(../images/library/0Q4A9093-Edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--9 {
-    background-image: url(../images/library/0Q4A9162-Edit.jpg);
+    background-image: url(../images/library/0Q4A9132-Edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--10 {
     background-image: url(../images/bg/10.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
 }
 
 .bg-image--11 {
@@ -4378,7 +4378,7 @@ h3.widget-title-modal {
 }
 
 .slide .slider__content h2 {
-    color: #3c3c3c;
+    color: #1C1C4A;
     font-size: 68px;
     font-family: poppins;
     font-weight: 700;
@@ -4406,7 +4406,7 @@ h3.widget-title-modal {
 }
 
 .slide .slider__content a.shopbtn {
-    color: #333;
+    color: #1C1C4A;
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
@@ -5786,7 +5786,7 @@ h3.widget-title-modal {
   Breadcaump Styles
 ----------------------------*/
 .ht__breadcrumb__area {
-    padding-bottom: 110px;
+    padding-bottom: 220px;
     padding-top: 220px;
 }
 
