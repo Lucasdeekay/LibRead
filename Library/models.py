@@ -12,6 +12,7 @@ class Clientele(models.Model):
     phone_no = models.CharField(max_length=20, null=False)
     email = models.EmailField(null=False)
     role = models.CharField(max_length=15, null=False, choices=[('student', 'Student'), ('staff', 'Staff'), ('admin', 'Admin')])
+    image = models.ImageField(null=False)
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):
@@ -33,7 +34,7 @@ class Ebook(models.Model):
     description = models.CharField(max_length=250, null=False)
     programme = models.CharField(max_length=250, null=False)
     date = models.DateTimeField(null=False)
-    file = models.FileField(upload_to="ebooks/", null=False)
+    file = models.FileField(upload_to="LibRead/ebooks/", null=False)
 
     def __str__(self):
         return f"{self.title} -> {self.authors}"
@@ -55,7 +56,7 @@ class Journal(models.Model):
     authors = models.CharField(max_length=500, null=False)
     description = models.CharField(max_length=250, null=True)
     date = models.DateTimeField(null=False)
-    file = models.FileField(upload_to="ebooks/", null=False)
+    file = models.FileField(upload_to="LibRead/journals/", null=False)
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):
