@@ -250,12 +250,9 @@ def repository(request):
 def offline_resources(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        all_ebooks = Ebook.objects.all()
-        approved_journals = Journal.objects.filter(is_approved=True)
-        e_list = [all_ebooks + approved_journals]
-        e_list.sort()
-        e_resources = sorted(e_list, key=attrgetter('date'))
-        context = {'current_clientele': current_clientele, 'e_resources': e_resources}
+        all_ebooks = Ebook.objects.all().sort_by('-date')
+        approved_journals = Journal.objects.filter(is_approved=True).sort_by('-date')
+        context = {'current_clientele': current_clientele, 'approved_journals': approved_journals, 'all_ebooks': all_ebooks}
         return render(request, 'library/offline_resources.html', context)
     else:
         messages.error(request, 'Please login to have access')

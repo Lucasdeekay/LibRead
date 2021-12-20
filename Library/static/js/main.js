@@ -66,4 +66,20 @@ $(function(){
 	    $('#journal-auth-section').show();
 	    $('#journal-auth-button').addClass('is-active');
 	});
+
+	/*============= Admin Tab =============*/
+	$('#journal-sec').hide();
+
+	$('#ebook-btn').click(function(){
+	    $('#ebook-sec').show();
+	    $('#ebook-btn').addClass('is-active');
+	    $('#journal-sec').hide();
+	    $('#journal-btn').removeClass('is-active');
+	});
+	$('#journal-btn').click(function(){
+	    $('#ebook-sec').hide();
+	    $('ebook-btn').removeClass('is-active');
+	    $('#journal-sec').show();
+	    $('#journal-btn').addClass('is-active');
+	});
 });
