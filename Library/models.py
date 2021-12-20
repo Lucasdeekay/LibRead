@@ -11,7 +11,7 @@ class Clientele(models.Model):
     sex = models.CharField(max_length=6, null=False, choices=[('male', 'Male'), ('female', 'Female')])
     phone_no = models.CharField(max_length=20, null=False)
     email = models.EmailField(null=False)
-    role = models.CharField(max_length=15, null=False, choices=[('student', 'Student'), ('staff', 'Staff'), ('admin', 'Admin')])
+    role = models.CharField(max_length=15, null=False, choices=[('Student', 'Student'), ('Staff', 'Staff'), ('Admin', 'Admin')])
     image = models.ImageField(upload_to='LibRead/profile-image', null=True, blank=True)
     is_approved = models.BooleanField(default=False)
 

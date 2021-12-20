@@ -33,7 +33,7 @@ def update_users():
                 clientele.save()
                 if clientele.role == 'Admin':
                     group = Group.objects.get(name='Admin')
-                    user.groups.add(group)
+                    group.user_set.add(user)
                 elif clientele.role == 'Staff':
                     group = Group.objects.get(name='Staff')
                     user.groups.add(group)
@@ -73,51 +73,37 @@ def contact(request):
 
 
 def log_in(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        return render(request, 'library/login.html', context)
+        return render(request, 'library/login.html')
 
 
 def process_login(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context, )))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         clientele_id = request.POST.get('clientele_id')
         password = request.POST.get('password')
         user = authenticate(request, username=clientele_id, password=password)
         if user is not None:
             login(request, user)
-            current_clientele = get_object_or_404(Clientele, clientele_id=clientele_id)
-            context = {'current_clientele': current_clientele}
-            return HttpResponseRedirect(reverse('Library:repository', args=(context, )))
+            return HttpResponseRedirect(reverse('Library:repository'))
         else:
             messages.error(request, "Invalid login details")
-            return HttpResponseRedirect(reverse('Library:login', args=(context, )))
+            return HttpResponseRedirect(reverse('Library:login'))
 
 
 def forgotten_password(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        return render(request, 'library/forgot_password.html', context)
+        return render(request, 'library/forgot_password.html')
 
 
 def send_recovery_pin(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         clientele_id = request.POST.get('clientele_id')
         email = request.POST.get('email')
@@ -126,23 +112,17 @@ def send_recovery_pin(request):
             if user.username == clientele_id and user.email == email:
                 recovery_password = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(12)])
                 subject = 'Password Recovery'
-                Password.objects.create(clientele=Clientele.objects.get(user=user), recovery_pin=recovery_password, time=timezone.now())
+                Password.objects.create(clientele=Clientele.objects.get(user=user), recovery_password=recovery_password, time=timezone.now())
                 send_mail(subject, recovery_password, EMAIL_HOST_USER, [email], fail_silently=False)
-
-                current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-                context = {'current_clientele': current_clientele, 'username': user.username}
-
-                return HttpResponseRedirect(reverse('Library:password_retrieval', args=(context,)))
+                return HttpResponseRedirect(reverse('Library:password_retrieval', args=(user.username, )))
         else:
             messages.error(request, "User profile not found")
-            return HttpResponseRedirect(reverse('Library:forgot_password', args=(context, )))
+            return HttpResponseRedirect(reverse('Library:forgot_password'))
 
 
 def password_retrieval(request, username):
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         context = {'current_clientele': current_clientele, 'username': username}
@@ -151,26 +131,21 @@ def password_retrieval(request, username):
 
 def process_recovery_password(request, username):
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context, )))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         password = request.POST.get('password')
         clientele = get_object_or_404(Clientele, user=User.objects.get_by_natural_key(username=username))
         all_password = Password.objects.all()
-
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele, 'username': username}
 
         for passcode in all_password:
             if passcode.clientele == clientele and passcode.password == password:
                 subject = 'Password Recovery Successful'
                 msg = "Account successfully retrieved"
                 send_mail(subject, msg, EMAIL_HOST_USER, [clientele.email], fail_silently=False)
-                return HttpResponseRedirect(reverse('Library:update_password', args=(context,)))
+                return HttpResponseRedirect(reverse('Library:update_password', args=(username,)))
         else:
             messages.error(request, "Incorrect recovery password. Click on resend to get the retrieval password again")
-            return HttpResponseRedirect(reverse('Library:password_retrieval', args=(context,)))
+            return HttpResponseRedirect(reverse('Library:password_retrieval', args=(username,)))
 
 
 def update_password(request):
@@ -179,22 +154,15 @@ def update_password(request):
         context = {'current_clientele': current_clientele, 'username': request.user.username}
         return render(request, 'library/update_password.html', context)
     else:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def set_updated_password(request, username):
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele, 'username': username}
 
         if password1 == password2:
             user = User.objects.get_by_natural_key(username=username)
@@ -203,28 +171,22 @@ def set_updated_password(request, username):
             subject = 'Password Update Successful'
             msg = "Account password has  been successfully changed"
             send_mail(subject, msg, EMAIL_HOST_USER, [user.email], fail_silently=False)
-            return HttpResponseRedirect(reverse('Library:login', args=(context, )))
+            return HttpResponseRedirect(reverse('Library:login'))
         else:
             messages.error(request, "Password does not match")
-            return HttpResponseRedirect(reverse('Library:update_password', args=(context,)))
+            return HttpResponseRedirect(reverse('Library:update_password', args=(username,)))
 
 
 def register(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        return render(request, 'library/register.html', context)
+        return render(request, 'library/register.html')
 
 
 def process_registration(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         last_name = request.POST.get('last_name').capitalize()
         first_name = request.POST.get('first_name').capitalize()
@@ -239,50 +201,43 @@ def process_registration(request):
         for clientele in all_clienteles:
             if clientele_id == clientele.clientele_id:
                 messages.error(request, "User ID already in use")
-                return HttpResponseRedirect(reverse('Library:register', args=(context,)))
+                return HttpResponseRedirect(reverse('Library:register'))
             elif email == clientele.email:
                 messages.error(request, "Email already in use")
-                return HttpResponseRedirect(reverse('Library:register', args=(context,)))
+                return HttpResponseRedirect(reverse('Library:register'))
         else:
             Clientele.objects.create(last_name=last_name, first_name=first_name, clientele_id=clientele_id, sex=sex,
                                      phone_no=phone_no, email=email, role=role)
 
             messages.success(request, "Registration successful. A mail of approval will be sent to your email within "
                                       "the next 48hrs. Thank You.")
-            return HttpResponseRedirect(reverse('Library:home', args=(context,)))
+            return HttpResponseRedirect(reverse('Library:home'))
 
 
 def update_profile_image(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         context = {'current_clientele': current_clientele}
         return render(request, 'library/upload_image.html', context)
     else:
         messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def upload_image(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
         image = request.FILES.get('image')
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         current_clientele.image = image
         current_clientele.save()
         messages.success(request, 'Profile picture updated successfully')
-
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
-
-        return HttpResponseRedirect(reverse('Library:repository', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:repository'))
     else:
         messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def repository(request):
-    context = {}
     update_users()
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
@@ -290,11 +245,10 @@ def repository(request):
         return render(request, 'library/library_main.html', context)
     else:
         messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def offline_resources(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
         all_ebooks = Ebook.objects.all()
@@ -306,26 +260,23 @@ def offline_resources(request):
         return render(request, 'library/offline_resources.html', context)
     else:
         messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def library_admin(request):
-    context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
         if (User.objects.filter(username=request.user.username, groups__name='Staff').exists()) or (User.objects.filter(username=request.user.username, groups__name='Admin').exists()):
             current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-            unauthorized_clienteles = Clientele.objects.filter(status=False)
-            unauthorized_journals = Journal.objects.filter(status=False)
+            unauthorized_clienteles = Clientele.objects.filter(is_approved=False)
+            unauthorized_journals = Journal.objects.filter(is_approved=False)
             context = {'current_clientele': current_clientele, 'unauthorized_clienteles': unauthorized_clienteles, 'unauthorized_journals': unauthorized_journals}
             return render(request, 'library/library_admin.html', context)
         else:
-            current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-            context = {'current_clientele': current_clientele}
             messages.error(request, 'Access only available to Staff and Admin')
-            return HttpResponseRedirect(reverse('Library:home', args=(context,)))
+            return HttpResponseRedirect(reverse('Library:home'))
     else:
         messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login', args=(context,)))
+        return HttpResponseRedirect(reverse('Library:login'))
 
 
 def upload_ebook(request):
@@ -336,11 +287,7 @@ def upload_ebook(request):
     file = request.FILES.get('file')
     Ebook.objects.create(title=title, authors=authors, description=description, programme=programme, file=file, date=timezone.now())
     messages.success(request, 'Ebook successfully uploaded')
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def upload_journal(request):
@@ -350,11 +297,7 @@ def upload_journal(request):
     file = request.FILES.get('file')
     Journal.objects.create(title=title, authors=authors, description=description, file=file, date=timezone.now())
     messages.success(request, 'Journal successfully uploaded and awaiting approval')
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context, )))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def upload_blog(request):
@@ -363,11 +306,7 @@ def upload_blog(request):
     image = request.FILES.get('image')
     Blog.objects.create(title=title, article=article, image=image, date=timezone.now())
     messages.success(request, 'Blog successfully uploaded')
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def approve_clientele(request, clientele_id):
@@ -375,22 +314,14 @@ def approve_clientele(request, clientele_id):
     clientele.is_approved = True
     clientele.save()
     messages.success(request, f"{clientele.last_name} {clientele.first_name} has been successfully authorized")
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def reject_clientele(request, clientele_id):
     clientele = get_object_or_404(Clientele, id=clientele_id)
     clientele.delete()
     messages.success(request, f"{clientele.last_name} {clientele.first_name} registration has been rejected")
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def approve_journal(request, journal_id):
@@ -398,22 +329,14 @@ def approve_journal(request, journal_id):
     journal.is_approved = True
     journal.save()
     messages.success(request, f"{journal.title} by {journal.authors} has been successfully approved")
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def reject_journal(request, journal_id):
     journal = get_object_or_404(Journal, id=journal_id)
     journal.delete()
     messages.success(request, f"{journal.title} by {journal.authors} has been rejected")
-
-    current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-    context = {'current_clientele': current_clientele}
-
-    return HttpResponseRedirect(reverse('Library:library_admin', args=(context,)))
+    return HttpResponseRedirect(reverse('Library:library_admin'))
 
 
 def log_out(request):

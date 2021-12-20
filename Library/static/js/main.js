@@ -1,7 +1,7 @@
 $(function(){
 
 	/*============= Admin Tab =============*/
-	$('#journal-section').hide();
+	$('#ebook-section').hide();
 	$('#blog-section').hide();
 	$('#user-auth-section').hide();
 	$('#journal-auth-section').hide();

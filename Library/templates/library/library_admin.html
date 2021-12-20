@@ -30,6 +30,7 @@
 </div>
 <!-- End breadcrumb area -->
 <!-- Start Tab area -->
+{% if current_clientele.role == 'Admin' %}
 <div class="container mt-5">
     <div class="tabs is-toggle is-fullwidth">
         <ul>
@@ -66,6 +67,7 @@
         </ul>
     </div>
 </div>
+{% endif %}
 <!-- Start Tab area -->
 <!-- Start Message area -->
 {% for message in messages %}
@@ -100,6 +102,7 @@
 {% endif %}
 {% endfor %}
 <!-- End Message area -->
+{% if current_clientele.role == 'Admin' %}
 <!-- Start Upload Ebook Area -->
 <section class="my_account_area pt--80 pb--55 bg--white" id="ebook-section">
     <div class="container">
@@ -166,60 +169,6 @@
     </div>
 </section>
 <!-- End Upload Ebook Area -->
-<!-- Start Upload Journal Area -->
-<section class="my_account_area pt--80 pb--55 bg--white" id="journal-section">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-sm-6">
-                <div class="my__account__wrapper">
-                    <h3 class="account__title">Upload Journal</h3>
-                    <form action="{% url 'Library:upload_journal' %}" method="post" enctype="multipart/form-data"
-                          style="background-color:#9298A0; border-radius:5%">
-                        {% csrf_token %}
-                        <div class="account__form" style="border:0">
-                            <div class="field">
-                                <label class="label">Title <span>*</span></label>
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="Enter title"
-                                           name="title"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">Authors <span>*</span></label>
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="Enter authors"
-                                           name="authors"
-                                           required>
-                                </div>
-                                <small>Name of authors should be separated with a comma</small>
-                            </div>
-                            <div class="field">
-                                <label class="label">Description <span>*</span></label>
-                                <div class="control">
-                                    <textarea class="textarea is-info" name="description" maxlength="250"
-                                              placeholder="Info textarea" required></textarea>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="has-name is-fullwidth">
-                                    <label class="file-label input">
-                                        <input type="file" name="file" required>
-                                    </label>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="button is-fullwidth is-rounded is-dark label" type="submit">Submit
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Upload Journals Area -->
 <!-- Start Upload Blog Area -->
 <section class="my_account_area pt--80 pb--55 bg--white" id="blog-section">
     <div class="container">
@@ -282,20 +231,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% if unauthorized_clienteles %}
-                {% for clientele in unauthorized_clienteles %}
                 <tr>
+                    {% if unauthorized_clienteles %}
+                {% for clientele in unauthorized_clienteles %}
                     <td>{{ clientele.last_name }}</td>
                     <td>{{ clientele.first_name }}</td>
                     <td>{{ clientele.matric_no }}</td>
                     <td>{{ clientele.role }}</td>
                     <td><a href="{% url 'Library:reject_clientele' clientele.id %}"><button class="button is-danger">Reject</button></a></td>
                     <td><a href="{% url 'Library:approve_clientele' clientele.id %}"><button class="button is-success">Approve</button></a></td>
-                </tr>
                 {% endfor %}
                 {% else %}
-                <tr>No unauthorized user available </tr>
+                    <td>No unauthorized user available </td>
                 {% endif %}
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -317,26 +266,81 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+
                 {% if unauthorized_journals %}
                 {% for journal in unauthorized_journals %}
-                <tr>
                     <td>{{ journal.title }}</td>
                     <td>{{ journal.date }}</td>
                     <td><a href="{{ journal.file.url }}" download><button class="button is-link">Download</button></a></td>
                     <td><a href="{% url 'Library:reject_journal' journal.id %}"><button class="button is-danger">Reject</button></a></td>
                     <td><a href="{% url 'Library:approve_journal' journal.id %}"><button class="button is-success">Approve</button></a></td>
-                </tr>
                 {% endfor %}
                 {% else %}
-                <tr>No unauthorized journal available </tr>
+                <td>No unauthorized journal available </td>
                 {% endif %}
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
 <!-- End Authenticate Journals Area -->
-
+{% endif %}
+<!-- Start Upload Journal Area -->
+<section class="my_account_area pt--80 pb--55 bg--white" id="journal-section">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Upload Journal</h3>
+                    <form action="{% url 'Library:upload_journal' %}" method="post" enctype="multipart/form-data"
+                          style="background-color:#9298A0; border-radius:5%" {% if current_clientele.role == 'staff' %}>
+                        {% csrf_token %}
+                        <div class="account__form" style="border:0">
+                            <div class="field">
+                                <label class="label">Title <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter title"
+                                           name="title"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Authors <span>*</span></label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Enter authors"
+                                           name="authors"
+                                           required>
+                                </div>
+                                <small>Name of authors should be separated with a comma</small>
+                            </div>
+                            <div class="field">
+                                <label class="label">Description <span>*</span></label>
+                                <div class="control">
+                                    <textarea class="textarea is-info" name="description" maxlength="250"
+                                              placeholder="Info textarea" required></textarea>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="has-name is-fullwidth">
+                                    <label class="file-label input">
+                                        <input type="file" name="file" required>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button is-fullwidth is-rounded is-dark label" type="submit">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Upload Journals Area -->
 {% endblock %}
 
 {% block script %}
