@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class Clientele(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=False)
     first_name = models.CharField(max_length=50, null=False)
     clientele_id = models.CharField(max_length=25, null=False)
@@ -12,7 +12,7 @@ class Clientele(models.Model):
     phone_no = models.CharField(max_length=20, null=False)
     email = models.EmailField(null=False)
     role = models.CharField(max_length=15, null=False, choices=[('student', 'Student'), ('staff', 'Staff'), ('admin', 'Admin')])
-    image = models.ImageField(upload_to='LibRead/profile-image', null=False)
+    image = models.ImageField(upload_to='LibRead/profile-image', null=True, blank=True)
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):
