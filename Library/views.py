@@ -110,54 +110,53 @@ def send_recovery_pin(request):
         all_user = User.objects.all()
         for user in all_user:
             if user.username == clientele_id and user.email == email:
+                clientele = Clientele.objects.get(user=user)
                 recovery_password = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(12)])
                 subject = 'Password Recovery'
-                Password.objects.create(clientele=Clientele.objects.get(user=user), recovery_password=recovery_password, time=timezone.now())
+                Password.objects.create(clientele=clientele, recovery_password=recovery_password, time=timezone.now())
                 send_mail(subject, recovery_password, EMAIL_HOST_USER, [email], fail_silently=False)
-                return HttpResponseRedirect(reverse('Library:password_retrieval', args=(user.username, )))
+                return HttpResponseRedirect(reverse('Library:password_retrieval', args=(clientele.last_name,)))
         else:
             messages.error(request, "User profile not found")
             return HttpResponseRedirect(reverse('Library:forgot_password'))
 
 
-def password_retrieval(request, username):
+def password_retrieval(request, name):
     if request.user.is_authenticated and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele, 'username': username}
+        current_clientele = get_object_or_404(Clientele, last_name=name)
+        context = {'current_clientele': current_clientele, 'name': name}
         return render(request, 'library/password_retrieval.html', context)
 
 
-def process_recovery_password(request, username):
+def process_recovery_password(request, name):
     if request.user.is_authenticated and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
         password = request.POST.get('password')
-        clientele = get_object_or_404(Clientele, user=User.objects.get_by_natural_key(username=username))
+        clientele = get_object_or_404(Clientele, last_name=name)
         all_password = Password.objects.all()
 
         for passcode in all_password:
-            if passcode.clientele == clientele and passcode.password == password:
+            if passcode.clientele == clientele and passcode.recovery_password == password:
                 subject = 'Password Recovery Successful'
                 msg = "Account successfully retrieved"
                 send_mail(subject, msg, EMAIL_HOST_USER, [clientele.email], fail_silently=False)
-                return HttpResponseRedirect(reverse('Library:update_password', args=(username,)))
+                return HttpResponseRedirect(reverse('Library:update_password', args=(name,)))
         else:
             messages.error(request, "Incorrect recovery password. Click on resend to get the retrieval password again")
-            return HttpResponseRedirect(reverse('Library:password_retrieval', args=(username,)))
+            return HttpResponseRedirect(reverse('Library:password_retrieval', args=(name,)))
 
 
-def update_password(request):
-    if request.user.is_authenticated and not request.user.is_superuser:
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele, 'username': request.user.username}
+def update_password(request, name):
+    if not request.user.is_superuser:
+        current_clientele = get_object_or_404(Clientele, last_name=name)
+        context = {'current_clientele': current_clientele, 'name': name}
         return render(request, 'library/update_password.html', context)
-    else:
-        return HttpResponseRedirect(reverse('Library:login'))
 
 
-def set_updated_password(request, username):
+def set_updated_password(request, name):
     if request.user.is_authenticated and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('Library:repository'))
     else:
@@ -165,7 +164,7 @@ def set_updated_password(request, username):
         password2 = request.POST.get('password2')
 
         if password1 == password2:
-            user = User.objects.get_by_natural_key(username=username)
+            user = Clientele.objects.get(last_name=name).user
             user.set_password(password1)
             user.save()
             subject = 'Password Update Successful'
@@ -174,7 +173,7 @@ def set_updated_password(request, username):
             return HttpResponseRedirect(reverse('Library:login'))
         else:
             messages.error(request, "Password does not match")
-            return HttpResponseRedirect(reverse('Library:update_password', args=(username,)))
+            return HttpResponseRedirect(reverse('Library:update_password', args=(name,)))
 
 
 def register(request):

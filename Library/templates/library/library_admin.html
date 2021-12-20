@@ -295,7 +295,7 @@
                 <div class="my__account__wrapper">
                     <h3 class="account__title">Upload Journal</h3>
                     <form action="{% url 'Library:upload_journal' %}" method="post" enctype="multipart/form-data"
-                          style="background-color:#9298A0; border-radius:5%" {% if current_clientele.role == 'staff' %}>
+                          style="background-color:#9298A0; border-radius:5%">
                         {% csrf_token %}
                         <div class="account__form" style="border:0">
                             <div class="field">
