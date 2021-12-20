@@ -45,7 +45,7 @@
                             <h2 class="another">E-<span>Library </span></h2>
                             <p>Boighor specifically created for authors and writes to present and sell their
                                 books online Soufflé tart sweet. </p>
-                            <a class="shopbtn" href="#">READ NOW</a>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">READ NOW</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <h2 class="another">E-<span>Library </span></h2>
                             <p>Boighor specifically created for authors and writes to present and sell their
                                 books online Soufflé tart sweet. </p>
-                            <a class="shopbtn" href="#">GO TO LIBRARY</a>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">GO TO LIBRARY</a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                 <div class="blog-details content">
                     <article class="blog-post-details">
                         <div class="post-thumbnail">
-                            <img src="{% static 'images/blog/big-img/1.jpg' %}" alt="blog images">
+                            <img src="{% static 'images/library/0Q4A9189-Edit.jpg' %}" alt="blog images">
                         </div>
                         <div class="post_wrapper">
                             <div class="post_header">
@@ -176,71 +176,23 @@
                         <h3 class="widget-title">Recent</h3>
                         <div class="recent-posts">
                             <ul>
+                                {% for blog in blogs %}
+                                {% if forloop.counter < 5 %}
                                 <li>
                                     <div class="post-wrapper d-flex">
                                         <div class="thumb">
                                             <a href="blog-details.html"><img
-                                                    src="{% static 'images/blog/sm-img/1.jpg' %}"
+                                                    src="{{ blog.image.url }}"
                                                     alt="blog images"></a>
                                         </div>
                                         <div class="content">
-                                            <h4><a href="blog-details.html">Blog image post</a></h4>
-                                            <p> March 10, 2015</p>
+                                            <h4><a href="{% url 'Blog:home' %}">{{ blog.title }}</a></h4>
+                                            <p> {{ blog.date }}</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="post-wrapper d-flex">
-                                        <div class="thumb">
-                                            <a href="blog-details.html"><img
-                                                    src="{% static 'images/blog/sm-img/2.jpg' %}"
-                                                    alt="blog images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="blog-details.html">Post with Gallery</a></h4>
-                                            <p> March 10, 2015</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper d-flex">
-                                        <div class="thumb">
-                                            <a href="blog-details.html"><img
-                                                    src="{% static 'images/blog/sm-img/3.jpg' %}"
-                                                    alt="blog images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="blog-details.html">Post with Video</a></h4>
-                                            <p> March 10, 2015</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper d-flex">
-                                        <div class="thumb">
-                                            <a href="blog-details.html"><img
-                                                    src="{% static 'images/blog/sm-img/4.jpg' %}"
-                                                    alt="blog images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="blog-details.html">Maecenas ultricies</a></h4>
-                                            <p> March 10, 2015</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-wrapper d-flex">
-                                        <div class="thumb">
-                                            <a href="blog-details.html"><img
-                                                    src="{% static 'images/blog/sm-img/5.jpg' %}"
-                                                    alt="blog images"></a>
-                                        </div>
-                                        <div class="content">
-                                            <h4><a href="blog-details.html">Blog image post</a></h4>
-                                            <p> March 10, 2015</p>
-                                        </div>
-                                    </div>
-                                </li>
+                                {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </aside>

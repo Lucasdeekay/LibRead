@@ -52,7 +52,8 @@ def home(request):
     context = {}
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele}
+        all_blogs = Blog.objects.all().order_by('-date')
+        context = {'current_clientele': current_clientele, 'all_blogs': all_blogs}
     return render(request, 'library/library_home.html', context)
 
 
@@ -250,9 +251,7 @@ def repository(request):
 def offline_resources(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        all_ebooks = Ebook.objects.all().sort_by('-date')
-        approved_journals = Journal.objects.filter(is_approved=True).sort_by('-date')
-        context = {'current_clientele': current_clientele, 'approved_journals': approved_journals, 'all_ebooks': all_ebooks}
+        context = {'current_clientele': current_clientele}
         return render(request, 'library/offline_resources.html', context)
     else:
         messages.error(request, 'Please login to have access')

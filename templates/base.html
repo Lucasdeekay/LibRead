@@ -63,7 +63,9 @@
                 <div class="col-md-6 col-sm-6 col-6 col-lg-3">
                     <div class="logo">
                         <a href="index.html">
-                            <img width="264" height="81" src="https://dominionuniversity.edu.ng/wp-content/uploads/2019/08/FOOTER_Logo_DU_1.png"  alt="Dominion University, Ibadan">
+                            <img width="264" height="81"
+                                 src="https://dominionuniversity.edu.ng/wp-content/uploads/2019/08/FOOTER_Logo_DU_1.png"
+                                 alt="Dominion University, Ibadan">
                         </a>
                     </div>
                 </div>
@@ -94,12 +96,30 @@
                 <div class="col-md-6 col-sm-6 col-6 col-lg-1">
                     <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
                         <li class="">
-                            <a class="setting__active" href="#"><img class="mx-6"
-                                                                     src="https://img.icons8.com/office/50/000000/person-neutral-skin-type-4.png"
-                                                                     width="30px"/>
-                                {% block user %}
-                                {% endblock %}
+                            {% if current_clientele %}
+                            <a class="setting__active" href="#">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    {% if current_clientele.image == '' %}
+                                    <img src="https://img.icons8.com/offices/30/000000/person-neutral-skin-type-4.png"/>
+                                    {% else %}
+                                    <img class="mx-6 is-rounded"
+                                         src="{{ current_clientele.image }}"
+                                         width="80px" style="border-radius: 50px"/>
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    {% block user %}
+                                    {% endblock %}
+                                </div>
                             </a>
+                            {% else %}
+                            <a class="setting__active" href="#">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="https://img.icons8.com/offices/30/000000/person-neutral-skin-type-4.png"/>
+                                </div>
+                            </a>
+                            {% endif %}
+
                             {% if current_clientele %}
                             <div class="searchbar__content setting__block">
                                 <div class="content-inner">
@@ -197,18 +217,17 @@
                         <div class="footer__widget footer__menu">
                             <div class="ft__logo">
                                 <a href="index.html">
-                                    <img src="https://dominionuniversity.edu.ng/wp-content/uploads/2019/08/New_Logo_DU_1-1.png" alt="Dominion University, Ibadan">
+                                    <img src="https://dominionuniversity.edu.ng/wp-content/uploads/2019/08/New_Logo_DU_1-1.png"
+                                         alt="Dominion University, Ibadan">
                                 </a>
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority
                                     have suffered duskam alteration variations of passages</p>
                             </div>
                             <div class="footer__content">
                                 <ul class="social__net social__net--2 d-flex justify-content-center">
-                                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-                                    <li><a href="#"><i class="bi bi-google"></i></a></li>
-                                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-                                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="bi bi-youtube"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
                                 </ul>
                                 <ul class="mainmenu d-flex justify-content-center">
                                     <li>
@@ -242,8 +261,22 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="copyright">
                             <div class="copy__right__inner text-start">
-                                <p>&copy; 2021, Boighor. Made with <i class="fa fa-heart text-danger"></i> by <a
-                                        href="http://hasthemes.com/" target="_blank">HasThemes</a></p>
+                                <p>&copy; 2021, LibRead. Made with <i class="fa fa-heart text-danger"></i> by
+                                    <strong><i>AuraTech</i></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="copyright">
+                        <div class="copy__right__inner text-end">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i> lucasdeekay98@gmail.com
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone" aria-hidden="true"></i> +2349024563447
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
