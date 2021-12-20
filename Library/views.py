@@ -207,6 +207,28 @@ def process_registration(request):
             return HttpResponseRedirect(reverse('Library:home'))
 
 
+def update_profile_image(request):
+    if request.user.is_authenticated and not request.user.is_superuser:
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
+        return render(request, 'library/upload_image.html', {'current_clientele': current_clientele})
+    else:
+        messages.error(request, 'Please login to have access')
+        return HttpResponseRedirect(reverse('Library:login'))
+
+
+def upload_image(request):
+    if request.user.is_authenticated and not request.user.is_superuser:
+        image = request.FILES.get('image')
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
+        current_clientele.image = image
+        current_clientele.save()
+        messages.success(request, 'Profile picture updated successfully')
+        return HttpResponseRedirect(reverse('Library:repository'))
+    else:
+        messages.error(request, 'Please login to have access')
+        return HttpResponseRedirect(reverse('Library:login'))
+
+
 def repository(request):
     update_users()
     if request.user.is_authenticated and not request.user.is_superuser:

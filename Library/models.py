@@ -12,7 +12,7 @@ class Clientele(models.Model):
     phone_no = models.CharField(max_length=20, null=False)
     email = models.EmailField(null=False)
     role = models.CharField(max_length=15, null=False, choices=[('student', 'Student'), ('staff', 'Staff'), ('admin', 'Admin')])
-    image = models.ImageField(null=False)
+    image = models.ImageField(upload_to='LibRead/profile-image', null=False)
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):

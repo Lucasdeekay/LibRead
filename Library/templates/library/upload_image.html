@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>E-Library | Password Retrieval</title>
+{% endblock %}
+
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Start breadcrumb area -->
+<div class="ht__breadcrumb__area bg-image--6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__inner text-center">
+                    <h2 class="breadcrumb-title">Change Profile Picture</h2>
+                    <nav class="breadcrumb-content">
+                        <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
+                        <span class="brd-separator">/</span>
+                        <a class="breadcrumb_item" href="{% url 'Library:login' %}">Change Profile Picture</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumb area -->
+<!-- Start Message area -->
+{% for message in messages %}
+{% if message.tag == 'success' %}
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+                {% else %}
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+<!-- End Message area -->
+<!-- Start Password Retrieval Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Upload Profile Picture</h3>
+                    <form action="{% url 'Library:update_profile_image' %}" method="post"
+                          style="background-color:#D3D3EE; border-radius:5%">
+                        {% csrf_token %}
+                        <div class="account__form" style="border:0">
+                            <div class="field">
+                                <label class="label">Add image <span>*</span></label>
+                                <div class="has-name is-fullwidth">
+                                    <label class="file-label input">
+                                        <input type="image" name="image" required>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button is-fullwidth is-rounded is-link label" type="submit">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Password Retrieval Area -->
+{% endblock %}
