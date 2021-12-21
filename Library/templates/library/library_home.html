@@ -78,6 +78,7 @@
 <!-- Start Message area -->
 {% for message in messages %}
 {% if message.tag == 'success' %}
+{{ message.tag }}
 <section class="my_account_area pt--80 pb--55 bg--white">
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -92,6 +93,7 @@
                     </div>
                 </article>
                 {% else %}
+                {{ message.tag }}
                 <article class="message is-danger">
                     <div class="message-header">
                         <p>Error</p>

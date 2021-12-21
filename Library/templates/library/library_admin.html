@@ -29,6 +29,39 @@
     </div>
 </div>
 <!-- End breadcrumb area -->
+<!-- Start Message area -->
+{% for message in messages %}
+{% if message.tag == 'success' %}
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+                {% else %}
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+<!-- End Message area -->
 <!-- Start Tab area -->
 {% if current_clientele.role == 'Admin' %}
 <div class="container mt-5">
@@ -69,39 +102,6 @@
 </div>
 {% endif %}
 <!-- Start Tab area -->
-<!-- Start Message area -->
-{% for message in messages %}
-{% if message.tag == 'success' %}
-<section class="my_account_area pt--80 pb--55 bg--white">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-sm-6">
-                <article class="message is-success">
-                    <div class="message-header">
-                        <p>Success</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-                {% else %}
-                <article class="message is-danger">
-                    <div class="message-header">
-                        <p>Error</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                        <em>{{ message }}</em>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-{% endfor %}
-<!-- End Message area -->
 {% if current_clientele.role == 'Admin' %}
 <!-- Start Upload Ebook Area -->
 <section class="my_account_area pt--80 pb--55 bg--white" id="ebook-section">
@@ -199,7 +199,7 @@
                                 <label class="label">Add image <span>*</span></label>
                                 <div class="has-name is-fullwidth">
                                     <label class="file-label input">
-                                        <input type="image" name="image" required>
+                                        <input type="file" name="image" required>
                                     </label>
                                 </div>
                             </div>
@@ -231,20 +231,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    {% if unauthorized_clienteles %}
+                {% if unauthorized_clienteles %}
                 {% for clientele in unauthorized_clienteles %}
+                <tr>
                     <td>{{ clientele.last_name }}</td>
                     <td>{{ clientele.first_name }}</td>
-                    <td>{{ clientele.matric_no }}</td>
+                    <td>{{ clientele.clientele_id }}</td>
                     <td>{{ clientele.role }}</td>
                     <td><a href="{% url 'Library:reject_clientele' clientele.id %}"><button class="button is-danger">Reject</button></a></td>
                     <td><a href="{% url 'Library:approve_clientele' clientele.id %}"><button class="button is-success">Approve</button></a></td>
+                </tr>
                 {% endfor %}
                 {% else %}
+                <tr>
                     <td>No unauthorized user available </td>
-                {% endif %}
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
@@ -266,20 +268,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-
                 {% if unauthorized_journals %}
                 {% for journal in unauthorized_journals %}
+                <tr>
                     <td>{{ journal.title }}</td>
                     <td>{{ journal.date }}</td>
-                    <td><a href="{{ journal.file.url }}" download><button class="button is-link">Download</button></a></td>
+                    <!-- TODO : Fix the journal download -->
+                    <td><a href="{{ journal.file }}.pdf" download><button class="button is-link">Download</button></a></td>
                     <td><a href="{% url 'Library:reject_journal' journal.id %}"><button class="button is-danger">Reject</button></a></td>
                     <td><a href="{% url 'Library:approve_journal' journal.id %}"><button class="button is-success">Approve</button></a></td>
+                </tr>
                 {% endfor %}
                 {% else %}
-                <td>No unauthorized journal available </td>
-                {% endif %}
+                <tr>
+                    <td>No unauthorized journal available </td>
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>

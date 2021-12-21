@@ -4771,8 +4771,9 @@ h3.widget-title-modal {
     }
 
     .fullscreen {
-        min-height: auto !important;
-        padding: 150px 0 !important;
+        position: absolute;
+    height: 100%;
+    width: 100%;
     }
 
     .page-slider {

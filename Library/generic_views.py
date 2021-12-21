@@ -13,7 +13,7 @@ class EbookGenericView(ListView):
 
 class JournalGenericView(ListView):
     model = Journal
-    paginate_by = 12
+    paginate_by = 2
     context_object_name = 'approved_journals'
     queryset = Journal.objects.filter(is_approved=True).order_by('-date')
     template_name = 'library/offline_resources.html'

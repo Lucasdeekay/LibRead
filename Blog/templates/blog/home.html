@@ -46,15 +46,13 @@
                     <article class="blog__post d-flex flex-wrap">
                         <div class="thumb">
                             <a href="blog-details.html">
-                                <img src="media/{{ blog.image }}" alt="blog images">
+                                <img src="{{ blog.image.url }}" alt="blog images">
                             </a>
                         </div>
                         <div class="content">
                             <h4>{{ blog.title }}</h4>
                             <ul class="post__meta">
-                                <li>Posts by : <a href="#">{{ blog.authors }}</a></li>
-                                <li class="post_separator">/</li>
-                                <li>{{ blog.date }}</li>
+                                <li>Posted on : <i>{{ blog.date }}</i></li>
                             </ul>
                             <p>{{ blog.article }}</p>
                         </div>

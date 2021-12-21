@@ -8,7 +8,7 @@ class Clientele(models.Model):
     last_name = models.CharField(max_length=50, null=False)
     first_name = models.CharField(max_length=50, null=False)
     clientele_id = models.CharField(max_length=25, null=False)
-    sex = models.CharField(max_length=6, null=False, choices=[('male', 'Male'), ('female', 'Female')])
+    sex = models.CharField(max_length=6, null=False, choices=[('Male', 'Male'), ('Female', 'Female')])
     phone_no = models.CharField(max_length=20, null=False)
     email = models.EmailField(null=False)
     role = models.CharField(max_length=15, null=False, choices=[('Student', 'Student'), ('Staff', 'Staff'), ('Admin', 'Admin')])

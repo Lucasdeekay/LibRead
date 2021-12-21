@@ -47,7 +47,6 @@
 </head>
 
 <body>
-{% if user %}
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
@@ -87,9 +86,15 @@
                             <li>
                                 <a href="{% url 'Library:contact' %}" style="color:white">Contact</a>
                             </li>
+                            {% if current_clientele.role == 'Admin' %}
                             <li>
                                 <a href="{% url 'Library:library_admin' %}" style="color:white">Admin</a>
                             </li>
+                            {% elif current_clientele.role == 'Staff' %}
+                            <li>
+                                <a href="{% url 'Library:library_admin' %}" style="color:white">Upload Journals</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
@@ -103,8 +108,8 @@
                                     <img src="https://img.icons8.com/offices/30/000000/person-neutral-skin-type-4.png"/>
                                     {% else %}
                                     <img class="mx-6 is-rounded"
-                                         src="{{ current_clientele.image }}"
-                                         width="80px" style="border-radius: 50px"/>
+                                         src="{{ current_clientele.image.url }}"
+                                         width="60px" style="border-radius: 50px"/>
                                     {% endif %}
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
@@ -124,7 +129,7 @@
                             <div class="searchbar__content setting__block">
                                 <div class="content-inner">
                                     <div class="switcher-currency">
-                                        <a href="{% url 'Library:update_password' current_clientele.last_name %}">
+                                        <a href="{% url 'Library:update_password' current_clientele.id %}">
                                             <strong class="label switcher-label">
                                                 <span>Change Password</span>
                                             </strong>
@@ -296,7 +301,6 @@
 {% block script %}
 {% endblock %}
 
-{% endif %}
 </body>
 
 
