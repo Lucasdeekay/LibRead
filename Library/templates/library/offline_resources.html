@@ -94,13 +94,13 @@
             <nav aria-label="Page navigation conatiner"></nav>
             <ul class="pagination justify-content-center">
                 {% if ebook_obj.has_previous %}
-                <li><a href="?page={{ ebook_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                <li><a href="?page={{ ebook_obj.previous_page_number }}" class="button is-rounded is-info">&laquo; PREV </a></li>
                 {% endif %}
                 <span class="current mx-3">
                         Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
                     </span>
                 {% if ebook_obj.has_next %}
-                <li><a href="?page={{ ebook_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                <li><a href="?page={{ ebook_obj.next_page_number }}" class="button is-rounded is-info"> NEXT &raquo;</a></li>
 
                 {% endif %}
             </ul>
@@ -146,13 +146,13 @@
             <nav aria-label="Page navigation conatiner"></nav>
             <ul class="pagination justify-content-center">
                 {% if journal_obj.has_previous %}
-                <li><a href="?page={{ journal_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                <li><a href="?page={{ journal_obj.previous_page_number }}" class="button is-rounded is-info">&laquo; PREV </a></li>
                 {% endif %}
                 <span class="current mx-3">
                         Page {{ journal_obj.number }} of {{ journal_obj.paginator.num_pages }}.
                     </span>
                 {% if journal_obj.has_next %}
-                <li><a href="?page={{ journal_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                <li><a href="?page={{ journal_obj.next_page_number }}" class="button is-rounded is-info"> NEXT &raquo;</a></li>
 
                 {% endif %}
             </ul>
