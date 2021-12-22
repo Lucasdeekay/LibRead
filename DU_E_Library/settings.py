@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = '#igx%t&m)q2tw1+b@#)r2i^u7hs0lcu68(obqy(r9yc3qpo**x'#os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,12 +82,13 @@ WSGI_APPLICATION = 'DU_E_Library.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': os.getenv('DB_NAME'),
+        # 'USER': os.getenv('DB_USER'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),
+        # 'HOST': os.getenv('DB_HOST'),
+        # 'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -101,9 +102,9 @@ EMAIL_USE_TLS = True
 
 # Cloudinary
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
-    'API_KEY': os.getenv('API_KEY'),
-    'API_SECRET': os.getenv('API_SECRET'),
+    'CLOUD_NAME': 'dhaolo7p5',#os.getenv('CLOUD_NAME'),
+    'API_KEY': '178536323172264',#os.getenv('API_KEY'),
+    'API_SECRET': 'B7RBcP-venLHE_Jdbot564JYJgc',#os.getenv('API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -153,3 +154,11 @@ STATICFILES_DIR = [
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 MEDIA_URL = "/media/"
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+"""
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE =True
+SESSION_COOKIE_SECURE =True
+"""

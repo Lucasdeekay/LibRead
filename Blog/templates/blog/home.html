@@ -41,12 +41,12 @@
                     <div class="page__header">
                         <h2>Latest Updates</h2>
                     </div>
-                    {% for blog in all_blogs %}
+                    {% for blog in blog_obj %}
                     <!-- Start Single Post -->
                     <article class="blog__post d-flex flex-wrap">
                         <div class="thumb">
                             <a href="blog-details.html">
-                                <img src="{{ blog.image.url }}" alt="blog images">
+                                <img src="{{ blog.image }}" alt="blog images">
                             </a>
                         </div>
                         <div class="content">
@@ -60,22 +60,21 @@
                     <!-- End Single Post -->
                     {% endfor %}
                 </div>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <div class="">
+                    <nav aria-label="Page navigation conatiner"></nav>
+                    <ul class="pagination justify-content-center">
+                        {% if blog_obj.has_previous %}
+                        <li><a href="?page={{ blog_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
                         {% endif %}
-
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
+                        <span class="current mx-3">
+                        Page {{ blog_obj.number }} of {{ blog_obj.paginator.num_pages }}.
                     </span>
+                        {% if blog_obj.has_next %}
+                        <li><a href="?page={{ blog_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+                        {% endif %}
+                    </ul>
+                    </nav>
                 </div>
             </div>
         </div>

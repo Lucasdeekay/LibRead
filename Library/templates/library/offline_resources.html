@@ -57,7 +57,7 @@
 <section class="my_account_area pt--80 pb--55 bg--white" id="ebook-sec">
     <div class="container">
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            {% for ebook in all_ebooks %}
+            {% for ebook in ebook_obj %}
             <div class="col">
                 <div class="card card-cover h-80 overflow-hidden text-white rounded-5 shadow-lg"
                      style="background-color:#FFBB33; border-radius:5%">
@@ -80,7 +80,9 @@
                                 <small class="pt-1 mt-1 mb-4 lh-1 fw-bold mx-4">{{ ebook.description }}</small>
                             </li>
                             <li class="mt-3 d-flex justify-content-end">
-                                <a href="{{ ebook.file.url }}" style="color:#1C1C4A" download>Download <img src="{% static 'images/pdf-img.png' %}" alt="PDF download" width="32" height="32"></a>
+                                <a href="{{ ebook.file.url }}" style="color:#1C1C4A" download>Download <img
+                                        src="{% static 'images/pdf-img.png' %}" alt="PDF download" width="32"
+                                        height="32"></a>
                             </li>
                         </ul>
                     </div>
@@ -88,23 +90,22 @@
             </div>
             {% endfor %}
         </div>
-        <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
-
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
+        <div class="">
+            <nav aria-label="Page navigation conatiner"></nav>
+            <ul class="pagination justify-content-center">
+                {% if ebook_obj.has_previous %}
+                <li><a href="?page={{ ebook_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                <span class="current mx-3">
+                        Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
                     </span>
-                </div>
+                {% if ebook_obj.has_next %}
+                <li><a href="?page={{ ebook_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+                {% endif %}
+            </ul>
+            </nav>
+        </div>
     </div>
 </section>
 <!-- End Ebook Resources Area -->
@@ -112,7 +113,7 @@
 <section class="my_account_area pt--80 pb--55 bg--white" id="journal-sec">
     <div class="container">
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            {% for journal  in approved_journals %}
+            {% for journal in journal_obj %}
             <div class="col">
                 <div class="card card-cover h-80 overflow-hidden text-white rounded-5 shadow-lg"
                      style="background-color: #1C1C4A;">
@@ -131,7 +132,9 @@
                                 <small class="pt-1 mt-1 mb-4 lh-1 fw-bold mx-4">{{ journal.description }}</small>
                             </li>
                             <li class="mt-3 d-flex justify-content-end">
-                                <a href="media/{{ journal.file.url }}" style="color:#CC8500" download>Download <img src="{% static 'images/pdf-img.png' %}" alt="PDF download" width="32" height="32"></a>
+                                <a href="media/{{ journal.file.url }}" style="color:#CC8500" download>Download <img
+                                        src="{% static 'images/pdf-img.png' %}" alt="PDF download" width="32"
+                                        height="32"></a>
                             </li>
                         </ul>
                     </div>
@@ -139,28 +142,23 @@
             </div>
             {% endfor %}
         </div>
-        <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
-
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
+        <div class="">
+            <nav aria-label="Page navigation conatiner"></nav>
+            <ul class="pagination justify-content-center">
+                {% if journal_obj.has_previous %}
+                <li><a href="?page={{ journal_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                <span class="current mx-3">
+                        Page {{ journal_obj.number }} of {{ journal_obj.paginator.num_pages }}.
                     </span>
-                </div>
+                {% if journal_obj.has_next %}
+                <li><a href="?page={{ journal_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+                {% endif %}
+            </ul>
+            </nav>
+        </div>
     </div>
 </section>
 <!-- End Journal Resources Area -->
-{% endblock %}
-
-{% block script %}
-<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

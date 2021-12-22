@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -253,9 +254,17 @@ def offline_resources(request):
         all_ebooks = Ebook.objects.all().order_by('-date')
         approved_journals = Journal.objects.filter(is_approved=True).order_by('-date')
 
+        ebook_paginator = Paginator(all_ebooks, 20)  # Show 20 ebooks per page.
+        ebook_page_number = request.GET.get('page')  # Get each paginated pages
+        ebook_obj = ebook_paginator.get_page(ebook_page_number)  # Insert the number of items into page
+
+        journal_paginator = Paginator(approved_journals, 20)  # Show 20 journals per page.
+        journal_page_number = request.GET.get('page-')  # Get each paginated pages
+        journal_obj = journal_paginator.get_page(journal_page_number)  # Insert the number of items into page
+
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
 
-        context = {'current_clientele': current_clientele, 'all_ebooks': all_ebooks, 'approved_journals': approved_journals}
+        context = {'current_clientele': current_clientele, 'ebook_obj': ebook_obj, 'journal_obj': journal_obj}
         return render(request, 'library/offline_resources.html', context)
     else:
         messages.error(request, 'Please login to have access')

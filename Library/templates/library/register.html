@@ -35,8 +35,8 @@
 <!-- End breadcrumb area -->
 <!-- Start Message area -->
 {% for message in messages %}
-{% if message.tag == 'success' %}
-<section class="my_account_area pt--80 pb--55 bg--white">
+{% if message.success %}
+<section class="my_account_area pt--80 pb--55 bg--white" id="suc-sec">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -49,7 +49,15 @@
                         <em>{{ message }}</em>
                     </div>
                 </article>
-                {% else %}
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="my_account_area pt--80 pb--55 bg--white" id="err-sec">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
                 <article class="message is-danger">
                     <div class="message-header">
                         <p>Error</p>
