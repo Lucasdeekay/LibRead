@@ -281,7 +281,7 @@
                 <tr>
                     <td>{{ journal.title }}</td>
                     <td>{{ journal.date }}</td>
-                    <!-- TODO : Fix the journal download -->
+                    <!-- TODO : Journal download not available on free cloudinary -->
                     <td><a href="{{ journal.file }}.pdf" download><button class="button is-link">Download</button></a></td>
                     <td><a href="{% url 'Library:reject_journal' journal.id %}"><button class="button is-danger">Reject</button></a></td>
                     <td><a href="{% url 'Library:approve_journal' journal.id %}"><button class="button is-success">Approve</button></a></td>
