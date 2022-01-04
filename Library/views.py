@@ -88,7 +88,7 @@ def forgotten_password(request):
                             [random.choice(string.ascii_letters + string.digits) for i in range(12)])
                         subject = 'Password Recovery'
 
-                        all_passwords = Password.objects.filter(active=True)
+                        all_passwords = Password.objects.filter(is_active=True)
                         for password in all_passwords:
                             if password.clientele == clientele and password.is_active:
                                 password.is_active = False
@@ -116,7 +116,7 @@ def forgotten_password(request):
 
 
 def password_retrieval(request, clientele_id):
-    all_passwords = Password.objects.filter(active=True)
+    all_passwords = Password.objects.filter(is_active=True)
     for password in all_passwords:
         password.expiry()
 
