@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>E-Library | Blog</title>
+{% endblock %}
+
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Start breadcrumb area -->
+<div class="ht__breadcrumb__area bg-image--4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__inner text-center">
+                    <h2 class="breadcrumb-title">Blog Page</h2>
+                    <nav class="breadcrumb-content">
+                        <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
+                        <span class="brd-separator">/</span>
+                        <span class="breadcrumb_item active">Blog</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumb area -->
+<!-- Start Blog Area -->
+<div class="page-blog bg--white section-padding--lg blog-sidebar right-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog-page">
+                    <div class="page__header">
+                        <h2>Latest Updates</h2>
+                    </div>
+                    {% for blog in blog_obj %}
+                    <!-- Start Single Post -->
+                    <article class="blog__post d-flex flex-wrap">
+                        <div class="thumb">
+                            <a href="blog-details.html">
+                                <img src="{{ blog.image.url }}" alt="blog images">
+                            </a>
+                        </div>
+                        <div class="content">
+                            <h4>{{ blog.title }}</h4>
+                            <ul class="post__meta">
+                                <li>Posted on : <i>{{ blog.date }}</i></li>
+                            </ul>
+                            <p>{{ blog.article.draft }}...</p>
+                            <p class="justify-content-end align-items-center"><a href="{% url 'Blog:blog_page' blog.title %}" style="color:#CC8500">Read More</a></p>
+                        </div>
+                    </article>
+                    <!-- End Single Post -->
+                    {% endfor %}
+                </div>
+                <div class="">
+                    <nav aria-label="Page navigation conatiner"></nav>
+                    <ul class="pagination justify-content-center">
+                        {% if blog_obj.has_previous %}
+                        <li><a href="?page={{ blog_obj.previous_page_number }}" class="button is-rounded is-dark">&laquo; PREV </a></li>
+                        {% endif %}
+                        <span class="current mx-3">
+                        Page {{ blog_obj.number }} of {{ blog_obj.paginator.num_pages }}.
+                    </span>
+                        {% if blog_obj.has_next %}
+                        <li><a href="?page={{ blog_obj.next_page_number }}" class="button is-rounded is-dark"> NEXT &raquo;</a></li>
+
+                        {% endif %}
+                    </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Blog Area -->
+{% endblock %}
+
