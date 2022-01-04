@@ -37,7 +37,7 @@ def blog_page(request, title):
             if form.is_valid():
                 comment = form.cleaned_data['comment'].strip()
                 Comment.objects.create(blog=blog, clientele=current_clientele, comment=comment, date=timezone.now())
-                return HttpResponseRedirect(reverse('Library:blog_page', args=(title,)))
+                return HttpResponseRedirect(reverse('Blog:blog_page', args=(title,)))
         else:
             form = CommentForm()
             context = {'blog': blog, 'comments': comments, 'form': form, 'current_clientele': current_clientele}
