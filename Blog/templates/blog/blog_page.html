@@ -82,11 +82,11 @@
                     {% if comments %}
                     {% for comment in comments %}
                     <div class="wn__addres__wreapper">
-                        <div class="single__address">
+                        <div class="section__title text-center is-128x128 image">
                             {% if comment.clientele.image == '' %}
-                            <img src="images/blog/comment/1.jpg" alt="comment images">
+                            <img class="is-rounded" src="{% static 'images/blog/comment/1.jpg' %}" alt="profile picture">
                             {% else %}
-                            <img src="{{ comment.clientele.image.url }}" alt="comment images">
+                            <img class="is-rounded" src="{{ comment.clientele.image.url }}" alt="profile picture">
                             {% endif %}
                             <div class="content">
                                 <span>{{ comment.clientele.role }}: {{ comment.clientele.last_name }} {{ comment.clientele.first_name }}</span>
