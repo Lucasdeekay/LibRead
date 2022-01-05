@@ -97,10 +97,9 @@ def forgotten_password(request):
                         Password.objects.create(clientele=clientele, recovery_password=recovery_password,
                                                 time=timezone.now())
 
-                        msg = f"Recovery password will expire after an hour<br>" \
-                              f"<h5>{recovery_password}<h5>"
-                        context = {'subject': subject, 'msg': msg}
-                        html_message = render_to_string('library/message.html', context=context)
+                        msg = f"Recovery password will expire after an hour. Your password is displayed below"
+                        context = {'subject': subject, 'msg': msg, 'recovery_password': recovery_password, 'id': clientele.id}
+                        html_message = render_to_string('library/msg.html', context=context)
                         plain_message = strip_tags(html_message)
 
                         send_mail(subject, plain_message, EMAIL_HOST_USER, [email], html_message=html_message, fail_silently=False)
@@ -135,7 +134,7 @@ def password_retrieval(request, clientele_id):
                         subject = 'Password Recovery Successful'
                         msg = "Account has been successfully recovered. Kindly proceed to update your password"
                         context = {'subject': subject, 'msg': msg}
-                        html_message = render_to_string('library/message.html', context=context)
+                        html_message = render_to_string('library/msg.html', context=context)
                         plain_message = strip_tags(html_message)
 
                         send_mail(subject, plain_message, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
@@ -169,7 +168,7 @@ def update_password(request, clientele_id):
                 subject = 'Password Update Successful'
                 msg = "Account password has  been successfully changed"
                 context = {'subject': subject, 'msg': msg}
-                html_message = render_to_string('library/message.html', context=context)
+                html_message = render_to_string('library/msg.html', context=context)
                 plain_message = strip_tags(html_message)
 
                 send_mail(subject, plain_message, EMAIL_HOST_USER, [user.email], html_message=html_message,
@@ -220,7 +219,7 @@ def register(request):
                     msg = "Registration successful. A mail of approval will be sent to your email within " \
                           "the next 48hrs. Thank You."
                     context = {'subject': subject, 'msg': msg}
-                    html_message = render_to_string('library/message.html', context=context)
+                    html_message = render_to_string('library/msg.html', context=context)
                     plain_message = strip_tags(html_message)
 
                     send_mail(subject, plain_message, EMAIL_HOST_USER, [email], html_message=html_message,
@@ -379,9 +378,9 @@ def approve_clientele(request, clientele_id):
         user.groups.add(group)
 
     subject = 'Registration Approval'
-    msg = f"You have been successfully approved to make use of Dominion university library. Your password " \
-          f"is <h5>{password}<h5>. You can proceed to update after login"
-    context = {'subject': subject, 'msg': msg}
+    msg = f"You have been successfully approved to make use of Dominion university library. You can proceed to update " \
+          f"after login. Your password is displayed below, click on it to redirect to login"
+    context = {'subject': subject, 'msg': msg, 'password': password}
     html_message = render_to_string('library/message.html', context=context)
     plain_message = strip_tags(html_message)
 

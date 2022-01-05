@@ -39,14 +39,14 @@
             <div class="col-lg-12">
                 <div class="blog-page">
                     <div class="page__header">
-                        <h2>Latest Updates</h2>
+                        <h2>Blog Posts</h2>
                     </div>
                     {% for blog in blog_obj %}
                     <!-- Start Single Post -->
                     <article class="blog__post d-flex flex-wrap">
                         <div class="thumb">
                             <a href="blog-details.html">
-                                <img src="{{ blog.image.url }}" alt="blog images">
+                                <img src="{{ blog.image.url }}" alt="blog images" width="60px">
                             </a>
                         </div>
                         <div class="content">
