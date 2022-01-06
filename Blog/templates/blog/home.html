@@ -43,21 +43,21 @@
                     </div>
                     {% for blog in blog_obj %}
                     <!-- Start Single Post -->
-                    <article class="blog__post d-flex flex-wrap">
-                        <div class="thumb">
-                            <div class="section__title text-center is-128x128 image">
-                                <img src="{{ blog.image.url }}" alt="blog image">
+                    <div class="container col-xxl-8 px-4 py-5">
+                        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                            <div class="col-10 col-sm-8 col-lg-6">
+                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid"
+                                     alt="Blog Image">
+                            </div>
+                            <div class="col-lg-6">
+                                <h1 class="display-5 fw-bold lh-1 mb-3">{{ blog.title }}</h1>
+                                <p class="lead">{{ blog.draft }}... <a href="{% url 'Blog:blog_page' blog.title %}" style="color:#CC8500">Continue Reading</a></p>
                             </div>
                         </div>
-                        <div class="content">
-                            <h4>{{ blog.title }}</h4>
-                            <ul class="post__meta">
-                                <li>Posted on : <i>{{ blog.date }}</i></li>
-                            </ul>
-                            <p>{{ blog.draft }}...</p>
-                            <p class="justify-content-end align-items-center"><a href="{% url 'Blog:blog_page' blog.title %}" style="color:#CC8500">Read More</a></p>
-                        </div>
-                    </article>
+                    </div>
+                    <ul class="blog_meta">
+                        <li>Posted on : <i>{{ blog.date }}</i></li>
+                    </ul>
                     <!-- End Single Post -->
                     {% endfor %}
                 </div>
