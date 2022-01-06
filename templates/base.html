@@ -99,7 +99,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-2 d-lg-block">
+                <div class="col-lg-1 d-lg-block">
                     <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
                         <li class="">
                             {% if current_clientele %}
@@ -181,80 +181,6 @@
             <!-- Start Mobile Menu -->
             <div class="row d-none">
                 <div class="col-lg-4">
-                    <div class="">
-                            {% if current_clientele %}
-                            <a class="setting__active" href="#">
-                                {% if current_clientele.image == '' %}
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="https://img.icons8.com/offices/30/000000/person-neutral-skin-type-4.png"/>
-                                </div>
-                                {% else %}
-                                <div class="text-center d-flex justify-content-center align-items-center">
-                                    <img class="is-rounded"
-                                         src="{{ current_clientele.image.url }}"
-                                         width="50px" style="border-radius: 50px"/>
-                                </div>
-                                {% endif %}
-                                <div class="d-flex justify-content-center align-items-center">
-                                    {% block user %}
-                                    {% endblock %}
-                                </div>
-                            </a>
-                            {% else %}
-                            <a class="setting__active" href="#">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="https://img.icons8.com/offices/30/000000/person-neutral-skin-type-4.png"/>
-                                </div>
-                            </a>
-                            {% endif %}
-
-                            {% if current_clientele %}
-                            <div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:update_password' current_clientele.id %}">
-                                            <strong class="label switcher-label">
-                                                <span>Change Password</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:update_profile_image' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Change Profile Picture</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:logout' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Logout</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:login' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Login</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                    <div class="switcher-currency">
-                                        <a href="{% url 'Library:register' %}">
-                                            <strong class="label switcher-label">
-                                                <span>Register</span>
-                                            </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
                     <nav class="mobilemenu__nav">
                         <ul class="meninmenu">
                             <li style="background-color:#1C1C4A">
