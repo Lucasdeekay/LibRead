@@ -378,8 +378,8 @@ def approve_clientele(request, clientele_id):
         user.groups.add(group)
 
     subject = 'Registration Approval'
-    msg = f"You have been successfully approved to make use of Dominion university library. You can proceed to update " \
-          f"after login. Your password is displayed below, click on it to redirect to login"
+    msg = f"You have been successfully approved to make use of Dominion university library. Kindly proceed to update " \
+          f"after login. Your password is displayed below"
     context = {'subject': subject, 'msg': msg, 'password': password}
     html_message = render_to_string('library/msg.html', context=context)
     plain_message = strip_tags(html_message)
