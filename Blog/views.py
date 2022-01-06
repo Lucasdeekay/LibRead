@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from Blog.models import Blog, Comment
-from Library.forms import CommentForm
+from Blog.forms import CommentForm
 from Library.models import Clientele
 
 

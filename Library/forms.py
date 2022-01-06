@@ -361,20 +361,3 @@ class BlogForm(forms.Form):
             raise forms.ValidationError("Field cannot be empty")
 
 
-class CommentForm(forms.Form):
-    comment = forms.CharField(
-        max_length=1000,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Enter comment',
-                'required': '',
-                'class': 'input',
-            }
-        )
-    )
-
-    def clean(self):
-        cleaned_data = super(CommentForm, self).clean()
-        comment = cleaned_data.get('comment')
-        if not comment:
-            raise forms.ValidationError("Field cannot be empty")
