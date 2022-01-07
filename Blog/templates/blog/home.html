@@ -43,31 +43,31 @@
                     </div>
                     {% for blog in blog_obj %}
                     <!-- Start Single Post -->
-                    <div class="container col-xxl-8 px-4 my-2">
+                    <div class="container col-xxl-8 px-4 my-2 py-3">
                         <div class="row flex-lg-row-reverse align-items-center g-5">
                             {% if forloop.counter|divisibleby:2 %}
-                            <div class="col-10 col-sm-8 col-lg-6">
-                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid rounded-circle"
-                                     alt="Blog Image">
-                            </div>
                             <div class="col-lg-6">
                                 <h3 class="fw-bold lh-1 mb-3">{{ blog.title }}</h3>
                                 <ul class="blog_meta">
                                     <li>Posted on : <i>{{ blog.date }}</i></li>
                                 </ul>
                                 <p>{{ blog.draft }}... <a href="{% url 'Blog:blog_page' blog.title %}" style="color:#CC8500">Continue Reading</a></p>
+                            </div>
+                            <div class="col-10 col-sm-8 col-lg-6">
+                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid rounded-circle"
+                                     alt="Blog Image">
                             </div>
                             {% else %}
+                            <div class="col-10 col-sm-8 col-lg-6">
+                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid rounded-circle"
+                                     alt="Blog Image">
+                            </div>
                             <div class="col-lg-6">
                                 <h3 class="fw-bold lh-1 mb-3">{{ blog.title }}</h3>
                                 <ul class="blog_meta">
                                     <li>Posted on : <i>{{ blog.date }}</i></li>
                                 </ul>
                                 <p>{{ blog.draft }}... <a href="{% url 'Blog:blog_page' blog.title %}" style="color:#CC8500">Continue Reading</a></p>
-                            </div>
-                            <div class="col-10 col-sm-8 col-lg-6">
-                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid rounded-circle"
-                                     alt="Blog Image">
                             </div>
                             {% endif %}
                         </div>

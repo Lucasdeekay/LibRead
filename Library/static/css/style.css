@@ -9082,3 +9082,12 @@ a.checkout__title {
 #news-btn:hover, #nig-news-btn:hover, #ebooks-btn:hover, #ejournals-btn:hover, #erefs-btn:hover, #res-btn:hover,{
     color: #ce7852
 }
+a:hover {
+    color: #cc8500
+  text-decoration: underline;
+}
+
+a:active {
+  color: #cc8500
+  text-decoration: underline;
+}
