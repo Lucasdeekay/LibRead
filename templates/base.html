@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 
 {% load static %}
 
@@ -101,7 +101,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-1 d-lg-block">
+                <div class="col-md-6 col-sm-6 col-7 col-lg-1">
                     <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
                         <li class="">
                             {% if current_clientele %}
@@ -112,7 +112,7 @@
                                 </div>
                                 {% else %}
                                 <div class="text-center d-flex justify-content-center align-items-center">
-                                    <img class="is-rounded"
+                                    <img class="img-fluid rounded-circle"
                                          src="{{ current_clientele.image.url }}"
                                          width="50px" style="border-radius: 50px"/>
                                 </div>

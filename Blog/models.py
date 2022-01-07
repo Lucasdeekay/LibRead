@@ -13,7 +13,7 @@ class Blog(models.Model):
         return f'{self.title}'
 
     def draft(self):
-        return self.article[:100]
+        return self.article[:250]
 
 
 class Comment(models.Model):
