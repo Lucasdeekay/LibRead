@@ -95,38 +95,38 @@ $(function(){
 
 	$('#news-btn').click(function(){
 	    $('#news-sec').slideToggle();
-	    $('#news-btn').toggleClass('is-active');
+	    $('#news-btn').css("color", "#cc8500");
 	});
 	$('#nig-news-btn').click(function(){
 	    $('#nig-news-sec').slideToggle();
-	    $('#nig-news-btn').toggleClass('is-active');
+	    $('#nig-news-btn').css("color", "#cc8500");
 	});
 
 	$('#ebooks-sec').hide();
 
 	$('#ebooks-btn').click(function(){
 	    $('#ebooks-sec').slideToggle();
-	    $('#ebooks-btn').toggleClass('is-active');
+	    $('#ebooks-btn').css("color", "#cc8500");
 	});
 
 	$('#ejournals-sec').hide();
 
 	$('#ejournals-btn').click(function(){
 	    $('#ejournals-sec').slideToggle();
-	    $('#ejournals-btn').toggleClass('is-active');
+	    $('#ejournals-btn').css("color", "#cc8500");
 	});
 
 	$('#erefs-sec').hide();
 
 	$('#erefs-btn').click(function(){
 	    $('#erefs-sec').slideToggle();
-	    $('#erefs-btn').toggleClass('is-active');
+	    $('#erefs-btn').css("color", "#cc8500");
 	});
 
 	$('#res-sec').hide();
 
 	$('#res-btn').click(function(){
 	    $('#res-sec').slideToggle();
-	    $('#res-btn').toggleClass('is-active');
+	    $('#res-btn').css("color", "#cc8500");
 	});
 });
