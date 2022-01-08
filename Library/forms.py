@@ -114,8 +114,10 @@ class RegistrationForm(forms.Form):
         role = cleaned_data.get('role')
         if not last_name and not first_name and not user_id and not sex and not phone_number and not email and not role:
             raise forms.ValidationError("Field cannot be empty")
-        elif len(last_name) < 2 or len(last_name > 50) or len(first_name) < 2 or len(first_name > 50):
-            raise forms.ValidationError("Character must be between 2-50")
+        elif len(last_name) < 2 or len(last_name > 50):
+            raise forms.ValidationError("Last Name must be between 2-50")
+        elif len(first_name) < 2 or len(first_name > 50):
+            raise forms.ValidationError("First Name must be between 2-50")
 
 
 class ForgotPasswordForm(forms.Form):
