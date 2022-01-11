@@ -4,7 +4,9 @@ certifi==2021.5.30
 charset-normalizer==2.0.4
 cloudinary==1.28.0
 Django==3.1.4
+django-appconf==1.0.5
 django-cloudinary-storage==0.3.0
+django-compressor==3.1
 django-widget-tweaks==1.4.9
 djangorestframework==3.13.1
 et-xmlfile==1.0.1
@@ -24,7 +26,9 @@ PyScreeze==0.1.27
 PyTweening==1.0.3
 pytz==2020.4
 pywhatkit==5.1
+rcssmin==1.1.0
 requests==2.26.0
+rjsmin==1.2.0
 six==1.16.0
 soupsieve==2.2.1
 sqlparse==0.4.1

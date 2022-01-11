@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'cloudinary',
     'widget_tweaks',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -157,9 +159,28 @@ MEDIA_URL = "/media/"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-"""
+# Security
 SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE =True
-SESSION_COOKIE_SECURE =True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
-"""
+
+# Whitenoise cache policy
+WHITENOISE_MAX_AGE = 31536000 if not DEBUG else 0
+
+# Django compressor settings
+COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
+COMPRESS_ROOT = os.path.abspath(STATIC_ROOT)
+COMPRESS_ENABLED = os.getenv('COMPRESS_ENABLED')
+COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE')
+COMPRESS_PRECOMPILERS = (
+    ("text/x-sass", "django_libsass.SassCompiler"),
+    ("text/x-scss", "django_libsass.SassCompiler"),
+)
+COMPRESS_FILTERS = {
+    "css": [
+        "compressor.filters.css_default.CssAbsoluteFilter",
+        "compressor.filters.cssmin.rCSSMinFilter",
+    ],
+    "js": ["compressor.filters.jsmin.JSMinFilter"],
+}

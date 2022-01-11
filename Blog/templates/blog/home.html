@@ -46,7 +46,8 @@
                     <div class="container col-xxl-8 px-4 my-2 py-3">
                         <div class="row flex-lg-row-reverse align-items-center g-5">
                             <div class="col-10 col-sm-8 col-lg-6">
-                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto img-fluid rounded-circle"
+                                <img data-src="{{ blog.image.url }}"
+                                     class="d-block mx-lg-auto img-fluid rounded-circle lazy"
                                      alt="Blog Image">
                             </div>
                             <div class="col-lg-6">

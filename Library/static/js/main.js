@@ -129,4 +129,11 @@ $(function(){
 	    $('#res-sec').slideToggle();
 	    $('#res-btn').toggleClass('is-yellow');
 	});
+
+	/*============= Image Lazy Loading =============*/
+	new LazyLoad({
+	    elements_selector: ".lazy", // class to apply to
+	    threshold: 300 // pixel threshold
+	});
+
 });

@@ -42,7 +42,7 @@
                     <div class="container col-xxl-8 px-4">
                         <div class="row flex-lg-row-reverse align-items-center g-5">
                             <div class="col-10 col-sm-8 col-lg-6">
-                                <img src="{{ blog.image.url }}" class="d-block mx-lg-auto"
+                                <img data-src="{{ blog.image.url }}" class="d-block mx-lg-auto lazy"
                                      alt="Blog Image">
                             </div>
                             <div class="col-lg-6">
@@ -81,9 +81,11 @@
                                     <div class="wn__comment">
                                         <div class="thumb">
                                             {% if comment.clientele.image == '' %}
-                                            <img class="is-rounded" src="{% static 'images/blog/comment/1.jpg' %}" alt="profile picture">
+                                            <img class="is-rounded lazy"
+                                                 data-src="{% static 'images/blog/comment/1.jpg' %}" alt="profile picture">
                                             {% else %}
-                                            <img class="is-rounded" src="{{ comment.clientele.image.url }}" alt="profile picture">
+                                            <img class="is-rounded lazy"
+                                                 data-src="{{ comment.clientele.image.url }}" alt="profile picture">
                                             {% endif %}
                                         </div>
                                         <div class="content">
