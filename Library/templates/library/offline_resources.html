@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Downloadable Resources</title>
+{% endblock %}
+
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Start breadcrumb area -->
+<div class="ht__breadcrumb__area bg-image--7 lazy">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__inner text-center">
+                    <h2 class="breadcrumb-title">E-library</h2>
+                    <nav class="breadcrumb-content">
+                        <a class="breadcrumb_item" href="{% url 'Library:home' %}">Home</a>
+                        <span class="brd-separator">/</span>
+                        <a class="breadcrumb_item" href="{% url 'Library:repository' %}">E-Resources</a>
+                        <span class="brd-separator">/</span>
+                        <span class="breadcrumb_item active">Downloadable PDFs</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumb area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <!-- Start Tab area -->
+                <div class="container mt-5">
+                    <div class="tabs is-toggle is-fullwidth">
+                        <ul>
+                            <li id="ebook-btn">
+                                <a>
+                                    <span class="icon is-small"><i aria-hidden="true" class="fa fa-book"></i></span>
+                                    <span>Ebook</span>
+                                </a>
+                            </li>
+                            <li id="journal-btn">
+                                <a>
+                                    <span class="icon is-small"><i aria-hidden="true"
+                                                                   class="fa fa-newspaper-o"></i></span>
+                                    <span>Journal</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Start Tab area -->
+                <!-- Start Ebook Resources Area -->
+                <section class="my_account_area pt--80 pb--55 bg--white" id="ebook-sec">
+                    <div class="container">
+                        <div class="row">
+                            <div class="blog-details content">
+                                <div class="row row-cols-1 row-cols-lg-9 align-items-stretch g-4 py-5">
+                                    {% for ebook in ebook_obj %}
+                                    <div class="col-md-6">
+                                        <div class="h-100 p-5 bg-light border rounded-3">
+                                          <h4 style="color: #cc8500"><img class="lazy px-1"
+                                                                    alt="" height="32"
+                                                                    src="{% static 'images/pdf-img.png' %}"
+                                                                    width="32">{{ ebook.title }}</h4>
+                                            <h6><span style="color: #cc8500">By: </span>{{ ebook.authors }}</h6>
+                                            <h6><span style="color: #cc8500">Programme: </span>{{ ebook.programme }}</h6>
+                                          <h6><span style="color: #cc8500">Description: </span>{{ ebook.description }}</h6>
+                                          <a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
+                                              <button class="button is-rounded is-warning" type="button"><strong>Read</strong></button>
+                                                            </a>
+                                        </div>
+                                      </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="">
+                                    <nav aria-label="Page navigation conatiner"></nav>
+                                    <ul class="pagination justify-content-center">
+                                        {% if ebook_obj.has_previous %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.previous_page_number }}">&laquo;
+                                            PREV </a></li>
+                                        {% endif %}
+                                        <span class="current mx-3">
+                        Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
+                    </span>
+                                        {% if ebook_obj.has_next %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.next_page_number }}"> NEXT
+                                            &raquo;</a></li>
+
+                                        {% endif %}
+                                    </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Ebook Resources Area -->
+                <!-- Start Journal Resources Area -->
+                <section class="my_account_area pt--80 pb--55 bg--white" id="journal-sec">
+                    <div class="container">
+                        <div class="row">
+                            <div class="blog-details content">
+                                <div class="row row-cols-1 row-cols-lg-9 align-items-stretch g-4 py-5">
+                                    {% for journal in journal_obj %}
+                                    <div class="col-md-6">
+                                        <div class="h-100 p-5 bg-light border rounded-3">
+                                          <h4 style="color: blue"><img class="lazy px-1"
+                                                                    alt="" height="32"
+                                                                    src="{% static 'images/pdf-img.png' %}"
+                                                                    width="32">{{ journal.title }}</h4>
+                                            <h6><span style="color: blue">By: </span>{{ journal.authors }}</h6>
+                                          <h6><span style="color: blue">Description: </span>{{ journal.description }}</h6>
+                                          <a download href="{{ journal.file.url }}" style="color:#1C1C4A">
+                                              <button class="button is-rounded is-link" type="button"><strong>Read</strong></button>
+                                                            </a>
+                                        </div>
+                                      </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <nav aria-label="Page navigation conatiner"></nav>
+                            <ul class="pagination justify-content-center">
+                                {% if journal_obj.has_previous %}
+                                <li><a class="button is-rounded is-info"
+                                       href="?page={{ journal_obj.previous_page_number }}">&laquo;
+                                    PREV </a></li>
+                                {% endif %}
+                                <span class="current mx-3">
+                                        Page {{ journal_obj.number }} of {{ journal_obj.paginator.num_pages }}.
+                                    </span>
+                                {% if journal_obj.has_next %}
+                                <li><a class="button is-rounded is-info"
+                                       href="?page={{ journal_obj.next_page_number }}"> NEXT
+                                    &raquo;</a></li>
+
+                                {% endif %}
+                            </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Journal Resources Area -->
+            </div>
+            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+                <div class="wn__sidebar">
+                    <!-- Start Single Widget -->
+                    <aside class="widget recent_widget">
+                        <h3 class="widget-title">Blog Posts</h3>
+                        <div class="recent-posts">
+                            <ul>
+                                {% for blog in all_blogs %}
+                                {% if forloop.counter < 5 %}
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="{% url 'Blog:blog_page' blog.title %}"><img
+                                                    src="{{ blog.image.url }}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="{% url 'Blog:blog_page' blog.title %}">{{ blog.title }}</a></h4>
+                                            <p> {{ blog.date }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

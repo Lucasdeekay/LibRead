@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+{% block user %}
+{% if current_clientele %}
+<div>
+    <small style="color:white">{{ current_clientele.clientele_id }}</small>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<!-- Start Slider area -->
+<div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--8 fullscreen align__center--left lazy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another"><span>Library </span></h2>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">READ NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--9 fullscreen align__center--left lazy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another"><span>Library </span></h2>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">GO TO LIBRARY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--4 fullscreen align__center--left lazy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another"><span>Library </span></h2>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">READ NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--11 fullscreen align__center--left lazy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another"><span>Library </span></h2>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">GO TO LIBRARY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+    <!-- Start Single Slide -->
+    <div class="slide animation__style10 bg-image--10 fullscreen align__center--left lazy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider__content">
+                        <div class="contentbox">
+                            <h2>Dominion <span>University</span></h2>
+                            <h2 class="another"><span>Library </span></h2>
+                            <a class="shopbtn" href="{% url 'Library:repository' %}">READ NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Single Slide -->
+</div>
+<!-- End Slider area -->
+
+<!-- Start Message area -->
+{% for message in messages %}
+{% if message.tags == "success" %}
+<section class="my_account_area pt--80 pb--55 bg--white" id="suc-sec">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="my_account_area pt--80 pb--55 bg--white" id="err-sec">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+<!-- End Message area -->
+
+<div class="page-blog-details section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <div class="blog-details content">
+                    <article class="blog-post-details">
+                        <div class="post_wrapper">
+                            <div class="post_content">
+                                <p>
+                                    The University Library is the centre for learning resources and source of
+                                    educational inspiration and intellectual food on which students, lecturers,
+                                    researchers, administrators, and other members of the university community
+                                    are nourished. In order to fulfill our primary function of supporting teaching,
+                                    learning and research, through the provision of quality, relevant, and
+                                    up-to-date information, we have carefully evaluated, selected, acquired and
+                                    processed information resources that will help to satisfy the educational,
+                                    recreational and research needs of our clients/patrons.
+                                </p>
+
+                                <div class="post_header">
+                                    <h2>Study Resources</h2>
+                                </div>
+
+                                <p>
+                                    The following study resources are available in the University's centre for
+                                    Learning Resources (University Library):
+                                </p>
+                                <div>
+                                    <ul>
+                                        <li>Books</li>
+                                        <li>Periodicals: Journals, Newspapers, Magazines</li>
+                                        <li>Reference Materials</li>
+                                        <li>Motivational Materials and Videotapes</li>
+                                        <li>Electronic Resources</li>
+                                        <li>Online Databases</li>
+                                        <li>Electronic Thesis and Dissertations</li>
+                                    </ul>
+                                </div>
+
+                                <p>
+                                    Generally, Dominion University (DU) Library offers you the following services:
+                                </p>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            Access to books in different formats and types such as paper books,
+                                            audio books, books in large print and electronic copy. You can also
+                                            find newspapers, magazines and journals. You can read them on site
+                                            or take them home. All resources are easily searchable through our
+                                            Online Public Access Catalogue (OPAC).
+                                        </li>
+                                        <li>
+                                            Information (reference) services: You can find local, business
+                                            and scientific information. Library staff are also happy to help you
+                                            with enquiries in other subjects, for fun, health, culture and everyday
+                                            problems. At Dominion University Library, we provide different sources
+                                            of information - dictionaries, reference books, yearbooks, maps, on-line
+                                            databases and resources on CDs or DVDs.
+                                        </li>
+                                        <li>
+                                            Through the DU Library Portal, we offer resources that encourage <em>Mobile</em>
+                                            library services which ca be accessed 24/7 for information research and
+                                            download.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+                <div class="wn__sidebar">
+                    <!-- Start Single Widget -->
+                    <aside class="widget recent_widget">
+                        <h3 class="widget-title">Blog Posts</h3>
+                        <div class="recent-posts">
+                            <ul>
+                                {% for blog in all_blogs %}
+                                {% if forloop.counter < 5 %}
+                                <li>
+                                    <div class="post-wrapper d-flex">
+                                        <div class="thumb">
+                                            <a href="{% url 'Blog:blog_page' blog.title %}"><img class="lazy"
+                                                    src="{{ blog.image.url }}"
+                                                    alt="blog images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="{% url 'Blog:blog_page' blog.title %}">{{ blog.title }}</a></h4>
+                                            <p> {{ blog.date }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //Main wrapper -->
+{% endblock %}
+
