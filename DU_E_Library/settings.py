@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['libread.herokuapp.com']
 
@@ -162,10 +162,10 @@ MEDIA_URL = "/media/"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Security
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = False
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+SECURE_BROWSER_XSS_FILTER = False
 
 # Whitenoise cache policy
 WHITENOISE_MAX_AGE = 31536000 if not DEBUG else 0

@@ -37,7 +37,7 @@
 <!-- Start Message area -->
 {% for message in messages %}
 {% if message.tags == "success" %}
-<section class="my_account_area pt--80 pb--55 bg--white" id="suc-sec">
+<section class="my_account_area pt--80 pb--50 bg--white" id="suc-sec">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -55,7 +55,7 @@
     </div>
 </section>
 {% else %}
-<section class="my_account_area pt--80 pb--55 bg--white" id="err-sec">
+<section class="my_account_area pt--80 pb--50 bg--white" id="err-sec">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6">
@@ -651,7 +651,7 @@
                 </section>
                 <!-- End My Account Area -->
             </div>
-            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40 pt--50">
                 <div class="wn__sidebar">
                     <!-- Start Single Widget -->
                     <aside class="widget recent_widget">
@@ -664,7 +664,7 @@
                                     <div class="post-wrapper d-flex">
                                         <div class="thumb">
                                             <a href="{% url 'Blog:blog_page' blog.title %}"><img
-                                                    src="{{ blog.image }}"
+                                                    src="{{ blog.image.url }}"
                                                     alt="blog images"></a>
                                         </div>
                                         <div class="content">

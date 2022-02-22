@@ -69,18 +69,23 @@ $(function(){
 
 	/*============= Admin Tab =============*/
 	$('#journal-sec').hide();
+	$('#journal-nav').hide();
 
 	$('#ebook-btn').click(function(){
 	    $('#ebook-sec').show();
 	    $('#ebook-btn').addClass('is-active');
+	    $('#ebook-nav').show();
 	    $('#journal-sec').hide();
+	    $('#journal-nav').hide();
 	    $('#journal-btn').removeClass('is-active');
 	});
 	$('#journal-btn').click(function(){
-	    $('#ebook-sec').hide();
-	    $('#ebook-btn').removeClass('is-active');
 	    $('#journal-sec').show();
 	    $('#journal-btn').addClass('is-active');
+	    $('#journal-nav').show();
+	    $('#ebook-sec').hide();
+	    $('#ebook-nav').hide();
+	    $('#ebook-btn').removeClass('is-active');
 	});
 
 	/*============= Message Tab =============*/

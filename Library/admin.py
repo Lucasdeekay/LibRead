@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Library.models import Clientele, Password, Ebook, Journal
+from Library.models import Clientele, Password, Ebook, Journal, LibraryFile
 
 
 class ClienteleAdmin(admin.ModelAdmin):
@@ -12,14 +12,19 @@ class PasswordAdmin(admin.ModelAdmin):
 
 
 class EbookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'authors', 'description', 'programme', 'date', 'file')
+    list_display = ('title', 'authors', 'description', 'date', 'file')
 
 
 class JournalAdmin(admin.ModelAdmin):
     list_display = ('title', 'authors', 'description', 'date', 'file')
 
 
+class LibraryFileAdmin(admin.ModelAdmin):
+    list_display = ('programme',)
+
+
 admin.site.register(Clientele, ClienteleAdmin)
 admin.site.register(Password, PasswordAdmin)
 admin.site.register(Ebook, EbookAdmin)
 admin.site.register(Journal, JournalAdmin)
+admin.site.register(LibraryFile, LibraryFileAdmin)

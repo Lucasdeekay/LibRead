@@ -13,11 +13,7 @@
 {% endif %}
 
 {% for field in form.visible_fields %}
-{% if field.label_tag == 'Sex:' or field.label_tag == 'Phone number:' or field.label_tag == 'Email:' or field.label_tag == 'Role:' or field.label_tag == 'Comment:' %}
-<div class="field col-6" >
-{% else %}
-<div class="field" >
-{% endif %}
+<div class="{% if field.name == 'sex' or field.name == 'phone_number' or field.name == 'email' or field.name == 'role' or field.name == 'comment' %} field col-6 {% else %} field {% endif %}">
     <label class="label">{{ field.label_tag }} </label>
 
     <div class="control">
@@ -42,6 +38,5 @@
     {% if field.help_text %}
     <small class="form-text text-muted">{{ field.help_text }} <small style="color: red">*</small></small>
     {% endif %}
-</div>
 </div>
 {% endfor %}

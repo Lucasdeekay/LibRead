@@ -8,7 +8,7 @@ class BlogAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('blog', 'clientele', 'comment', 'date')
+    list_display = ('clientele', 'comment', 'date')
 
 
 admin.site.register(Blog, BlogAdmin)

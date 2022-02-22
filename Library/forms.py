@@ -252,10 +252,22 @@ class EbookForm(forms.Form):
         )
     )
     programme = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
+        max_length=250,
+        widget=forms.Select(
+            choices=[
+                ('Computer Science', 'Computer Science'),
+                ('Software Engineering', 'Software Engineering'),
+                ('Cyber Security', 'Cyber Security'),
+                ('Biochemistry', 'Biochemistry'),
+                ('Industrial Chemistry', 'Industrial Chemistry'),
+                ('Business Administration', 'Business Administration'),
+                ('Mass Communication', 'Mass Communication'),
+                ('Criminology', 'Criminology'),
+                ('Microbiology', 'Microbiology'),
+                ('Economics', 'Economics'),
+                ('Accounting', 'Accounting'),
+            ],
             attrs={
-                'placeholder': 'Enter programme',
                 'required': '',
                 'class': 'input',
             }
@@ -317,6 +329,28 @@ class JournalForm(forms.Form):
             }
         )
     )
+    programme = forms.CharField(
+        max_length=250,
+        widget=forms.Select(
+            choices=[
+                ('Computer Science', 'Computer Science'),
+                ('Software Engineering', 'Software Engineering'),
+                ('Cyber Security', 'Cyber Security'),
+                ('Biochemistry', 'Biochemistry'),
+                ('Industrial Chemistry', 'Industrial Chemistry'),
+                ('Business Administration', 'Business Administration'),
+                ('Mass Communication', 'Mass Communication'),
+                ('Criminology', 'Criminology'),
+                ('Microbiology', 'Microbiology'),
+                ('Economics', 'Economics'),
+                ('Accounting', 'Accounting'),
+            ],
+            attrs={
+                'required': '',
+                'class': 'input',
+            }
+        )
+    )
     file = forms.FileField(
         max_length=250,
         help_text="File must not be more than 50mb",
@@ -333,6 +367,7 @@ class JournalForm(forms.Form):
         title = cleaned_data.get('title')
         authors = cleaned_data.get('authors')
         description = cleaned_data.get('description')
+        programme = cleaned_data.get('programme')
         file = cleaned_data.get('file')
         if not title or not authors or not description or not file:
             raise forms.ValidationError("Field cannot be empty")
@@ -379,5 +414,3 @@ class BlogForm(forms.Form):
         image = cleaned_data.get('image')
         if not title or not article or not image:
             raise forms.ValidationError("Field cannot be empty")
-
-

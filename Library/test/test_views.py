@@ -715,14 +715,17 @@ class ApproveClieneteleViewTest(TestCase):
         cls.clientele.save()
 
     def test_url_exist(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(f'/admin/approve-clientele/{self.clientele.id}')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_is_accessible_by_name(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:approve_clientele', args=(self.clientele.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_redirects(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:approve_clientele', args=(self.clientele.id,)))
         self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
 
@@ -741,14 +744,17 @@ class RejectClieneteleViewTest(TestCase):
         cls.clientele.save()
 
     def test_url_exist(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(f'/admin/reject-clientele/{self.clientele.id}')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_is_accessible_by_name(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:reject_clientele', args=(self.clientele.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_redirects(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:reject_clientele', args=(self.clientele.id,)))
         self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
 
@@ -761,14 +767,17 @@ class ApproveJournalViewTest(TestCase):
                                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
 
     def test_url_exist(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(f'/admin/approve-journal/{self.journal.id}')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_is_accessible_by_name(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:approve_journal', args=(self.journal.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_redirects(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:approve_journal', args=(self.journal.id,)))
         self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
 
@@ -781,14 +790,17 @@ class RejectJournalViewTest(TestCase):
                                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
 
     def test_url_exist(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(f'/admin/reject-journal/{self.journal.id}')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_is_accessible_by_name(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:reject_journal', args=(self.journal.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_redirects(self):
+        self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:reject_journal', args=(self.journal.id,)))
         self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
 

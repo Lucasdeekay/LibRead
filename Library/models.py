@@ -46,7 +46,6 @@ class Ebook(models.Model):
     title = models.CharField(max_length=250, null=False)
     authors = models.CharField(max_length=200, null=False)
     description = models.CharField(max_length=250, null=False)
-    programme = models.CharField(max_length=100, null=False)
     date = models.DateTimeField(null=False)
     file = ContentTypeRestrictedFileField(upload_to="LibRead/ebooks/",
                                           max_upload_size=5242880,
@@ -94,3 +93,25 @@ class Journal(models.Model):
 
     def duration_of_post(self):
         return timezone.now() - self.date
+
+
+class LibraryFile(models.Model):
+    programme = models.CharField(max_length=250, null=False, choices=[
+        ('Computer Science', 'Computer Science'),
+        ('Software Engineering', 'Software Engineering'),
+        ('Cyber Security', 'Cyber Security'),
+        ('Biochemistry', 'Biochemistry'),
+        ('Industrial Chemistry', 'Industrial Chemistry'),
+        ('Business Administration', 'Business Administration'),
+        ('Mass Communication', 'Mass Communication'),
+        ('Criminology', 'Criminology'),
+        ('Microbiology', 'Microbiology'),
+        ('Economics', 'Economics'),
+        ('Accounting', 'Accounting'),
+    ])
+    ebook = models.ManyToManyField(Ebook)
+    journal = models.ManyToManyField(Journal)
+
+    def __str__(self):
+        return self.programme
+

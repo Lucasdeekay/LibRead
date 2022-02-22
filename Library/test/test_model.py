@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.test import TestCase
 from django.utils import timezone
 
-from Library.models import Clientele, Password, Ebook, Journal
+from Library.models import Clientele, Password, Ebook, Journal, LibraryFile
 
 
 class ClienteleModelTest(TestCase):
@@ -52,7 +52,7 @@ class ClienteleModelTest(TestCase):
     def test_clientele_id_max_length(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
         max_length = clientele._meta.get_field('clientele_id').max_length
-        self.assertEqual(max_length, 25)
+        self.assertEqual(max_length, 30)
 
     def test_sex_label(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
@@ -62,7 +62,7 @@ class ClienteleModelTest(TestCase):
     def test_sex_max_length(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
         max_length = clientele._meta.get_field('sex').max_length
-        self.assertEqual(max_length, 6)
+        self.assertEqual(max_length, 10)
 
     def test_phone_no_label(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
@@ -87,7 +87,7 @@ class ClienteleModelTest(TestCase):
     def test_role_max_length(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
         max_length = clientele._meta.get_field('role').max_length
-        self.assertEqual(max_length, 15)
+        self.assertEqual(max_length, 10)
 
     def test_image_label(self):
         clientele = get_object_or_404(Clientele, last_name="Adekunle")
@@ -127,7 +127,7 @@ class PasswordModelTest(TestCase):
     def test_recovery_password_max_length(self):
         password = get_object_or_404(Password, recovery_password='recovery')
         max_length = password._meta.get_field('recovery_password').max_length
-        self.assertEqual(max_length, 25)
+        self.assertEqual(max_length, 12)
 
     def test_time_label(self):
         password = get_object_or_404(Password, recovery_password='recovery')
@@ -150,7 +150,7 @@ class EbookModelTest(TestCase):
     def test_title_max_length(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
         max_length = ebook._meta.get_field('title').max_length
-        self.assertEqual(max_length, 50)
+        self.assertEqual(max_length, 250)
 
     def test_authors_label(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
@@ -160,7 +160,7 @@ class EbookModelTest(TestCase):
     def test_authors_max_length(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
         max_length = ebook._meta.get_field('authors').max_length
-        self.assertEqual(max_length, 50)
+        self.assertEqual(max_length, 200)
 
     def test_description_label(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
@@ -180,7 +180,7 @@ class EbookModelTest(TestCase):
     def test_programme_max_length(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
         max_length = ebook._meta.get_field('programme').max_length
-        self.assertEqual(max_length, 50)
+        self.assertEqual(max_length, 250)
 
     def test_date_label(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
@@ -208,7 +208,7 @@ class JournalModelTest(TestCase):
     def test_title_max_length(self):
         journal = get_object_or_404(Journal, title='Journal')
         max_length = journal._meta.get_field('title').max_length
-        self.assertEqual(max_length, 50)
+        self.assertEqual(max_length, 250)
 
     def test_authors_label(self):
         journal = get_object_or_404(Journal, title='Journal')
@@ -218,7 +218,7 @@ class JournalModelTest(TestCase):
     def test_authors_max_length(self):
         journal = get_object_or_404(Journal, title='Journal')
         max_length = journal._meta.get_field('authors').max_length
-        self.assertEqual(max_length, 50)
+        self.assertEqual(max_length, 200)
 
     def test_description_label(self):
         journal = get_object_or_404(Journal, title='Journal')
@@ -244,4 +244,35 @@ class JournalModelTest(TestCase):
         journal = get_object_or_404(Journal, title='Journal')
         field_label = journal._meta.get_field('is_approved').verbose_name
         self.assertEqual(field_label, 'is approved')
+
+
+class LibraryFileModelTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        ebook = Ebook.objects.create(title='Ebook', authors='authors', description='description', programme='programme',
+                             date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
+        journal = Journal.objects.create(title='Journal', authors='authors', description='description',
+                                         date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
+        LibraryFile.objects.create(programme='programme', ebook=ebook, journal=journal)
+
+    def test_programme_label(self):
+        library_file = get_object_or_404(LibraryFile, programme='programme')
+        field_label = library_file._meta.get_field('programme').verbose_name
+        self.assertEqual(field_label, 'programme')
+
+    def test_programme_max_length(self):
+        library_file = get_object_or_404(LibraryFile, programme='programme')
+        max_length = library_file._meta.get_field('programme').max_length
+        self.assertEqual(max_length, 250)
+
+    def test_ebook_label(self):
+        library_file = get_object_or_404(LibraryFile, programme='programme')
+        field_label = library_file._meta.get_field('ebook').verbose_name
+        self.assertEqual(field_label, 'ebook')
+
+    def test_journal_label(self):
+        library_file = get_object_or_404(LibraryFile, programme='programme')
+        field_label = library_file._meta.get_field('journal').verbose_name
+        self.assertEqual(field_label, 'journal')
 

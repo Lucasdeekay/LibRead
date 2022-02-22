@@ -35,55 +35,111 @@
     </div>
 </div>
 <!-- End breadcrumb area -->
-<section class="my_account_area pt--80 pb--55 bg--white">
+<!-- Start Shop Page -->
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-12">
-                <!-- Start Tab area -->
-                <div class="container mt-5">
-                    <div class="tabs is-toggle is-fullwidth">
-                        <ul>
-                            <li id="ebook-btn">
-                                <a>
-                                    <span class="icon is-small"><i aria-hidden="true" class="fa fa-book"></i></span>
-                                    <span>Ebook</span>
-                                </a>
-                            </li>
-                            <li id="journal-btn">
-                                <a>
-                                    <span class="icon is-small"><i aria-hidden="true"
-                                                                   class="fa fa-newspaper-o"></i></span>
-                                    <span>Journal</span>
-                                </a>
-                            </li>
-                        </ul>
+            <div class="col-lg-10 col-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+                            <div class="shop__list nav justify-content-center pb--20" role="tablist" id="ebook-nav">
+                                <a class="nav-item nav-link active" data-bs-toggle="tab" href="#ebook-nav-grid"
+                                   role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link" data-bs-toggle="tab" href="#ebook-nav-list" role="tab"><i
+                                        class="fa fa-list"></i></a>
+                            </div>
+                            <div class="shop__list nav justify-content-center pb--20" role="tablist" id="journal-nav">
+                                <a class="nav-item nav-link" data-bs-toggle="tab" href="#journal-nav-grid"
+                                   role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link" data-bs-toggle="tab" href="#journal-nav-list" role="tab"><i
+                                        class="fa fa-list"></i></a>
+                            </div>
+                            <div>
+                                <div class="tabs is-toggle is-fullwidth">
+                                    <ul>
+                                <li id="ebook-btn">
+                                    <a>
+                                        <span class="icon is-small"><i aria-hidden="true" class="fa fa-book"></i></span>
+                                        <span>Ebook</span>
+                                    </a>
+                                </li>
+                                <li id="journal-btn">
+                                    <a>
+                                        <span class="icon is-small"><i aria-hidden="true"
+                                                                       class="fa fa-newspaper-o"></i></span>
+                                        <span>Journal</span>
+                                    </a>
+                                </li>
+                            </ul>
+                                </div>
+                            </div>
+                            <div class="orderby__wrapper">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <span>Sort By</span>
+                                    <select class="shot__byselect" name="programme">
+                                        <option value="All">All</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Software Engineering">Software Engineering</option>
+                                        <option value="Cyber Security">Cyber Security</option>
+                                        <option value="Biochemistry">Biochemistry</option>
+                                        <option value="Industrial Chemistry">Industrial Chemistry</option>
+                                        <option value="Business Administration">Business Administration</option>
+                                        <option value="Mass Communication">Mass Communication</option>
+                                        <option value="Criminology">Criminology</option>
+                                        <option value="Microbiology">Microbiology</option>
+                                        <option value="Economics">Economics</option>
+                                        <option value="Accounting">Accounting</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <span><button class="ml-2 button is-success" type="submit">Go</button></span>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Start Tab area -->
                 <!-- Start Ebook Resources Area -->
-                <section class="my_account_area pt--80 pb--55 bg--white" id="ebook-sec">
-                    <div class="container">
+                <div class="tab__container tab-content" id="ebook-sec">
+                    <div class="shop-grid tab-pane fade show active" id="ebook-nav-grid" role="tabpanel">
                         <div class="row">
-                            <div class="blog-details content">
-                                <div class="row row-cols-1 row-cols-lg-9 align-items-stretch g-4 py-5">
-                                    {% for ebook in ebook_obj %}
-                                    <div class="col-md-6">
-                                        <div class="h-100 p-5 bg-light border rounded-3">
-                                          <h4 style="color: #cc8500"><img class="lazy px-1"
-                                                                    alt="" height="32"
-                                                                    src="{% static 'images/pdf-img.png' %}"
-                                                                    width="32">{{ ebook.title }}</h4>
-                                            <h6><span style="color: #cc8500">By: </span>{{ ebook.authors }}</h6>
-                                            <h6><span style="color: #cc8500">Programme: </span>{{ ebook.programme }}</h6>
-                                          <h6><span style="color: #cc8500">Description: </span>{{ ebook.description }}</h6>
-                                          <a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
-                                              <button class="button is-rounded is-warning" type="button"><strong>Read</strong></button>
-                                                            </a>
+                            {% for ebook in ebook_obj %}
+                            <!-- Start Single Product -->
+                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                <a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
+                                    <div class="product__thumb">
+                                        <a class="first__img" href="single-product.html"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <a class="second__img animation1" href="single-product.html"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <div class="hot__box">
+                                            <span class="hot-label">Ebook</span>
                                         </div>
-                                      </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="">
+                                    </div>
+                                    <div class="product__content content--center">
+                                        <h4><a href="single-product.html">{{ ebook.title }}</a></h4>
+                                        <ul class="price d-flex">
+                                            <li>{{ ebook.authors }}</li>
+                                        </ul>
+                                        <div class="action">
+                                            <div class="actions_inner">
+                                                <ul class="add_to_links">
+                                                    <li><span class="icon is-small"><i aria-hidden="true" class="fa fa-book"></i></span>{{ ebook.description }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product__hover--content">
+                                            <ul class="rating d-flex">
+                                                <li class="on">{{ ebook.programme }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End Single Product -->
+                            {% endfor %}
+                        </div>
+                        <div class="wn__pagination">
                                     <nav aria-label="Page navigation conatiner"></nav>
                                     <ul class="pagination justify-content-center">
                                         {% if ebook_obj.has_previous %}
@@ -103,60 +159,136 @@
                                     </ul>
                                     </nav>
                                 </div>
-                            </div>
-                        </div>
                     </div>
-                </section>
-                <!-- End Ebook Resources Area -->
-                <!-- Start Journal Resources Area -->
-                <section class="my_account_area pt--80 pb--55 bg--white" id="journal-sec">
-                    <div class="container">
-                        <div class="row">
-                            <div class="blog-details content">
-                                <div class="row row-cols-1 row-cols-lg-9 align-items-stretch g-4 py-5">
-                                    {% for journal in journal_obj %}
-                                    <div class="col-md-6">
-                                        <div class="h-100 p-5 bg-light border rounded-3">
-                                          <h4 style="color: blue"><img class="lazy px-1"
-                                                                    alt="" height="32"
-                                                                    src="{% static 'images/pdf-img.png' %}"
-                                                                    width="32">{{ journal.title }}</h4>
-                                            <h6><span style="color: blue">By: </span>{{ journal.authors }}</h6>
-                                          <h6><span style="color: blue">Description: </span>{{ journal.description }}</h6>
-                                          <a download href="{{ journal.file.url }}" style="color:#1C1C4A">
-                                              <button class="button is-rounded is-link" type="button"><strong>Read</strong></button>
+                    <div class="shop-grid tab-pane fade" id="ebook-nav-list" role="tabpanel">
+                        <div class="list__view__wrapper">
+                            {% for ebook in ebook_obj %}
+                            <!-- Start Single Product -->
+                            <div class="list__view">
+                                <div class="thumb">
+                                    <a class="first__img" href="single-product.html"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                    <a class="second__img animation1" href="single-product.html"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                </div>
+                                <div class="content">
+                                    <h2><a href="single-product.html">{{ ebook.title }}</a></h2>
+                                    <div class="rating d-flex">
+                                        <i class="on">By {{ ebook.authors }}</i>
+                                    </div>
+                                    <div class="price__box">
+                                        <i>{{ ebook.programme }}</i>
+                                    </div>
+                                    <p>{{ ebook.description }}</p>
+                                    <div class="cart__action d-flex"><a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
+                                              <button class="button is-rounded is-warning" type="button"><strong>Read</strong></button>
                                                             </a>
-                                        </div>
-                                      </div>
-                                    {% endfor %}
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="">
-                            <nav aria-label="Page navigation conatiner"></nav>
-                            <ul class="pagination justify-content-center">
-                                {% if journal_obj.has_previous %}
-                                <li><a class="button is-rounded is-info"
-                                       href="?page={{ journal_obj.previous_page_number }}">&laquo;
-                                    PREV </a></li>
-                                {% endif %}
-                                <span class="current mx-3">
-                                        Page {{ journal_obj.number }} of {{ journal_obj.paginator.num_pages }}.
-                                    </span>
-                                {% if journal_obj.has_next %}
-                                <li><a class="button is-rounded is-info"
-                                       href="?page={{ journal_obj.next_page_number }}"> NEXT
-                                    &raquo;</a></li>
-
-                                {% endif %}
-                            </ul>
-                            </nav>
+                            <!-- End Single Product -->
+                            {% endfor %}
                         </div>
                     </div>
-                </section>
+                </div>
+                <!-- End Ebook Resources Area -->
+                <!-- Start Journal Resources Area -->
+                <div class="tab__container tab-content" id="journal-sec">
+                    <div class="shop-grid tab-pane fade show active" id="journal-nav-grid" role="tabpanel">
+                        <div class="row">
+                            {% for journal in journal_obj %}
+                            <!-- Start Single Product -->
+                            <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                <a download href="{{ journal.file.url }}" style="color:#1C1C4A">
+                                    <div class="product__thumb">
+                                        <a class="first__img" href="single-product.html"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <a class="second__img animation1" href="single-product.html"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <div class="hot__box">
+                                            <span class="hot-label">Journal</span>
+                                        </div>
+                                    </div>
+                                    <div class="product__content content--center">
+                                        <h4><a href="single-product.html">{{ journal.title }}</a></h4>
+                                        <ul class="price d-flex">
+                                            <li>{{ journal.authors }}</li>
+                                        </ul>
+                                        <div class="action">
+                                            <div class="actions_inner">
+                                                <ul class="add_to_links">
+                                                    <li><span class="icon is-small"><i aria-hidden="true" class="fa fa-book"></i></span>{{ journal.description }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product__hover--content">
+                                            <ul class="rating d-flex">
+                                                <li class="on">{{ journal.programme }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- End Single Product -->
+                            {% endfor %}
+                        </div>
+                        <div class="wn__pagination">
+                                    <nav aria-label="Page navigation conatiner"></nav>
+                                    <ul class="pagination justify-content-center">
+                                        {% if ebook_obj.has_previous %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.previous_page_number }}">&laquo;
+                                            PREV </a></li>
+                                        {% endif %}
+                                        <span class="current mx-3">
+                        Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
+                    </span>
+                                        {% if ebook_obj.has_next %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.next_page_number }}"> NEXT
+                                            &raquo;</a></li>
+
+                                        {% endif %}
+                                    </ul>
+                                    </nav>
+                                </div>
+                    </div>
+                    <div class="shop-grid tab-pane fade" id="journal-nav-list" role="tabpanel">
+                        <div class="list__view__wrapper">
+                            {% for journal in journal_obj %}
+                            <!-- Start Single Product -->
+                            <div class="list__view">
+                                <div class="thumb">
+                                    <a class="first__img" href="single-product.html"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                    <a class="second__img animation1" href="single-product.html"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                </div>
+                                <div class="content">
+                                    <h2><a href="single-product.html">{{ journal.title }}</a></h2>
+                                    <div class="rating d-flex">
+                                        <i class="on">By {{ journal.authors }}</i>
+                                    </div>
+                                    <div class="price__box">
+                                        <i>{{ journal.programme }}</i>
+                                    </div>
+                                    <p>{{ journal.description }}</p>
+                                    <div class="cart__action d-flex"><a download href="{{ journal.file.url }}" style="color:#1C1C4A">
+                                              <button class="button is-rounded is-warning" type="button"><strong>Read</strong></button>
+                                                            </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
                 <!-- End Journal Resources Area -->
             </div>
-            <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+            <div class="col-lg-2 col-12 md-mt-40 sm-mt-40 pt--50">
                 <div class="wn__sidebar">
                     <!-- Start Single Widget -->
                     <aside class="widget recent_widget">
@@ -188,6 +320,7 @@
             </div>
         </div>
     </div>
-</section>
+</div>
+<!-- End Shop Page -->
 
 {% endblock %}

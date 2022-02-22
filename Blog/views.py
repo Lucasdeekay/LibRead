@@ -28,7 +28,7 @@ def home(request):
 
 def blog_page(request, title):
     blog = get_object_or_404(Blog, title=title)
-    comments = Comment.objects.filter(blog=blog)
+    comments = Blog.comment.all()
 
     if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = Clientele.objects.get(clientele_id=request.user.username)
@@ -36,7 +36,8 @@ def blog_page(request, title):
             form = CommentForm(request.POST)
             if form.is_valid():
                 comment = form.cleaned_data['comment'].strip()
-                Comment.objects.create(blog=blog, clientele=current_clientele, comment=comment, date=timezone.now())
+                user_comment = Comment.objects.create(clientele=current_clientele, comment=comment, date=timezone.now())
+                blog.comment.add(user_comment)
                 return HttpResponseRedirect(reverse('Blog:blog_page', args=(title,)))
         else:
             form = CommentForm()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Library.models import Clientele, Password, Ebook, Journal
+from Library.models import Clientele, Password, Ebook, Journal, LibraryFile
 
 
 class ClienteleSerializer(serializers.ModelSerializer):
@@ -23,4 +23,10 @@ class EbookSerializer(serializers.ModelSerializer):
 class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
+        fields = "__all__"
+
+
+class LibraryFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LibraryFile
         fields = "__all__"

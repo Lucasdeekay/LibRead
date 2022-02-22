@@ -17,7 +17,7 @@ from Blog.models import Blog
 from DU_E_Library.settings import EMAIL_HOST_USER
 from Library.forms import RegistrationForm, LoginForm, ForgotPasswordForm, PasswordRetrievalForm, UpdatePasswordForm, \
     UpdateImageForm, EbookForm, JournalForm, BlogForm
-from Library.models import Clientele, Password, Journal, Ebook
+from Library.models import Clientele, Password, Journal, Ebook, LibraryFile
 
 random = random.Random()
 
@@ -62,8 +62,7 @@ def log_in(request):
                 if user is not None:
                     login(request, user)
                     messages.success(request, "Login successful")
-                    # return HttpResponseRedirect(reverse('Library:repository'))
-                    return HttpResponseRedirect(reverse('Library:library_admin'))
+                    return HttpResponseRedirect(reverse('Library:repository'))
                 else:
                     messages.error(request, "Invalid login details")
                     return HttpResponseRedirect(reverse('Library:login'))
@@ -131,7 +130,7 @@ def password_retrieval(request, clientele_id):
                 clientele = get_object_or_404(Clientele, id=clientele_id)
 
                 for passcode in all_password:
-                    if passcode.clientele == clientele and passcode.recovery_password == password and password.is_active:
+                    if passcode.clientele == clientele and passcode.recovery_password == password and passcode.is_active:
                         subject = 'Password Recovery Successful'
                         msg = "Account has been successfully recovered. Kindly proceed to update your password"
                         context = {'subject': subject, 'msg': msg}
@@ -269,8 +268,19 @@ def repository(request):
 
 def offline_resources(request):
     if request.user.is_authenticated and not request.user.is_superuser:
+        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
+
         all_ebooks = Ebook.objects.all().order_by('-date')
         approved_journals = Journal.objects.filter(is_approved=True).order_by('-date')
+
+        if request.method == 'POST':
+            programme = request.POST.get("programme")
+            if programme == "All":
+                return HttpResponseRedirect(reverse('Library:offline_resources'))
+            else:
+                sorted_file = get_object_or_404(LibraryFile, programme=programme)
+                all_ebooks = sorted_file.ebook.all().order_by('-date')
+                approved_journals = sorted_file.journal.filter(is_approved=True).order_by('-date')
 
         ebook_paginator = Paginator(all_ebooks, 20)  # Show 20 ebooks per page.
         ebook_page_number = request.GET.get('page')  # Get each paginated pages
@@ -279,8 +289,6 @@ def offline_resources(request):
         journal_paginator = Paginator(approved_journals, 20)  # Show 20 journals per page.
         journal_page_number = request.GET.get('page-')  # Get each paginated pages
         journal_obj = journal_paginator.get_page(journal_page_number)  # Insert the number of items into page
-
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
 
         context = {'current_clientele': current_clientele, 'ebook_obj': ebook_obj, 'journal_obj': journal_obj}
         return render(request, 'library/offline_resources.html', context)
@@ -314,17 +322,24 @@ def library_admin(request):
                     description = ebook_form.cleaned_data['description'].strip()
                     programme = ebook_form.cleaned_data['programme'].strip()
                     file = ebook_form.cleaned_data['file']
-                    Ebook.objects.create(title=title, authors=authors, description=description, programme=programme,
-                                         file=file, date=timezone.now())
+                    ebook = Ebook.objects.create(title=title, authors=authors, description=description, file=file,
+                                                 date=timezone.now())
+                    library_file = get_object_or_404(LibraryFile, programme=programme)
+                    library_file.ebook.add(ebook)
+
                     messages.success(request, 'Ebook successfully uploaded')
                     return HttpResponseRedirect(reverse('Library:library_admin'))
                 elif journal_form.is_valid():
                     title = journal_form.cleaned_data['title'].strip()
                     authors = journal_form.cleaned_data['authors'].strip()
                     description = journal_form.cleaned_data['description'].strip()
+                    programme = ebook_form.cleaned_data['programme'].strip()
                     file = journal_form.cleaned_data['file']
-                    Journal.objects.create(title=title, authors=authors, description=description, file=file,
+                    journal = Journal.objects.create(title=title, authors=authors, description=description, file=file,
                                            date=timezone.now())
+                    library_file = get_object_or_404(LibraryFile, programme=programme)
+                    library_file.ebook.add(journal)
+
                     messages.success(request, 'Journal successfully uploaded and awaiting approval')
                     return HttpResponseRedirect(reverse('Library:library_admin'))
                 elif blog_form.is_valid():

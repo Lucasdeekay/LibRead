@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from Library import views
-from Library.api_views import ClienteleView, PasswordView, EbookView, JournalView
+from Library.api_views import ClienteleView, PasswordView, EbookView, JournalView, LibraryFileView
 
 app_name = 'Library'
 
@@ -11,6 +11,7 @@ router.register('clientele', ClienteleView)
 router.register('password', PasswordView)
 router.register('ebook', EbookView)
 router.register('journal', JournalView)
+router.register('library-file', LibraryFileView)
 
 urlpatterns = [
     path('', views.home, name='home'),

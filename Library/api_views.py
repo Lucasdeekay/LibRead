@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 
-from Library.models import Clientele, Password, Ebook, Journal
-from Library.serializers import ClienteleSerializer, PasswordSerializer, EbookSerializer, JournalSerializer
+from Library.models import Clientele, Password, Ebook, Journal, LibraryFile
+from Library.serializers import ClienteleSerializer, PasswordSerializer, EbookSerializer, JournalSerializer, \
+    LibraryFileSerializer
 
 
 class ClienteleView(viewsets.ModelViewSet):
@@ -22,3 +23,8 @@ class EbookView(viewsets.ModelViewSet):
 class JournalView(viewsets.ModelViewSet):
     serializer_class = JournalSerializer
     queryset = Journal.objects.all()
+
+
+class LibraryFileView(viewsets.ModelViewSet):
+    serializer_class = LibraryFileSerializer
+    queryset = LibraryFile.objects.all()
