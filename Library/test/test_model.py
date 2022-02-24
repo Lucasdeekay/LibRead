@@ -139,7 +139,7 @@ class EbookModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Ebook.objects.create(title='Ebook', authors='authors', description='description', programme='programme',
+        Ebook.objects.create(title='Ebook', authors='authors', description='description',
                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
 
     def test_title_label(self):
@@ -170,16 +170,6 @@ class EbookModelTest(TestCase):
     def test_description_max_length(self):
         ebook = get_object_or_404(Ebook, title='Ebook')
         max_length = ebook._meta.get_field('description').max_length
-        self.assertEqual(max_length, 250)
-
-    def test_programme_label(self):
-        ebook = get_object_or_404(Ebook, title='Ebook')
-        field_label = ebook._meta.get_field('programme').verbose_name
-        self.assertEqual(field_label, 'programme')
-
-    def test_programme_max_length(self):
-        ebook = get_object_or_404(Ebook, title='Ebook')
-        max_length = ebook._meta.get_field('programme').max_length
         self.assertEqual(max_length, 250)
 
     def test_date_label(self):
@@ -250,11 +240,13 @@ class LibraryFileModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        ebook = Ebook.objects.create(title='Ebook', authors='authors', description='description', programme='programme',
+        ebook = Ebook.objects.create(title='Ebook', authors='authors', description='description',
                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
         journal = Journal.objects.create(title='Journal', authors='authors', description='description',
                                          date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
-        LibraryFile.objects.create(programme='programme', ebook=ebook, journal=journal)
+        library_file = LibraryFile.objects.create(programme='programme')
+        library_file.ebook.add(ebook)
+        library_file.journal.add(journal)
 
     def test_programme_label(self):
         library_file = get_object_or_404(LibraryFile, programme='programme')

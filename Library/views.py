@@ -100,9 +100,8 @@ def forgotten_password(request):
                         msg = f"Recovery password will expire after an hour. Your password is displayed below"
                         context = {'subject': subject, 'msg': msg, 'recovery_password': recovery_password, 'id': clientele.id}
                         html_message = render_to_string('library/msg.html', context=context)
-                        plain_message = strip_tags(html_message)
 
-                        send_mail(subject, plain_message, EMAIL_HOST_USER, [email], html_message=html_message, fail_silently=False)
+                        send_mail(subject, msg, EMAIL_HOST_USER, [email], html_message=html_message, fail_silently=False)
 
                         messages.success(request, "Recovery password has been successfully sent")
                         return HttpResponseRedirect(reverse('Library:password_retrieval', args=(clientele.id,)))
@@ -135,9 +134,8 @@ def password_retrieval(request, clientele_id):
                         msg = "Account has been successfully recovered. Kindly proceed to update your password"
                         context = {'subject': subject, 'msg': msg}
                         html_message = render_to_string('library/msg.html', context=context)
-                        plain_message = strip_tags(html_message)
 
-                        send_mail(subject, plain_message, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
+                        send_mail(subject, msg, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
                                   fail_silently=False)
 
                         messages.success(request, 'Account has been successfully recovered. Kindly update your password')
@@ -169,9 +167,8 @@ def update_password(request, clientele_id):
                 msg = "Account password has  been successfully changed"
                 context = {'subject': subject, 'msg': msg}
                 html_message = render_to_string('library/msg.html', context=context)
-                plain_message = strip_tags(html_message)
 
-                send_mail(subject, plain_message, EMAIL_HOST_USER, [user.email], html_message=html_message,
+                send_mail(subject, msg, EMAIL_HOST_USER, [user.email], html_message=html_message,
                           fail_silently=False)
 
                 messages.success(request, 'Password successfully changed')
@@ -220,9 +217,8 @@ def register(request):
                           "your registration has been approved, alongside your login details. Thank You."
                     context = {'subject': subject, 'msg': msg}
                     html_message = render_to_string('library/msg.html', context=context)
-                    plain_message = strip_tags(html_message)
 
-                    send_mail(subject, plain_message, EMAIL_HOST_USER, [email], html_message=html_message,
+                    send_mail(subject, msg, EMAIL_HOST_USER, [email], html_message=html_message,
                               fail_silently=False)
 
                     messages.success(request,
@@ -302,12 +298,12 @@ def library_admin(request):
         if (User.objects.filter(username=request.user.username, groups__name='Staff').exists()) or (User.objects.filter(username=request.user.username, groups__name='Admin').exists()):
             current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
 
-            unauthorized_clienteles = Clientele.objects.filter(is_approved=False)
+            unauthorized_clienteles = Clientele.objects.filter(is_approved=False).order_by('-last_name')
             clientele_paginator = Paginator(unauthorized_clienteles, 20)  # Show 20 ebooks per page.
             clientele_page_number = request.GET.get('page')  # Get each paginated pages
             clientele_obj = clientele_paginator.get_page(clientele_page_number)  # Insert the number of items into page
 
-            unauthorized_journals = Journal.objects.filter(is_approved=False)
+            unauthorized_journals = Journal.objects.filter(is_approved=False).order_by('-date')
             journal_paginator = Paginator(unauthorized_journals, 20)  # Show 20 ebooks per page.
             journal_page_number = request.GET.get('page')  # Get each paginated pages
             journal_obj = journal_paginator.get_page(journal_page_number)  # Insert the number of items into page
@@ -373,23 +369,24 @@ def library_admin(request):
 
 
 def approve_clientele(request, clientele_id):
-    clientele = get_object_or_404(Clientele, id=clientele_id)
-    clientele.is_approved = True
-    clientele.save()
-    messages.success(request, f"{clientele.last_name} {clientele.first_name} has been successfully authorized")
+    current_clientele = get_object_or_404(Clientele, id=clientele_id)
+    current_clientele.is_approved = True
+
+    current_clientele.save()
+    messages.success(request, f"{current_clientele.last_name} {current_clientele.first_name} has been successfully authorized")
 
     password = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
-    user = User.objects.create_user(username=clientele.clientele_id, email=clientele.email, password=password,
-                                    last_name=clientele.last_name, first_name=clientele.first_name)
-    clientele.user = user
-    clientele.save()
-    if clientele.role == 'Admin':
+    user = User.objects.create_user(username=current_clientele.clientele_id, email=current_clientele.email, password=password,
+                                    last_name=current_clientele.last_name, first_name=current_clientele.first_name)
+    current_clientele.user = user
+    current_clientele.save()
+    if current_clientele.role == 'Admin':
         group = Group.objects.get(name='Admin')
-        group.user_set.add(user)
-    elif clientele.role == 'Staff':
+        user.groups.add(group)
+    elif current_clientele.role == 'Staff':
         group = Group.objects.get(name='Staff')
         user.groups.add(group)
-    elif clientele.role == 'Student':
+    elif current_clientele.role == 'Student':
         group = Group.objects.get(name='Student')
         user.groups.add(group)
 
@@ -398,9 +395,10 @@ def approve_clientele(request, clientele_id):
           f"after login. Your password is displayed below"
     context = {'subject': subject, 'msg': msg, 'password': password}
     html_message = render_to_string('library/msg.html', context=context)
-    plain_message = strip_tags(html_message)
+    plain_message = f"You have been successfully approved to make use of Dominion university library. Kindly proceed to update " \
+                    f"after login. Your password is {password}"
 
-    send_mail(subject, plain_message, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
+    send_mail(subject, plain_message, EMAIL_HOST_USER, [current_clientele.email], html_message=html_message,
               fail_silently=False)
 
     return HttpResponseRedirect(reverse('Library:library_admin'))
@@ -416,9 +414,8 @@ def reject_clientele(request, clientele_id):
           f" Kindly register again with valid information. Thank you"
     context = {'subject': subject, 'msg': msg}
     html_message = render_to_string('library/msg.html', context=context)
-    plain_message = strip_tags(html_message)
 
-    send_mail(subject, plain_message, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
+    send_mail(subject, msg, EMAIL_HOST_USER, [clientele.email], html_message=html_message,
               fail_silently=False)
     return HttpResponseRedirect(reverse('Library:library_admin'))
 

@@ -27,10 +27,9 @@ def home(request):
 
 
 def blog_page(request, title):
-    blog = get_object_or_404(Blog, title=title)
-    comments = Blog.comment.all()
-
     if request.user.is_authenticated and not request.user.is_superuser:
+        blog = get_object_or_404(Blog, title=title)
+        comments = blog.comment.all().order_by('-date')
         current_clientele = Clientele.objects.get(clientele_id=request.user.username)
         if request.method == 'POST':
             form = CommentForm(request.POST)

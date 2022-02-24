@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -13,14 +13,21 @@ class HomeViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id=0000,
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="Adekunle", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
+
         for i in range(3):
             Blog.objects.create(title=f'Blog{i+1}', article='An article for your blog', date=timezone.now(),
                                 image='Library/static/images/du logo.png')
@@ -42,18 +49,26 @@ class BlogPageViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id=0000,
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="0000", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
-        comment = Comment.objects.create(clientele=clientele, comment='An article for your blog', date=timezone.now())
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
+
+        comment = Comment.objects.create(clientele=cls.clientele, comment='An article for your blog', date=timezone.now())
 
         blog = Blog.objects.create(title='Blog', article='An article for your blog', date=timezone.now(),
                                    image='Library/static/images/du logo.png')
+        blog.comment.add(comment)
 
     def test_user_is_logged_in(self):
         logged_in = self.client.login(username='0000', password='Adekunle')

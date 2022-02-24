@@ -15,14 +15,20 @@ class HomeViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id=0000,
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="Adekunle", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
         for i in range(3):
             Blog.objects.create(title=f'Blog{i + 1}', article='An article for your blog', date=timezone.now(),
                                 image='Library/static/images/du logo.png')
@@ -44,14 +50,20 @@ class AboutViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id=0000,
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="Adekunle", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
     def test_url_exist(self):
         response = self.client.get('/about/')
@@ -70,14 +82,20 @@ class ContactViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id=0000,
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="Adekunle", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
     def test_url_exist(self):
         response = self.client.get('/contact/')
@@ -96,14 +114,20 @@ class LoginViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
-                                             sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="0000", email=clientele.email,
-                                        last_name=clientele.last_name, first_name=clientele.first_name,
-                                        password=clientele.last_name)
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
         user.save()
-        clientele.user = user
-        clientele.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         cls.data = {'user_id': '0000', 'password': 'Adekunle'}
         cls.fail_data = {'user_id': 'faildata', 'password': 'F41LD454'}
@@ -164,6 +188,9 @@ class ForgottenPasswordViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -172,6 +199,9 @@ class ForgottenPasswordViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         Password.objects.create(clientele=cls.clientele, recovery_password='recovery_password', time=timezone.now())
 
@@ -226,15 +256,20 @@ class PasswordRetrievalViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
                                         last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
                                         password=cls.clientele.last_name)
-        Password.objects.create(clientele=cls.clientele, recovery_password='recovery_password', time=timezone.now())
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         cls.data = {'password': 'recovery_password'}
         cls.fail_data = {'password': 'faildata'}
@@ -275,19 +310,18 @@ class PasswordRetrievalViewTest(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_exists_when_not_logged_in_with_correct_data(self):
+        self.client.login(username='fail', password='fail')
         response = self.client.post(reverse('Library:password_retrieval', args=(self.clientele.id,)), data=self.data)
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_exists_when_not_logged_in_with_fail_data(self):
+        self.client.login(username='fail', password='fail')
         response = self.client.post(reverse('Library:password_retrieval', args=(self.clientele.id,)),
                                     data=self.fail_data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_url_redirects_when_not_logged_in_with_correct_data(self):
-        response = self.client.post(reverse('Library:password_retrieval', args=(self.clientele.id,)), data=self.data)
-        self.assertRedirects(response, reverse('Library:update_password', args=(self.clientele.id,)))
-
     def test_url_redirects_when_not_logged_in_with_fail_data(self):
+        self.client.login(username='fail', password='fail')
         response = self.client.post(reverse('Library:password_retrieval', args=(self.clientele.id,)),
                                     data=self.fail_data)
         self.assertRedirects(response, reverse('Library:password_retrieval', args=(self.clientele.id,)))
@@ -297,6 +331,9 @@ class UpdatePasswordViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -305,6 +342,9 @@ class UpdatePasswordViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         cls.data = {'password': 'password', 'confirm_password': 'password'}
         cls.fail_data = {'password': 'failure8', 'confirm_password': 'failureee'}
@@ -360,6 +400,9 @@ class RegisterViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -368,6 +411,9 @@ class RegisterViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         cls.fail_data = {'last_name': "Adekunle", 'first_name': "Michael", 'user_id': '0000',
                          'sex': "Male", 'phone_no': "09036451726", 'email': "lekan@...", 'role': "Admin"}
@@ -422,6 +468,9 @@ class UpdateProfileImageViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -430,6 +479,9 @@ class UpdateProfileImageViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
         cls.data = {'file': 'Library/static/books/COMPTIA-Roadmap.pdf'}
 
@@ -495,6 +547,9 @@ class RepositoryViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -503,6 +558,9 @@ class RepositoryViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
     def test_url_exist_without_login(self):
         response = self.client.get('/account/repository')
@@ -549,6 +607,9 @@ class OfflineResourcesViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -557,6 +618,9 @@ class OfflineResourcesViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Student')
+        group.user_set.add(user)
 
     def test_url_exist_without_login(self):
         response = self.client.get('/account/repository/e-books')
@@ -615,7 +679,7 @@ class LibraryAdminViewTest(TestCase):
         cls.clientele.user = user
         cls.clientele.save()
 
-        group = Group.objects.get(name='Student')
+        group = Group.objects.get(name='Admin')
         group.user_set.add(user)
 
         cls.clientele2 = Clientele.objects.create(last_name="Adekunle1", first_name="Michael1", clientele_id='0001',
@@ -675,12 +739,12 @@ class LibraryAdminViewTest(TestCase):
     def test_url_exist(self):
         self.client.login(username='0000', password='Adekunle')
         response = self.client.get('/admin/')
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_is_accessible_by_name(self):
         self.client.login(username='0000', password='Adekunle')
         response = self.client.get(reverse('Library:library_admin'))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_uses_correct_template(self):
         self.client.login(username='0000', password='Adekunle')
@@ -705,14 +769,11 @@ class ApproveClieneteleViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
-                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
-        user = User.objects.create_user(username="0000", email=cls.clientele.email,
-                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
-                                        password=cls.clientele.last_name)
-        user.save()
-        cls.clientele.user = user
-        cls.clientele.save()
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Student")
 
     def test_url_exist(self):
         self.client.login(username='0000', password='Adekunle')
@@ -724,16 +785,14 @@ class ApproveClieneteleViewTest(TestCase):
         response = self.client.post(reverse('Library:approve_clientele', args=(self.clientele.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_url_redirects(self):
-        self.client.login(username='0000', password='Adekunle')
-        response = self.client.post(reverse('Library:approve_clientele', args=(self.clientele.id,)))
-        self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
-
 
 class RejectClieneteleViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
         cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
                                                  sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
         user = User.objects.create_user(username="0000", email=cls.clientele.email,
@@ -742,6 +801,9 @@ class RejectClieneteleViewTest(TestCase):
         user.save()
         cls.clientele.user = user
         cls.clientele.save()
+
+        group = Group.objects.get(name='Admin')
+        group.user_set.add(user)
 
     def test_url_exist(self):
         self.client.login(username='0000', password='Adekunle')
@@ -753,16 +815,25 @@ class RejectClieneteleViewTest(TestCase):
         response = self.client.post(reverse('Library:reject_clientele', args=(self.clientele.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_url_redirects(self):
-        self.client.login(username='0000', password='Adekunle')
-        response = self.client.post(reverse('Library:reject_clientele', args=(self.clientele.id,)))
-        self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
-
 
 class ApproveJournalViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
+        user.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Admin')
+        group.user_set.add(user)
         cls.journal = Journal.objects.create(title='Journal', authors='authors', description='description',
                                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
 
@@ -776,16 +847,25 @@ class ApproveJournalViewTest(TestCase):
         response = self.client.post(reverse('Library:approve_journal', args=(self.journal.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_url_redirects(self):
-        self.client.login(username='0000', password='Adekunle')
-        response = self.client.post(reverse('Library:approve_journal', args=(self.journal.id,)))
-        self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
-
 
 class RejectJournalViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        Group.objects.create(name='Admin')
+        Group.objects.create(name='Student')
+
+        cls.clientele = Clientele.objects.create(last_name="Adekunle", first_name="Michael", clientele_id='0000',
+                                                 sex="Male", phone_no="09036451726", email="lekan@...", role="Admin")
+        user = User.objects.create_user(username="0000", email=cls.clientele.email,
+                                        last_name=cls.clientele.last_name, first_name=cls.clientele.first_name,
+                                        password=cls.clientele.last_name)
+        user.save()
+        cls.clientele.user = user
+        cls.clientele.save()
+
+        group = Group.objects.get(name='Admin')
+        group.user_set.add(user)
         cls.journal = Journal.objects.create(title='Journal', authors='authors', description='description',
                                              date=timezone.now(), file='Library/static/books/COMPTIA-Roadmap.pdf')
 
@@ -798,11 +878,6 @@ class RejectJournalViewTest(TestCase):
         self.client.login(username='0000', password='Adekunle')
         response = self.client.post(reverse('Library:reject_journal', args=(self.journal.id,)))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-
-    def test_url_redirects(self):
-        self.client.login(username='0000', password='Adekunle')
-        response = self.client.post(reverse('Library:reject_journal', args=(self.journal.id,)))
-        self.assertRedirects(response, reverse('Library:library_admin'), target_status_code=302)
 
 
 class LogoutViewTest(SimpleTestCase):
