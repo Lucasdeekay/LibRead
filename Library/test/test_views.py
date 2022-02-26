@@ -623,31 +623,31 @@ class OfflineResourcesViewTest(TestCase):
         group.user_set.add(user)
 
     def test_url_exist_without_login(self):
-        response = self.client.get('/account/repository/e-books')
+        response = self.client.get('/account/repository')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_is_accessible_by_name_without_login(self):
-        response = self.client.get(reverse('Library:offline_resources'))
+        response = self.client.get(reverse('Library:repository'))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_url_redirects_without_login(self):
-        response = self.client.get(reverse('Library:offline_resources'))
+        response = self.client.get(reverse('Library:repository'))
         self.assertRedirects(response, reverse('Library:login'))
 
     def test_url_exist(self):
         self.client.login(username='0000', password='Adekunle')
-        response = self.client.get('/account/repository/e-books')
+        response = self.client.get('/account/repository')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_is_accessible_by_name(self):
         self.client.login(username='0000', password='Adekunle')
-        response = self.client.get(reverse('Library:offline_resources'))
+        response = self.client.get(reverse('Library:repository'))
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_url_uses_correct_template(self):
         self.client.login(username='0000', password='Adekunle')
-        response = self.client.get(reverse('Library:offline_resources'))
-        self.assertTemplateUsed(response, 'library/offline_resources.html')
+        response = self.client.get(reverse('Library:repository'))
+        self.assertTemplateUsed(response, 'library/repository.html')
 
     def test_user_is_logged_in(self):
         logged_in = self.client.login(username='0000', password='Adekunle')
@@ -659,7 +659,7 @@ class OfflineResourcesViewTest(TestCase):
 
     def test_url_still_works_after_login_with_fail_data(self):
         self.client.login(username='fail', password='fail')
-        response = self.client.post(reverse('Library:offline_resources'))
+        response = self.client.post(reverse('Library:repository'))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
 

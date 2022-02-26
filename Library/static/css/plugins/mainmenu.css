@@ -164,7 +164,7 @@ a.meanmenu-reveal {
 	top: 0;
 	z-index: 2;
 	font-weight: 700;
-	background: rgba(255,255,255,0.1);
+	background: rgba(255,255,255);
 	border: none !important;
 	line-height: 35px;
 }

@@ -253,17 +253,6 @@ def update_profile_image(request):
 
 def repository(request):
     if request.user.is_authenticated and not request.user.is_superuser:
-        all_blogs = Blog.objects.all()
-        current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
-        context = {'current_clientele': current_clientele, 'all_blogs': all_blogs}
-        return render(request, 'library/library_main.html', context)
-    else:
-        messages.error(request, 'Please login to have access')
-        return HttpResponseRedirect(reverse('Library:login'))
-
-
-def offline_resources(request):
-    if request.user.is_authenticated and not request.user.is_superuser:
         current_clientele = get_object_or_404(Clientele, clientele_id=request.user.username)
 
         all_ebooks = Ebook.objects.all().order_by('-date')
@@ -272,7 +261,7 @@ def offline_resources(request):
         if request.method == 'POST':
             programme = request.POST.get("programme")
             if programme == "All":
-                return HttpResponseRedirect(reverse('Library:offline_resources'))
+                return HttpResponseRedirect(reverse('Library:repository'))
             else:
                 sorted_file = get_object_or_404(LibraryFile, programme=programme)
                 all_ebooks = sorted_file.ebook.all().order_by('-date')
@@ -287,7 +276,7 @@ def offline_resources(request):
         journal_obj = journal_paginator.get_page(journal_page_number)  # Insert the number of items into page
 
         context = {'current_clientele': current_clientele, 'ebook_obj': ebook_obj, 'journal_obj': journal_obj}
-        return render(request, 'library/offline_resources.html', context)
+        return render(request, 'library/repository.html', context)
     else:
         messages.error(request, 'Please login to have access')
         return HttpResponseRedirect(reverse('Library:login'))

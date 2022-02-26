@@ -27,9 +27,8 @@ urlpatterns = [
     path('admin/approve-journal/<int:journal_id>', views.approve_journal, name='approve_journal'),
     path('admin/reject-journal/<int:journal_id>', views.reject_journal, name='reject_journal'),
     path('register', views.register, name='register'),
-    path('account/repository', views.repository, name='repository'),
     path('account/update-profile-image', views.update_profile_image, name='update_profile_image'),
-    path('account/repository/e-books', views.offline_resources, name='offline_resources'),
+    path('account/repository', views.repository, name='repository'),
     path('account/logout', views.log_out, name='logout'),
     path('api/', include(router.urls))
 ]

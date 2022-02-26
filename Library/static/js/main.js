@@ -95,53 +95,20 @@ $(function(){
 	});
 
 	/*============= E-Resources =============*/
-	$('#news-sec').hide();
 	$('#nig-news-sec').hide();
 
-	$('#news-btn').click(function(){
-	    $('#news-sec').slideToggle();
-	    $('#news-btn').toggleClass('is-yellow');
+	$('#nig-news-btn').hover(function(){
+	    $('#nig-news-sec').show();
+	    $('#nig-news-sec').hover(function(){
+	        $('#nig-news-sec').show();
+	    },
+	    function(){
+	        $('#nig-news-sec').show();
+	    })
+	},
+	function(){
+	    $('#nig-news-sec').hide();
 	});
-	$('#nig-news-btn').click(function(){
-	    $('#nig-news-sec').slideToggle();
-	    $('#nig-news-btn').toggleClass('is-yellow');
-	});
-
-	$('#ebooks-sec').hide();
-
-	$('#ebooks-btn').click(function(){
-	    $('#ebooks-sec').slideToggle();
-	    $('#ebooks-btn').toggleClass('is-yellow');
-	});
-
-	$('#ejournals-sec').hide();
-
-	$('#ejournals-btn').click(function(){
-	    $('#ejournals-sec').slideToggle();
-	    $('#ejournals-btn').toggleClass('is-yellow');
-	});
-
-	$('#erefs-sec').hide();
-
-	$('#erefs-btn').click(function(){
-	    $('#erefs-sec').slideToggle();
-	    $('#erefs-btn').toggleClass('is-yellow');
-	});
-
-	$('#res-sec').hide();
-
-	$('#res-btn').click(function(){
-	    $('#res-sec').slideToggle();
-	    $('#res-btn').toggleClass('is-yellow');
-	});
-
-	$('#fd-sec').hide();
-
-	$('#fd-btn').click(function(){
-	    $('#fd-sec').slideToggle();
-	    $('#fd-btn').toggleClass('is-yellow');
-	});
-
 	/*============= Image Lazy Loading =============*/
 	new LazyLoad({
 	    elements_selector: ".lazy", // class to apply to

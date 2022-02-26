@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{% static 'css/plugins/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/plugins/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/plugins/mainmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/material-design-iconic-font.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -80,27 +81,297 @@
                     </nav>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
-                    <ul class="header__sidebar__right d-flex justify-content-center align-items-center">
-                        <li class="drop mx-2">
-                            <a href="https://www.dominionuniversity.edu.ng" class="hover" style="color:white">University
-                                <br> Homepage</a>
-                        </li>
-                        <li class="drop">
+                    <nav class="mainmenu__nav">
+                        <ul class="meninmenu header__sidebar__right d-flex justify-content-center align-items-center">
+                            <li class="">
+                                <a href="https://www.dominionuniversity.edu.ng" class="hover" style="color:white">University
+                                    <br> Homepage</a>
+                            </li>
+                            <li class="">
                             <a href="{% url 'Library:home' %}" class="hover" style="color:white">Home</a>
                         </li>
-                        <!--<li class="drop mx-2">
+                            <li class="drop"><a href="#" class="hover" style="color:white">E-Resources</a>
+                                <div class="megamenu dropdown">
+                                    <ul class="item item01">
+                                        <li>
+                                            <a href="{% url 'Library:repository' %}" class="hover">Courseware</a>
+                                        </li>
+                                        <li class="label2"><a href="#" class="hover">E-Journals</a>
+                                        <ul>
+                                                        <li><a href="https://academicjournals.org/journal/JMD"
+                                                                               target="_blank" title="Journal Of Music And Dance">
+                                                                        Journal Of Music And Dance
+                                                                    </a></li>
+                                                        <li><a href="https://academicjournals.org/journal/AJHC"
+                                                                               target="_blank" title="Africa Journal Of History And Culture">
+                                                                        Africa Journal Of History And Culture
+                                                                    </a></li>
+                                                        <li><a href="https://academicjournals.org/journal/JMCS"
+                                                                               target="_blank" title="Journal Of Media And Communication Studies">
+                                                                        Journal Of Media And Communication Studies
+                                                                    </a></li>
+                                                        <li><a href="https://academicjournals.org/journal/IJEL"
+                                                                               target="_blank" title="International Journal Of English And Literature">
+                                                                        International Journal Of English And Literature
+                                                                    </a></li>
+                                                        <li><a href="https://academicjournals.org/journal/AJPSIR"
+                                                                               target="_blank" title="African Journal Of Political Science And International Relations">
+                                                                        African Journal Of Political Science And International Relations
+                                                                    </a></li>
+                                                        <li><a href="https://www.bmj.com/"
+                                                                               target="_blank"
+                                                                               title="BMJ Journals">
+                                                                        BMJ Journals
+                                                                    </a></li>
+                                                        <li><a href="https://www.ncbi.nlm.nih.gov/pmc/"
+                                                                               target="_blank"
+                                                                               title="PUBMED Central">
+                                                                        PUBMED Central
+                                                                    </a></li>
+                                                        <li><a href="https://worldwidescience.org/"
+                                                                               target="_blank"
+                                                                               title="World Wide Science">
+                                                                        World Wide Science
+                                                                    </a></li>
+                                                        <li><a href="https://doaj.org/"
+                                                                               target="_blank"
+                                                                               title="Directory Of Open Access Journals">
+                                                                        Directory Of Open Access Journals
+                                                                    </a></li>
+                                                        <li><a href="http://repec.org/"
+                                                                               target="_blank"
+                                                                               title="Research Papers In Economics">
+                                                                        Research Papers In Economics
+                                                                    </a></li>
+                                                        <li><a href="https://www.elsevier.com/open-access/open-access-journals"
+                                                                               target="_blank"
+                                                                               title="Open Access Journals">
+                                                                        Open Access Journals
+                                                                    </a></li>
+                                                        <li><a href="https://www.jstor.org/"
+                                                                               target="_blank"
+                                                                               title="JSTOR">
+                                                                        JSTOR
+                                                                    </a></li>
+                                                    </ul>
+                                    </li>
+                                        <li class="label2"><a href="#" class="hover">E-Newspapers And Magazines</a>
+                                        <ul>
+                                                        <li><a href="http://www.onlinenewspapers.com/magazines/"
+                                                                               target="_blank" title="Online Magazines">
+                                                                        Online Magazines
+                                                                    </a></li>
+                                                        <li><a href="http://www.refdesk.com/paper.html#natnews"
+                                                                               target="_blank"
+                                                                               title="World Newspapers in English">
+                                                                        World Newspapers In English
+                                                                    </a></li>
+                                                        <li class="label2"><a href="#" class="hover" id="nig-news-btn">Nigerian Newspapers</a>
+                                                                <ul id="nig-news-sec">
+                                                                            <li><a
+                                                                                    href="http://www.businessdayonline.com/"
+                                                                                    target="_blank"
+                                                                                    title="Business Day&nbsp;">Business Day&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a
+                                                                                    href="http://www.completesportsnigeria.com/"
+                                                                                    target="_blank"
+                                                                                    title="Complete Sports&nbsp;">Complete
+                                                                                Sports&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a href="http://guardian.ng/"
+                                                                                           target="_blank"
+                                                                                           title="The Guardian&nbsp;">The
+                                                                                Guardian&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a href="http://www.thisdaylive.com/"
+                                                                                           target="_blank"
+                                                                                           title="This Day&nbsp;">This
+                                                                                Day</a>
+                                                                            </li>
+                                                                            <li><a href="http://www.punchontheweb.com/"
+                                                                                           target="_blank"
+                                                                                           title="Punch on the Web&nbsp;">Punch
+                                                                                on the Web&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a href="http://punchng.com/"
+                                                                                           target="_blank"
+                                                                                           title="The Punch&nbsp;">The
+                                                                                Punch&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a href="http://tribuneonlineng.com/"
+                                                                                           target="_blank"
+                                                                                           title="Nigerian Tribune&nbsp;">Nigerian
+                                                                                Tribune&nbsp;</a>
+                                                                            </li>
+                                                                            <li><a href="http://www.vanguardngr.com/"
+                                                                                           target="_blank"
+                                                                                           title="Vanguard">Vanguard</a>
+                                                                            </li>
+                                                                        </ul>
+                                                        </li>
+                                                    </ul>
+                                    </li>
+                                        <li class="label2"><a href="#" class="hover">Databases</a>
+                                        <ul>
+                                                        <li><a href="http://bravecontent.com/dominion/"
+                                                                               target="_blank" title="ProQuest">
+                                                                        ProQuest
+                                                                    </a></li>
+                                                        <li><a href="https://www.ajol.info/index.php/ajol"
+                                                                               target="_blank" title="AJOL">
+                                                                        AJOL
+                                                                    </a></li>
+                                                        <li><a href="https://www.jisc.ac.uk/opendoar"
+                                                                               target="_blank"
+                                                                               title="Directory Of Open Access Repositories">
+                                                                        Directory Of Open Access Repositories
+                                                                    </a></li>
+                                                        <li><a href="https://eric.ed.gov/"
+                                                                               target="_blank"
+                                                                               title="ERIC Online">
+                                                                        ERIC Online
+                                                                    </a></li>
+                                                         <li><a href="https://openknowledge.worldbank.org/"
+                                                                               target="_blank"
+                                                                               title="Open Knowledge Repository">
+                                                                        Open Knowledge Repository
+                                                                    </a></li>
+                                                        <li><a href="https://www.msm.edu/Library/NLMD.php#:~:text=National%20Library%20of%20Medicine%20Databases&text=Its%20mission%20is%20to%20offer,consumers%20and%20health%2Dcare%20providers"
+                                                                               target="_blank"
+                                                                               title="National Library Of Medicine(NLM) Databases">
+                                                                        National Library Of Medicine(NLM) Databases
+                                                                    </a></li>
+                                                        <li><a href="https://guides.lib.umich.edu/greyliterature"
+                                                                               target="_blank"
+                                                                               title="Resesarch Guides: Grey Literature">
+                                                                        Resesarch Guides: Grey Literature
+                                                                    </a></li>
+                                                        <li><a href="https://www.oerafrica.org/"
+                                                                               target="_blank"
+                                                                               title="OER Africa">
+                                                                        OER Africa
+                                                                    </a></li>
+                                                        <li><a href="https://www.inasp.info/"
+                                                                               target="_blank"
+                                                                               title="INASP">
+                                                                        INASP
+                                                                    </a></li>
+                                                        <li><a href="https://nitda.gov.ng/virtual-library/"
+                                                                               target="_blank"
+                                                                               title="National Virtual Library">
+                                                                        National Virtual Library
+                                                                    </a></li>
+                                                        <li><a href="https://onlinelibrary.london.ac.uk/resources/databases/popline"
+                                                                               target="_blank"
+                                                                               title="The Online Library">
+                                                                        The Online Library
+                                                                    </a></li>
+                                                    </ul>
+                                    </li>
+                                        <li class="label2"><a href="#" class="hover">E-Books</a>
+                                            <ul>
+                                            <li><a href="https://www.pdfdrive.com/"
+                                                                   target="_blank" title="PDF Drive">
+                                                            PDF Drive
+                                                        </a></li>
+                                            <li><a href="https://z-lib.org"
+                                                                   target="_blank"
+                                                                   title="Z Library">
+                                                            Z Library
+                                                        </a></li>
+                                            <li><a href="https://www.hoopladigital.com/browse/audiobook/popular?page=1"
+                                                                   target="_blank"
+                                                                   title="Hoopla Audiobooks">
+                                                            Hoopla Audiobooks
+                                                        </a></li>
+                                            <li><a href="https://www.cbn.gov.ng/documents/annualreports.asp"
+                                                                   target="_blank"
+                                                                   title="CBN Annual Statistical Report">
+                                                            CBN Annual Statistical Report
+                                                        </a></li>
+                                             <li><a href="https://eric.ed.gov/"
+                                                                   target="_blank"
+                                                                   title="ERIC Online">
+                                                            ERIC Online
+                                                        </a></li>
+                                            <li><a href="https://bookboon.com/"
+                                                                   target="_blank"
+                                                                   title="BOOKBOON">
+                                                            BOOKBOON
+                                                        </a></li>
+                                            <li><a href="https://www.intechopen.com/"
+                                                                   target="_blank"
+                                                                   title="Intech Open">
+                                                            Intech Open
+                                                        </a></li>
+                                        </ul>
+                                        </li>
+                                        <li class="label2"><a href="#" class="hover">E-References</a>
+                                        <ul>
+                                                        <li><a href="https://www.britannica.com/"
+                                                                               target="_blank" title="Encyclopedia Britannica">
+                                                                       Encyclopedia Britannica
+                                                                    </a></li>
+                                                        <li><a href="https://www.encyclopedia.com/"
+                                                                               target="_blank"
+                                                                               title="Encyclopedia">
+                                                                        Encyclopedia
+                                                                    </a></li>
+                                                        <li><a href="https://eol.org"
+                                                                               target="_blank"
+                                                                               title="Encyclopedia Of Life">
+                                                                        Encyclopedia Of Life
+                                                                    </a></li>
+                                                    </ul>
+                                    </li>
+                                        <li>
+                                            <a class="state-published contenttype-link hover" target="_blank"
+                                                           href="http://ocw.mit.edu/index.htm" title="MIT Open Courseware">
+                                                    MIT Open Courseware
+                                                </a>
+                                        </li>
+                                        <li class="label2"><a href="#" class="hover">Learning And Research Tools</a>
+                                          <ul>
+                                                        <li><a href="https://www.edx.org/how-it-works"
+                                                                               target="_blank" title="eDX">
+                                                                       eDX
+                                                                    </a></li>
+                                                        <li><a href="https://www.mooc-list.com/"
+                                                                               target="_blank"
+                                                                               title="MOOC">
+                                                                        MOOC
+                                                                    </a></li>
+                                                        <li><a href="https://researcheracademy.elsevier.com/"
+                                                                               target="_blank"
+                                                                               title="Researcher Academy">
+                                                                        Researcher Academy
+                                                                    </a></li>
+                                                        <li><a href="https://www.scopus.com/standard/marketing.uri"
+                                                                               target="_blank"
+                                                                               title="Scopus">
+                                                                        Scopus
+                                                                    </a></li>
+                                                    </ul>
+                                        </li>
+                                        <li>
+                                            <a href="https://opac.dominionuniversity.edu.ng/" class="hover">Online Public Access
+                                                    Catalogue (OPAC)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="">
                             <a href="{% url 'Library:about' %}" class="hover" style="color:white">About Us</a>
-                        </li>-->
-                        <li class="drop mx-2">
-                            <a href="{% url 'Library:repository' %}" class="hover" style="color:white">E-Resources</a>
                         </li>
-                        <li class="drop mx-2">
+                            <li class="">
                             <a href="{% url 'Blog:home' %}" class="hover" style="color:white">Blog</a>
                         </li>
-                        <li class="drop mx-2">
+                            <li class="">
                             <a href="{% url 'Library:contact' %}" class="hover" style="color:white">Contact Us</a>
                         </li>
-                    </ul>
+                        </ul>
+                    </nav>
                 </div>
                 <div class="col-md-6 col-sm-6 col-7 col-lg-1">
                    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
@@ -183,8 +454,9 @@
             </div>
             <!-- Start Mobile Menu -->
             <div class="row d-none">
-                <div class="col-lg-4">
-                    <nav class="mobilemenu__nav">
+                <div class="col-lg-12 d-none">
+                    <div class="mean-push"></div>
+                    <nav class="mobilemenu__nav" style="display: none;">
                         <ul class="meninmenu">
                             <li style="background-color:#1C1C4A">
                                 <a href="https://www.dominionuniversity.edu.ng" style="color:white">University Homepage</a>
@@ -196,7 +468,274 @@
                                 <a href="{% url 'Library:about' %}" style="color:white">About Us</a>
                             </li>-->
                             <li style="background-color:#1C1C4A">
-                                <a href="{% url 'Library:repository' %}" style="color:white">E-Resources</a>
+                                <a href="#" style="color:white">E-Resources</a>
+                                <ul>
+                                    <li>
+                                        <a style="color:white" href="{% url 'Library:repository' %}" class="hover">Courseware</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Journals</a>
+                                        <ul>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/JMD"
+                                                                   target="_blank" title="Journal Of Music And Dance">
+                                                            Journal Of Music And Dance
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/AJHC"
+                                                                   target="_blank" title="Africa Journal Of History And Culture">
+                                                            Africa Journal Of History And Culture
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/JMCS"
+                                                                   target="_blank" title="Journal Of Media And Communication Studies">
+                                                            Journal Of Media And Communication Studies
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/IJEL"
+                                                                   target="_blank" title="International Journal Of English And Literature">
+                                                            International Journal Of English And Literature
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/AJPSIR"
+                                                                   target="_blank" title="African Journal Of Political Science And International Relations">
+                                                            African Journal Of Political Science And International Relations
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.bmj.com/"
+                                                                   target="_blank"
+                                                                   title="BMJ Journals">
+                                                            BMJ Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.ncbi.nlm.nih.gov/pmc/"
+                                                                   target="_blank"
+                                                                   title="PUBMED Central">
+                                                            PUBMED Central
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://worldwidescience.org/"
+                                                                   target="_blank"
+                                                                   title="World Wide Science">
+                                                            World Wide Science
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://doaj.org/"
+                                                                   target="_blank"
+                                                                   title="Directory Of Open Access Journals">
+                                                            Directory Of Open Access Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="http://repec.org/"
+                                                                   target="_blank"
+                                                                   title="Research Papers In Economics">
+                                                            Research Papers In Economics
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.elsevier.com/open-access/open-access-journals"
+                                                                   target="_blank"
+                                                                   title="Open Access Journals">
+                                                            Open Access Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.jstor.org/"
+                                                                   target="_blank"
+                                                                   title="JSTOR">
+                                                            JSTOR
+                                                        </a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Newspapers And Magazines</a>
+                                        <ul>
+                                            <li><a style="color:white" href="http://www.onlinenewspapers.com/magazines/"
+                                                                   target="_blank" title="Online Magazines">
+                                                            Online Magazines
+                                                        </a></li>
+                                            <li><a style="color:white" href="http://www.refdesk.com/paper.html#natnews"
+                                                                   target="_blank"
+                                                                   title="World Newspapers in English">
+                                                            World Newspapers In English
+                                                        </a></li>
+                                            <li><a style="color:white" href="#" class="hover">Nigerian Newspapers</a>
+                                                <ul>
+                                                    <li><a style="color:white"
+                                                            href="http://www.businessdayonline.com/"
+                                                            target="_blank"
+                                                            title="Business Day&nbsp;">Business Day&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white"
+                                                            href="http://www.completesportsnigeria.com/"
+                                                            target="_blank"
+                                                            title="Complete Sports&nbsp;">Complete
+                                                        Sports&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://guardian.ng/"
+                                                                   target="_blank"
+                                                                   title="The Guardian&nbsp;">The
+                                                        Guardian&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://www.thisdaylive.com/"
+                                                                   target="_blank"
+                                                                   title="This Day&nbsp;">This
+                                                        Day</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://www.punchontheweb.com/"
+                                                                   target="_blank"
+                                                                   title="Punch on the Web&nbsp;">Punch
+                                                        on the Web&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://punchng.com/"
+                                                                   target="_blank"
+                                                                   title="The Punch&nbsp;">The
+                                                        Punch&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://tribuneonlineng.com/"
+                                                                   target="_blank"
+                                                                   title="Nigerian Tribune&nbsp;">Nigerian
+                                                        Tribune&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://www.vanguardngr.com/"
+                                                                   target="_blank"
+                                                                   title="Vanguard">Vanguard</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">Databases</a>
+                                        <ul>
+                                            <li><a style="color:white" href="http://bravecontent.com/dominion/"
+                                                                   target="_blank" title="ProQuest">
+                                                            ProQuest
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.ajol.info/index.php/ajol"
+                                                                   target="_blank" title="AJOL">
+                                                            AJOL
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.jisc.ac.uk/opendoar"
+                                                                   target="_blank"
+                                                                   title="Directory Of Open Access Repositories">
+                                                            Directory Of Open Access Repositories
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://eric.ed.gov/"
+                                                                   target="_blank"
+                                                                   title="ERIC Online">
+                                                            ERIC Online
+                                                        </a></li>
+                                             <li><a style="color:white" href="https://openknowledge.worldbank.org/"
+                                                                   target="_blank"
+                                                                   title="Open Knowledge Repository">
+                                                            Open Knowledge Repository
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.msm.edu/Library/NLMD.php#:~:text=National%20Library%20of%20Medicine%20Databases&text=Its%20mission%20is%20to%20offer,consumers%20and%20health%2Dcare%20providers"
+                                                                   target="_blank"
+                                                                   title="National Library Of Medicine(NLM) Databases">
+                                                            National Library Of Medicine(NLM) Databases
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://guides.lib.umich.edu/greyliterature"
+                                                                   target="_blank"
+                                                                   title="Resesarch Guides: Grey Literature">
+                                                            Resesarch Guides: Grey Literature
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.oerafrica.org/"
+                                                                   target="_blank"
+                                                                   title="OER Africa">
+                                                            OER Africa
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.inasp.info/"
+                                                                   target="_blank"
+                                                                   title="INASP">
+                                                            INASP
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://nitda.gov.ng/virtual-library/"
+                                                                   target="_blank"
+                                                                   title="National Virtual Library">
+                                                            National Virtual Library
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://onlinelibrary.london.ac.uk/resources/databases/popline"
+                                                                   target="_blank"
+                                                                   title="The Online Library">
+                                                            The Online Library
+                                                        </a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Books</a>
+                                        <ul>
+                                            <li><a style="color:white" href="https://www.pdfdrive.com/"
+                                                                   target="_blank" title="PDF Drive">
+                                                            PDF Drive
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://z-lib.org"
+                                                                   target="_blank"
+                                                                   title="Z Library">
+                                                            Z Library
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.hoopladigital.com/browse/audiobook/popular?page=1"
+                                                                   target="_blank"
+                                                                   title="Hoopla Audiobooks">
+                                                            Hoopla Audiobooks
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.cbn.gov.ng/documents/annualreports.asp"
+                                                                   target="_blank"
+                                                                   title="CBN Annual Statistical Report">
+                                                            CBN Annual Statistical Report
+                                                        </a></li>
+                                             <li><a style="color:white" href="https://eric.ed.gov/"
+                                                                   target="_blank"
+                                                                   title="ERIC Online">
+                                                            ERIC Online
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://bookboon.com/"
+                                                                   target="_blank"
+                                                                   title="BOOKBOON">
+                                                            BOOKBOON
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.intechopen.com/"
+                                                                   target="_blank"
+                                                                   title="Intech Open">
+                                                            Intech Open
+                                                        </a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-References</a>
+                                        <ul>
+                                            <li><a style="color:white" href="https://www.britannica.com/"
+                                                                   target="_blank" title="Encyclopedia Britannica">
+                                                           Encyclopedia Britannica
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.encyclopedia.com/"
+                                                                   target="_blank"
+                                                                   title="Encyclopedia">
+                                                            Encyclopedia
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://eol.org"
+                                                                   target="_blank"
+                                                                   title="Encyclopedia Of Life">
+                                                            Encyclopedia Of Life
+                                                        </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a style="color:white" class="state-published contenttype-link hover" target="_blank"
+                                                       href="http://ocw.mit.edu/index.htm" title="MIT Open Courseware">
+                                                MIT Open Courseware
+                                            </a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">Learning And Research Tools</a>
+                                        <ul>
+                                            <li><a style="color:white" href="https://www.edx.org/how-it-works"
+                                                                   target="_blank" title="eDX">
+                                                           eDX
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.mooc-list.com/"
+                                                                   target="_blank"
+                                                                   title="MOOC">
+                                                            MOOC
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://researcheracademy.elsevier.com/"
+                                                                   target="_blank"
+                                                                   title="Researcher Academy">
+                                                            Researcher Academy
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.scopus.com/standard/marketing.uri"
+                                                                   target="_blank"
+                                                                   title="Scopus">
+                                                            Scopus
+                                                        </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a style="color:white" href="https://opac.dominionuniversity.edu.ng/" class="hover">Online Public Access
+                                                Catalogue (OPAC)</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li style="background-color:#1C1C4A">
                                 <a href="{% url 'Blog:home' %}" style="color:white">Blog</a>
@@ -209,7 +748,307 @@
                 </div>
             </div>
             <!-- End Mobile Menu -->
-            <div class="mobile-menu d-block d-lg-none">
+            <div class="mobile-menu d-block d-lg-none mean-container">
+                <div class="mean-bar">
+                    <a href="#nav" class="meanmenu-reveal meanclose" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;">X</a>
+                    <nav class="mean-nav">
+                        <ul class="meninmenu" style="">
+                            <li style="background-color:#1C1C4A">
+                                <a href="https://www.dominionuniversity.edu.ng" style="color:white">University Homepage</a>
+                            </li>
+                            <li style="background-color:#1C1C4A">
+                                <a href="{% url 'Library:home' %}" style="color:white">Home</a>
+                            </li>
+                            <!--<li style="background-color:#1C1C4A">
+                                <a href="{% url 'Library:about' %}" style="color:white">About Us</a>
+                            </li>-->
+                            <li style="background-color:#1C1C4A">
+                                <a href="#" style="color:white">E-Resources</a>
+                                <ul style="display: none;">
+                                    <li>
+                                        <a style="color:white" href="{% url 'Library:repository' %}" class="hover">Courseware</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Journals</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/JMD"
+                                                                   target="_blank" title="Journal Of Music And Dance">
+                                                            Journal Of Music And Dance
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/AJHC"
+                                                                   target="_blank" title="Africa Journal Of History And Culture">
+                                                            Africa Journal Of History And Culture
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/JMCS"
+                                                                   target="_blank" title="Journal Of Media And Communication Studies">
+                                                            Journal Of Media And Communication Studies
+                                                        </a></li>
+                                            <li><a  style="color:white" href="https://academicjournals.org/journal/IJEL"
+                                                                   target="_blank" title="International Journal Of English And Literature">
+                                                            International Journal Of English And Literature
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://academicjournals.org/journal/AJPSIR"
+                                                                   target="_blank" title="African Journal Of Political Science And International Relations">
+                                                            African Journal Of Political Science And International Relations
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.bmj.com/"
+                                                                   target="_blank"
+                                                                   title="BMJ Journals">
+                                                            BMJ Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.ncbi.nlm.nih.gov/pmc/"
+                                                                   target="_blank"
+                                                                   title="PUBMED Central">
+                                                            PUBMED Central
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://worldwidescience.org/"
+                                                                   target="_blank"
+                                                                   title="World Wide Science">
+                                                            World Wide Science
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://doaj.org/"
+                                                                   target="_blank"
+                                                                   title="Directory Of Open Access Journals">
+                                                            Directory Of Open Access Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="http://repec.org/"
+                                                                   target="_blank"
+                                                                   title="Research Papers In Economics">
+                                                            Research Papers In Economics
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.elsevier.com/open-access/open-access-journals"
+                                                                   target="_blank"
+                                                                   title="Open Access Journals">
+                                                            Open Access Journals
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.jstor.org/"
+                                                                   target="_blank"
+                                                                   title="JSTOR">
+                                                            JSTOR
+                                                        </a></li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Newspapers And Magazines</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="http://www.onlinenewspapers.com/magazines/"
+                                                                   target="_blank" title="Online Magazines">
+                                                            Online Magazines
+                                                        </a></li>
+                                            <li><a style="color:white" href="http://www.refdesk.com/paper.html#natnews"
+                                                                   target="_blank"
+                                                                   title="World Newspapers in English">
+                                                            World Newspapers In English
+                                                        </a></li>
+                                            <li><a style="color:white" href="#" class="hover">Nigerian Newspapers</a>
+                                                <ul style="display: none;">
+                                                    <li><a style="color:white"
+                                                            href="http://www.businessdayonline.com/"
+                                                            target="_blank"
+                                                            title="Business Day&nbsp;">Business Day&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white"
+                                                            href="http://www.completesportsnigeria.com/"
+                                                            target="_blank"
+                                                            title="Complete Sports&nbsp;">Complete
+                                                        Sports&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://guardian.ng/"
+                                                                   target="_blank"
+                                                                   title="The Guardian&nbsp;">The
+                                                        Guardian&nbsp;</a>
+                                                    </li>
+                                                    <l><a style="color:white" href="http://www.thisdaylive.com/"
+                                                                   target="_blank"
+                                                                   title="This Day&nbsp;">This
+                                                        Day</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://www.punchontheweb.com/"
+                                                                   target="_blank"
+                                                                   title="Punch on the Web&nbsp;">Punch
+                                                        on the Web&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://punchng.com/"
+                                                                   target="_blank"
+                                                                   title="The Punch&nbsp;">The
+                                                        Punch&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://tribuneonlineng.com/"
+                                                                   target="_blank"
+                                                                   title="Nigerian Tribune&nbsp;">Nigerian
+                                                        Tribune&nbsp;</a>
+                                                    </li>
+                                                    <li><a style="color:white" href="http://www.vanguardngr.com/"
+                                                                   target="_blank"
+                                                                   title="Vanguard">Vanguard</a>
+                                                    </li>
+                                                </ul>
+                                                <a class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                            </li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">Databases</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="http://bravecontent.com/dominion/"
+                                                                   target="_blank" title="ProQuest">
+                                                            ProQuest
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.ajol.info/index.php/ajol"
+                                                                   target="_blank" title="AJOL">
+                                                            AJOL
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.jisc.ac.uk/opendoar"
+                                                                   target="_blank"
+                                                                   title="Directory Of Open Access Repositories">
+                                                            Directory Of Open Access Repositories
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://eric.ed.gov/"
+                                                                   target="_blank"
+                                                                   title="ERIC Online">
+                                                            ERIC Online
+                                                        </a></li>
+                                             <li><a style="color:white" href="https://openknowledge.worldbank.org/"
+                                                                   target="_blank"
+                                                                   title="Open Knowledge Repository">
+                                                            Open Knowledge Repository
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.msm.edu/Library/NLMD.php#:~:text=National%20Library%20of%20Medicine%20Databases&text=Its%20mission%20is%20to%20offer,consumers%20and%20health%2Dcare%20providers"
+                                                                   target="_blank"
+                                                                   title="National Library Of Medicine(NLM) Databases">
+                                                            National Library Of Medicine(NLM) Databases
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://guides.lib.umich.edu/greyliterature"
+                                                                   target="_blank"
+                                                                   title="Resesarch Guides: Grey Literature">
+                                                            Resesarch Guides: Grey Literature
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.oerafrica.org/"
+                                                                   target="_blank"
+                                                                   title="OER Africa">
+                                                            OER Africa
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.inasp.info/"
+                                                                   target="_blank"
+                                                                   title="INASP">
+                                                            INASP
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://nitda.gov.ng/virtual-library/"
+                                                                   target="_blank"
+                                                                   title="National Virtual Library">
+                                                            National Virtual Library
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://onlinelibrary.london.ac.uk/resources/databases/popline"
+                                                                   target="_blank"
+                                                                   title="The Online Library">
+                                                            The Online Library
+                                                        </a></li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-Books</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="https://www.pdfdrive.com/"
+                                                                   target="_blank" title="PDF Drive">
+                                                            PDF Drive
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://z-lib.org"
+                                                                   target="_blank"
+                                                                   title="Z Library">
+                                                            Z Library
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.hoopladigital.com/browse/audiobook/popular?page=1"
+                                                                   target="_blank"
+                                                                   title="Hoopla Audiobooks">
+                                                            Hoopla Audiobooks
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.cbn.gov.ng/documents/annualreports.asp"
+                                                                   target="_blank"
+                                                                   title="CBN Annual Statistical Report">
+                                                            CBN Annual Statistical Report
+                                                        </a></li>
+                                             <li><a style="color:white" href="https://eric.ed.gov/"
+                                                                   target="_blank"
+                                                                   title="ERIC Online">
+                                                            ERIC Online
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://bookboon.com/"
+                                                                   target="_blank"
+                                                                   title="BOOKBOON">
+                                                            BOOKBOON
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.intechopen.com/"
+                                                                   target="_blank"
+                                                                   title="Intech Open">
+                                                            Intech Open
+                                                        </a></li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">E-References</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="https://www.britannica.com/"
+                                                                   target="_blank" title="Encyclopedia Britannica">
+                                                           Encyclopedia Britannica
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.encyclopedia.com/"
+                                                                   target="_blank"
+                                                                   title="Encyclopedia">
+                                                            Encyclopedia
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://eol.org"
+                                                                   target="_blank"
+                                                                   title="Encyclopedia Of Life">
+                                                            Encyclopedia Of Life
+                                                        </a></li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li>
+                                        <a style="color:white" class="state-published contenttype-link hover" target="_blank"
+                                                       href="http://ocw.mit.edu/index.htm" title="MIT Open Courseware">
+                                                MIT Open Courseware
+                                            </a>
+                                    </li>
+                                    <li><a style="color:white" href="#" class="hover">Learning And Research Tools</a>
+                                        <ul style="display: none;">
+                                            <li><a style="color:white" href="https://www.edx.org/how-it-works"
+                                                                   target="_blank" title="eDX">
+                                                           eDX
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.mooc-list.com/"
+                                                                   target="_blank"
+                                                                   title="MOOC">
+                                                            MOOC
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://researcheracademy.elsevier.com/"
+                                                                   target="_blank"
+                                                                   title="Researcher Academy">
+                                                            Researcher Academy
+                                                        </a></li>
+                                            <li><a style="color:white" href="https://www.scopus.com/standard/marketing.uri"
+                                                                   target="_blank"
+                                                                   title="Scopus">
+                                                            Scopus
+                                                        </a></li>
+                                        </ul>
+                                        <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                                    </li>
+                                    <li>
+                                        <a style="color:white" href="https://opac.dominionuniversity.edu.ng/" class="hover">Online Public Access
+                                                Catalogue (OPAC)</a>
+                                    </li>
+                                </ul>
+                                <a style="background-color:white" class="mean-expand" href="#" style="font-size: 18px">+</a>
+                            </li>
+                            <li style="background-color:#1C1C4A">
+                                <a href="{% url 'Blog:home' %}" style="color:white">Blog</a>
+                            </li>
+                            <li style="background-color:#1C1C4A">
+                                <a href="{% url 'Library:contact' %}" style="color:white">Contact Us</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
             <!-- Mobile Menu -->
         </div>
@@ -279,7 +1118,7 @@
                         <div class="copyright">
                             <div class="copy__right__inner text-start">
                                 <p>&copy; 2021, LibRead. Made with <i class="fa fa-heart text-danger"></i> by
-                                    <strong><i>AuraTech</i></strong></p>
+                                    <strong><i>IT Department</i></strong></p>
                             </div>
                         </div>
                     </div>
@@ -291,13 +1130,7 @@
                                         <i class="fa fa-envelope" aria-hidden="true"></i> lucasdeekay98@gmail.com
                                     </li>
                                     <li>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i> timmyhonoured1@gmail.com
-                                    </li>
-                                    <li>
                                         <i class="fa fa-phone" aria-hidden="true"></i> +2349024563447
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-phone" aria-hidden="true"></i> +2348136353545
                                     </li>
                                 </ul>
                             </div>
