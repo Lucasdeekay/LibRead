@@ -109,8 +109,8 @@ class LibraryFile(models.Model):
         ('Economics', 'Economics'),
         ('Accounting', 'Accounting'),
     ])
-    ebook = models.ManyToManyField(Ebook)
-    journal = models.ManyToManyField(Journal)
+    ebook = models.ManyToManyField(Ebook, blank=True, null=True)
+    journal = models.ManyToManyField(Journal, blank=True, null=True)
 
     def __str__(self):
         return self.programme
