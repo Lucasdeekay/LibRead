@@ -14,6 +14,8 @@
 {% endif %}
 {% endblock %}
 
+{% block content %}
+
 <!-- Start Message area -->
 {% for message in messages %}
 {% if message.tags == "success" %}
@@ -56,7 +58,6 @@
 {% endfor %}
 <!-- End Message area -->
 
-{% block content %}
 <!-- Start breadcrumb area -->
 <div class="ht__breadcrumb__area bg-image--7 lazy">
     <div class="container">
