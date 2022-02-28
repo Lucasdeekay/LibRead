@@ -150,10 +150,10 @@
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
                                     <div class="product__thumb">
-                                        <a download class="first__img" href="{{ ebook.file.url }}"><img
-                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
-                                        <a download class="second__img animation1" href="{{ ebook.file.url }}"><img
-                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <a download class="first__img" align="center" href="{{ ebook.file.url }}"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image" style="max-width: 70%"></a>
+                                        <a download class="second__img animation1" align="center" href="{{ ebook.file.url }}"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image" style="max-width: 70%"></a>
                                         <div class="hot__box">
                                             <span class="hot-label">Ebook</span>
                                         </div>
@@ -208,10 +208,8 @@
                             <!-- Start Single Product -->
                             <div class="list__view">
                                 <div class="thumb">
-                                    <a download class="first__img" href="{{ ebook.file.url }}"><img
-                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
-                                    <a download class="second__img animation1" href="{{ ebook.file.url }}"><img
-                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                    <a download class="first__img" align="center" href="{{ ebook.file.url }}"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images" style="max-width: 70%"></a>
                                 </div>
                                 <div class="content">
                                     <h2><a href="single-product.html">{{ ebook.title }}</a></h2>
@@ -232,6 +230,26 @@
                             <!-- End Single Product -->
                             {% endfor %}
                         </div>
+                        <div class="wn__pagination">
+                                    <nav aria-label="Page navigation conatiner"></nav>
+                                    <ul class="pagination justify-content-center">
+                                        {% if ebook_obj.has_previous %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.previous_page_number }}">&laquo;
+                                            PREV </a></li>
+                                        {% endif %}
+                                        <span class="current mx-3">
+                        Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
+                    </span>
+                                        {% if ebook_obj.has_next %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.next_page_number }}"> NEXT
+                                            &raquo;</a></li>
+
+                                        {% endif %}
+                                    </ul>
+                                    </nav>
+                                </div>
                     </div>
                 </div>
                 <!-- End Ebook Resources Area -->
@@ -244,10 +262,10 @@
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <a download href="{{ journal.file.url }}" style="color:#1C1C4A">
                                     <div class="product__thumb">
-                                        <a download class="first__img" href="{{ journal.file.url }}"><img
-                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
-                                        <a download class="second__img animation1" href="{{ journal.file.url }}"><img
-                                                src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
+                                        <a download class="first__img" align="center" href="{{ journal.file.url }}"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image" style="max-width: 70%"></a>
+                                        <a download class="second__img animation1" align="center" href="{{ journal.file.url }}"><img
+                                                src="{% static 'images/pdf-img.png' %}" alt="product image" style="max-width: 70%"></a>
                                         <div class="hot__box">
                                             <span class="hot-label">Journal</span>
                                         </div>
@@ -302,10 +320,8 @@
                             <!-- Start Single Product -->
                             <div class="list__view">
                                 <div class="thumb">
-                                    <a download class="first__img" href="{{ journal.file.url }}"><img
-                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
-                                    <a download class="second__img animation1" href="{{ journal.file.url }}"><img
-                                            src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
+                                    <a download class="first__img" align="center" href="{{ journal.file.url }}"><img
+                                            src="{% static 'images/pdf-img.png' %}" alt="product images" style="max-width: 70%"></a>
                                 </div>
                                 <div class="content">
                                     <h2><a href="single-product.html">{{ journal.title }}</a></h2>
@@ -326,6 +342,26 @@
                             <!-- End Single Product -->
                             {% endfor %}
                         </div>
+                        <div class="wn__pagination">
+                                    <nav aria-label="Page navigation conatiner"></nav>
+                                    <ul class="pagination justify-content-center">
+                                        {% if ebook_obj.has_previous %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.previous_page_number }}">&laquo;
+                                            PREV </a></li>
+                                        {% endif %}
+                                        <span class="current mx-3">
+                        Page {{ ebook_obj.number }} of {{ ebook_obj.paginator.num_pages }}.
+                    </span>
+                                        {% if ebook_obj.has_next %}
+                                        <li><a class="button is-rounded is-info"
+                                               href="?page={{ ebook_obj.next_page_number }}"> NEXT
+                                            &raquo;</a></li>
+
+                                        {% endif %}
+                                    </ul>
+                                    </nav>
+                                </div>
                     </div>
                 </div>
                 <!-- End Journal Resources Area -->
