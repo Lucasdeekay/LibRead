@@ -8629,7 +8629,7 @@ a.checkout__title {
     width: 100%;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 300px) {
     .orderby__wrapper {
         flex-basis: 100%;
         margin-top: 14px;
@@ -8647,6 +8647,10 @@ a.checkout__title {
     .list__view .content {
         flex-basis: 100%;
         padding-left: 0;
+    }
+
+    .list__view .thumb a img{
+        width: 50%;
     }
 }
 

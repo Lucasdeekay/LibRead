@@ -14,6 +14,48 @@
 {% endif %}
 {% endblock %}
 
+<!-- Start Message area -->
+{% for message in messages %}
+{% if message.tags == "success" %}
+<section class="my_account_area pt--80 pb--50 bg--white" id="suc-sec">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Success</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="my_account_area pt--80 pb--50 bg--white" id="err-sec">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6">
+                <article class="message is-danger">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <em>{{ message }}</em>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+<!-- End Message area -->
+
 {% block content %}
 <!-- Start breadcrumb area -->
 <div class="ht__breadcrumb__area bg-image--7 lazy">
@@ -108,9 +150,9 @@
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <a download href="{{ ebook.file.url }}" style="color:#1C1C4A">
                                     <div class="product__thumb">
-                                        <a class="first__img" href="single-product.html"><img
+                                        <a download class="first__img" href="{{ ebook.file.url }}"><img
                                                 src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
-                                        <a class="second__img animation1" href="single-product.html"><img
+                                        <a download class="second__img animation1" href="{{ ebook.file.url }}"><img
                                                 src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
                                         <div class="hot__box">
                                             <span class="hot-label">Ebook</span>
@@ -166,9 +208,9 @@
                             <!-- Start Single Product -->
                             <div class="list__view">
                                 <div class="thumb">
-                                    <a class="first__img" href="single-product.html"><img
+                                    <a download class="first__img" href="{{ ebook.file.url }}"><img
                                             src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
-                                    <a class="second__img animation1" href="single-product.html"><img
+                                    <a download class="second__img animation1" href="{{ ebook.file.url }}"><img
                                             src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
                                 </div>
                                 <div class="content">
@@ -202,9 +244,9 @@
                             <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <a download href="{{ journal.file.url }}" style="color:#1C1C4A">
                                     <div class="product__thumb">
-                                        <a class="first__img" href="single-product.html"><img
+                                        <a download class="first__img" href="{{ journal.file.url }}"><img
                                                 src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
-                                        <a class="second__img animation1" href="single-product.html"><img
+                                        <a download class="second__img animation1" href="{{ journal.file.url }}"><img
                                                 src="{% static 'images/pdf-img.png' %}" alt="product image"></a>
                                         <div class="hot__box">
                                             <span class="hot-label">Journal</span>
@@ -260,9 +302,9 @@
                             <!-- Start Single Product -->
                             <div class="list__view">
                                 <div class="thumb">
-                                    <a class="first__img" href="single-product.html"><img
+                                    <a download class="first__img" href="{{ journal.file.url }}"><img
                                             src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
-                                    <a class="second__img animation1" href="single-product.html"><img
+                                    <a download class="second__img animation1" href="{{ journal.file.url }}"><img
                                             src="{% static 'images/pdf-img.png' %}" alt="product images"></a>
                                 </div>
                                 <div class="content">
